@@ -36,8 +36,6 @@ namespace National_Museum_2.Context
              .HasKey(u => u.Contact_Id);*/
 
 
-            //Oscar
-
             modelBuilder.Entity<Employees>()
             .HasKey(u => u.Employee_Id);
 
