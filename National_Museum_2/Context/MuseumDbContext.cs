@@ -17,7 +17,7 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<User>()
                 .HasKey(u => u.Id);
 
-            modelBuilder.Entity<UserType>()
+           /* modelBuilder.Entity<UserType>()
             .HasKey(u => u.UserType_Id);
 
             modelBuilder.Entity<PermissionXUserType>()
@@ -33,15 +33,15 @@ namespace National_Museum_2.Context
             .HasKey(u => u.Gerder_Id);
 
             modelBuilder.Entity<Contact>()
-            .HasKey(u => u.Contact_Id);
+            .HasKey(u => u.Contact_Id);*/
         }
         public DbSet<User> user { get; set; }
-        public DbSet<UserType> userType { get; set; }
+        /*public DbSet<UserType> userType { get; set; }
         public DbSet<UserType> permissionXUserType { get; set; }
         public DbSet<UserType> permissions { get; set; }
         public DbSet<UserType> identificationType { get; set; }
         public DbSet<UserType> gender { get; set; }
-        public DbSet<UserType> contact { get; set; }
+        public DbSet<UserType> contact { get; set; }*/
 
 
     }
