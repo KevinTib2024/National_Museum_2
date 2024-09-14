@@ -71,10 +71,10 @@ namespace National_Museum_2.Context
         public DbSet<State> states{ get; set; }*/
 
         public DbSet<Employees> employees { get; set; }
-        /*public DbSet<EmployeesXArtRoom>  employeesXArtRooms{ get; set; }
+        public DbSet<EmployeesXArtRoom>  employeesXArtRooms{ get; set; }
         public DbSet<Collection> collections{ get; set; }
         public DbSet<Maintenance> maintenances { get; set; }
         public DbSet<TypeEmployee> typeEmployees { get; set; }
-        public DbSet<WorkShedule> workShedules{ get; set; }*/
+        public DbSet<WorkShedule> workShedules{ get; set; }
     }
 }
