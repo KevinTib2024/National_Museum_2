@@ -53,6 +53,9 @@ namespace National_Museum_2.Context
 
             modelBuilder.Entity<WorkShedule>()
             .HasKey(u => u.WorkShedule_Id);*/
+
+            modelBuilder.Entity<ArtRoom>()
+            .HasKey(u => u.ArtRoom_Id);
         }
         public DbSet<User> user { get; set; }
         /*public DbSet<UserType> userTypes { get; set; }
@@ -70,7 +73,7 @@ namespace National_Museum_2.Context
         public DbSet<Location> location { get; set; }
         public DbSet<State> states{ get; set; }*/
 
-        public DbSet<ArtRoom> artRooms{ get; set; }
+        public DbSet<ArtRoom> artRoom{ get; set; }
         /*public DbSet<Category> category { get; set; }
         public DbSet<Exhibition> exhibition { get; set; }
         public DbSet<Location> location { get; set; }
