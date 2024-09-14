@@ -43,6 +43,17 @@ namespace National_Museum_2.Context
         public DbSet<UserType> gender { get; set; }
         public DbSet<UserType> contact { get; set; }*/
 
+        public DbSet<ArtObject> artObjects { get; set; 
+            /*
+        public DbSet<ArtRoom> artRooms{ get; set; }
+        public DbSet<Category> category { get; set; }
+        public DbSet<Exhibition> exhibition { get; set; }
+        public DbSet<Location> location { get; set; }
+        public DbSet<State> states{ get; set; }*/
+
+
+
+
 
     }
 }
