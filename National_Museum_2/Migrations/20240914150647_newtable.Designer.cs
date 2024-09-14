@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using National_Museum_2.Context;
 
@@ -11,9 +12,11 @@ using National_Museum_2.Context;
 namespace National_Museum_2.Migrations
 {
     [DbContext(typeof(MuseumDbContext))]
-    partial class MuseumDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240914150647_newtable")]
+    partial class newtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
