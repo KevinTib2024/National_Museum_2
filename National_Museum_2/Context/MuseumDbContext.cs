@@ -14,10 +14,10 @@ namespace National_Museum_2.Context
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>()
+            /*modelBuilder.Entity<User>()
                 .HasKey(u => u.Id);
 
-            /* modelBuilder.Entity<UserType>()
+            modelBuilder.Entity<UserType>()
              .HasKey(u => u.UserType_Id);
 
              modelBuilder.Entity<PermissionXUserType>()
@@ -36,10 +36,10 @@ namespace National_Museum_2.Context
              .HasKey(u => u.Contact_Id);*/
 
 
-            /*modelBuilder.Entity<Employees>()
+            modelBuilder.Entity<Employees>()
             .HasKey(u => u.Employee_Id);
 
-            modelBuilder.Entity<EmployeesXArtRoom>()
+            /*modelBuilder.Entity<EmployeesXArtRoom>()
             .HasKey(u => u.EmployeesXArtRoom_Id);
 
             modelBuilder.Entity<Collection>()
@@ -62,8 +62,8 @@ namespace National_Museum_2.Context
         public DbSet<Gender> gender { get; set; }
         public DbSet<Contact> contact { get; set; }*/
 
-        public DbSet<ArtObject> artObjects { get; set; }
-        /*
+        /*public DbSet<ArtObject> artObjects { get; set; }
+        
         public DbSet<ArtRoom> artRooms{ get; set; }
         public DbSet<Category> category { get; set; }
         public DbSet<Exhibition> exhibition { get; set; }
@@ -77,10 +77,10 @@ namespace National_Museum_2.Context
         public DbSet<State> states{ get; set; }*/
 
         public DbSet<Employees> employees { get; set; }
-        public DbSet<EmployeesXArtRoom>  employeesXArtRooms{ get; set; }
+        /*public DbSet<EmployeesXArtRoom>  employeesXArtRooms{ get; set; }
         public DbSet<Collection> collections{ get; set; }
         public DbSet<Maintenance> maintenances { get; set; }
         public DbSet<TypeEmployee> typeEmployees { get; set; }
-        public DbSet<WorkShedule> workShedules{ get; set; }
+        public DbSet<WorkShedule> workShedules{ get; set; }*/
     }
 }
