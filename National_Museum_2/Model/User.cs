@@ -2,12 +2,15 @@
 {
     public class User
     {
-        public int Id { get; set; }
-
-        public required string Name { get; set; }
-
-        public required string Email { get; set; }
-
-        public required string Password { get; set; }
+        public int User_Id { get; set; }
+        public required int UserType_Id { get; set; }
+        public required int IdentificationType_Id { get; set; }
+        public required int IdentificationNumber { get; set; }
+        public required string Names { get; set; }
+        public required string Lastname { get; set; }
+        public required DateTime BirthDate { get; set; }
+        public required int Contact_Id { get; set; }
+        public required string Contact { get; set; }
+        public required int Gender_Id { get; set; }
     }
 }

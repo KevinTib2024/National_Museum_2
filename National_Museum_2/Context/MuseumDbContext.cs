@@ -85,5 +85,11 @@ namespace National_Museum_2.Context
         public DbSet<Maintenance> maintenances { get; set; }
         public DbSet<TypeEmployee> typeEmployees { get; set; }
         public DbSet<WorkShedule> workShedules{ get; set; }*/
+
+        public DbSet<TicketXCollection> ticketXCollections { get; set; }
+        public DbSet<PaymentMethod>  paymentMethods{ get; set; }
+        public DbSet<TicketType> ticketTypes{ get; set; }
+        public DbSet<Tickets> tickets{ get; set; }
+        
     }
 }
