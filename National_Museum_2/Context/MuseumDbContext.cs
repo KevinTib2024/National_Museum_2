@@ -36,10 +36,10 @@ namespace National_Museum_2.Context
              .HasKey(u => u.Contact_Id);*/
 
 
-            modelBuilder.Entity<Employees>()
+            /*modelBuilder.Entity<Employees>()
             .HasKey(u => u.Employee_Id);
 
-            /*modelBuilder.Entity<EmployeesXArtRoom>()
+            modelBuilder.Entity<EmployeesXArtRoom>()
             .HasKey(u => u.EmployeesXArtRoom_Id);
 
             modelBuilder.Entity<Collection>()
