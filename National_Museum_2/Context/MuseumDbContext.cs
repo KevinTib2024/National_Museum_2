@@ -45,12 +45,12 @@ namespace National_Museum_2.Context
         }
 
         public DbSet<User> user { get; set; }
-        /*public DbSet<UserType> userType { get; set; }
+        public DbSet<UserType> userType { get; set; }
         public DbSet<UserType> permissionXUserType { get; set; }
         public DbSet<UserType> permissions { get; set; }
         public DbSet<UserType> identificationType { get; set; }
         public DbSet<UserType> gender { get; set; }
-        public DbSet<UserType> contact { get; set; }*/
+        public DbSet<UserType> contact { get; set; }
 
 
     }

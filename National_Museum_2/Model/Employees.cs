@@ -7,5 +7,6 @@
         public required int TypeEmployee_Id { get; set; }
         public required int WorkShedule_Id { get; set; }
         public required DateTime HiringDate { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }
