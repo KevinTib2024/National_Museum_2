@@ -22,6 +22,55 @@ namespace National_Museum_2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("National_Museum_2.Model.ArtObject", b =>
+                {
+                    b.Property<int>("ArtObject_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ArtObject_Id"));
+
+                    b.Property<string>("Artist")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Category_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cost")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CreationDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Exhibition_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Origin")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ArtObject_Id");
+
+                    b.ToTable("artObjects");
+                });
+
             modelBuilder.Entity("National_Museum_2.Model.ArtRoom", b =>
                 {
                     b.Property<int>("ArtRoom_Id")
@@ -56,7 +105,62 @@ namespace National_Museum_2.Migrations
 
                     b.HasKey("ArtRoom_Id");
 
-                    b.ToTable("artRoom");
+                    b.ToTable("artRooms");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
+
+                    b.Property<string>("Category_")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("category");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Collection", b =>
+                {
+                    b.Property<int>("Collection_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Collection_Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Collection_Id");
+
+                    b.ToTable("collections");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Contact", b =>
+                {
+                    b.Property<int>("Contact_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Contact_Id"));
+
+                    b.Property<string>("Contact_Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Contact_Id");
+
+                    b.ToTable("contact");
                 });
 
             modelBuilder.Entity("National_Museum_2.Model.Employees", b =>
@@ -84,15 +188,38 @@ namespace National_Museum_2.Migrations
                     b.ToTable("employees");
                 });
 
-            modelBuilder.Entity("National_Museum_2.Model.User", b =>
+            modelBuilder.Entity("National_Museum_2.Model.EmployeesXArtRoom", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EmployeesXArtRoom_Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeesXArtRoom_Id"));
 
-                    b.Property<string>("Email")
+                    b.Property<int>("ArtRoom_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Employee_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("EmployeesXArtRoom_Id");
+
+                    b.ToTable("employeesXArtRooms");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Exhibition", b =>
+                {
+                    b.Property<int>("Exhibition_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Exhibition_Id"));
+
+                    b.Property<string>("ArtRoom_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -100,13 +227,320 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Password")
+                    b.HasKey("Exhibition_Id");
+
+                    b.ToTable("exhibition");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Gender", b =>
+                {
+                    b.Property<int>("Gerder_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Gerder_Id"));
+
+                    b.Property<string>("Gender_")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Gerder_Id");
+
+                    b.ToTable("gender");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.IdentificationType", b =>
+                {
+                    b.Property<int>("Identification_Type_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Identification_Type_Id"));
+
+                    b.Property<string>("Identification_Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Identification_Type_Id");
+
+                    b.ToTable("identificationType");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Location", b =>
+                {
+                    b.Property<int>("Location_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Location_Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Location_Id");
+
+                    b.ToTable("location");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Maintenance", b =>
+                {
+                    b.Property<int>("Maintenance_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Maintenance_Id"));
+
+                    b.Property<int>("ArtObject_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Cost")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Employee_Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StarDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Maintenance_Id");
+
+                    b.ToTable("maintenances");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.PaymentMethod", b =>
+                {
+                    b.Property<int>("PaymentMethod_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PaymentMethod_Id"));
+
+                    b.Property<string>("Payment_Method")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PaymentMethod_Id");
+
+                    b.ToTable("paymentMethods");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.PermissionXUserType", b =>
+                {
+                    b.Property<int>("Permission_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Permission_Id"));
+
+                    b.Property<int>("UserType_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("Permission_Id");
+
+                    b.ToTable("permissionXUserType");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Permissions", b =>
+                {
+                    b.Property<int>("Permission_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Permission_Id"));
+
+                    b.Property<string>("Permission")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Permission_Id");
+
+                    b.ToTable("permissions");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.State", b =>
+                {
+                    b.Property<int>("State_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("State_Id"));
+
+                    b.Property<string>("State_")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("State_Id");
+
+                    b.ToTable("states");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.TicketType", b =>
+                {
+                    b.Property<int>("TicketType_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketType_Id"));
+
+                    b.Property<string>("Ticket_Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("price")
+                        .HasColumnType("real");
+
+                    b.HasKey("TicketType_Id");
+
+                    b.ToTable("ticketTypes");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.TicketXCollection", b =>
+                {
+                    b.Property<int>("TicketXCollection_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TicketXCollection_Id"));
+
+                    b.Property<int>("Collection_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Ticket_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("TicketXCollection_Id");
+
+                    b.ToTable("ticketXCollections");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Tickets", b =>
+                {
+                    b.Property<int>("Ticket_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Ticket_Id"));
+
+                    b.Property<int>("Employee_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PaymentMethod_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TicketType_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("User_Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("VisitDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Ticket_Id");
+
+                    b.ToTable("tickets");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.TypeEmployee", b =>
+                {
+                    b.Property<int>("TypeEmployee_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeEmployee_Id"));
+
+                    b.Property<string>("Type_Employee")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TypeEmployee_Id");
+
+                    b.ToTable("typeEmployees");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.User", b =>
+                {
+                    b.Property<int>("User_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("User_Id"));
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Contact_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Gender_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdentificationNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdentificationType_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Names")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserType_Id")
+                        .HasColumnType("int");
+
+                    b.HasKey("User_Id");
 
                     b.ToTable("user");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.UserType", b =>
+                {
+                    b.Property<int>("UserType_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UserType_Id"));
+
+                    b.Property<string>("User_Type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserType_Id");
+
+                    b.ToTable("userTypes");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.WorkShedule", b =>
+                {
+                    b.Property<int>("WorkShedule_Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WorkShedule_Id"));
+
+                    b.Property<string>("Work_Shedule")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WorkShedule_Id");
+
+                    b.ToTable("workShedules");
                 });
 #pragma warning restore 612, 618
         }
