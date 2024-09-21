@@ -2,9 +2,9 @@
 {
     public class PermissionXUserType
     {
-        public int Permission_Id { get; set; }
+        public int permissionXUserTypeId { get; set; }
 
-        public required int UserType_Id { get; set; }
+        public virtual required UserType user_Type_Id { get; set; }
 
     }
 }
