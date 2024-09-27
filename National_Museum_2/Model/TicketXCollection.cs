@@ -4,6 +4,6 @@
     {
         public int TicketXCollection_Id { get; set; }
         public required int Ticket_Id { get; set; }
-        public required int Collection_Id { get; set; }
+        public virtual required Collection collection_Id{ get; set; }
     }
 }

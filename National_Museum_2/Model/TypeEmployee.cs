@@ -2,7 +2,7 @@
 {
     public class TypeEmployee
     {
-        public required int TypeEmployee_Id { get; set; }
-        public required string Type_Employee { get; set; }
+        public required int typeEmployeeId { get; set; }
+        public required string typeEmployee { get; set; }
     }
 }

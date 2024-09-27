@@ -9,8 +9,8 @@
         public required string Description { get; set; }
         public required string Location_id{ get; set; }
         public required string NumberExhibitions { get; set; }
-        public required string Collection_Id { get; set; }
-        public required string Employee_Id{ get; set; }
+        public virtual required Collection collection_Id { get; set; }
+        public virtual required EmployeesXArtRoom employeesXArtRoom_Id { get; set; }
 
         
 
