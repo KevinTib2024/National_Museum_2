@@ -2,8 +2,8 @@
 {
     public class Gender
     {
-        public int Gerder_Id { get; set; }
+        public int genderId { get; set; }
 
-        public required string Gender_ { get; set; }
+        public required string gender { get; set; }
     }
 }

@@ -2,8 +2,9 @@
 {
     public class UserType
     {
-        public int UserType_Id { get; set; }
+        public int userTypeId { get; set; }
 
-        public required string User_Type { get; set; }
+        public required string userType { get; set; }
+
     }
 }
