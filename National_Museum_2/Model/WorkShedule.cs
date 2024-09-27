@@ -2,7 +2,7 @@
 {
     public class WorkShedule
     {
-        public required int WorkShedule_Id { get; set; }
-        public required string Work_Shedule { get; set; }
+        public required int workSheduleId { get; set; }
+        public required string workShedule { get; set; }
     }
 }

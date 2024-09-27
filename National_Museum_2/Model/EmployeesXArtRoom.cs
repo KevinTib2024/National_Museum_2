@@ -2,8 +2,8 @@
 {
     public class EmployeesXArtRoom
     {
-        public int EmployeesXArtRoom_Id { get; set; }
-        public required int Employee_Id { get; set; }
-        public required int ArtRoom_Id { get; set; }
+        public int employeesXArtRoomId { get; set; }
+        public required int employeeId { get; set; }
+        public required int artRoomId { get; set; }
     }
 }

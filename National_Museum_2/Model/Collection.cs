@@ -2,8 +2,8 @@
 {
     public class Collection
     {
-        public int Collection_Id { get; set; }
-        public required string Name { get; set; }
-        public required string Description { get; set; }
+        public int collectionId { get; set; }
+        public required string name { get; set; }
+        public required string description { get; set; }
     }
 }

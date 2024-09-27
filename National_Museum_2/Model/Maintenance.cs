@@ -2,7 +2,7 @@
 {
     public class Maintenance
     {
-        public int Maintenance_Id { get; set; }
+        public int maintenanceId { get; set; }
         public required int ArtObject_Id { get; set; }
         public required DateTime StarDate { get; set; }
         public required DateTime EndDate { get; set; }
