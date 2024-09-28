@@ -5,5 +5,7 @@
         public int genderId { get; set; }
 
         public required string gender { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }
