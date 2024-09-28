@@ -78,7 +78,7 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<Category>()
                    .HasKey(c => c.categoryId);
 
-            modelBuilder.Entity<State>()
+             modelBuilder.Entity<State>()
                    .HasKey(c => c.stateId);
         }
 
