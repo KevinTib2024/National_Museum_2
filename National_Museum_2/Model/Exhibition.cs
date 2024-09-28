@@ -2,11 +2,11 @@
 {
     public class Exhibition
     {
-        public int Exhibition_Id { get; set; }
+        public int exhibitionId { get; set; }
 
-        public required string Name { get; set; }
-        public required string Description{ get; set; }
-        public required string ArtRoom_Id { get; set; }
+        public required string name { get; set; }
+        public required string description{ get; set; }
+        public virtual required ArtRoom artRoom_Id { get; set; }
 
     }
 }
