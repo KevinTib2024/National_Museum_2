@@ -9,7 +9,7 @@ namespace National_Museum_2.Repository
         public interface IEmployeesXArtRoomRepository
         {
             Task<IEnumerable<EmployeesXArtRoom>> GetAllEmployeesXArtRoomAsync();
-            Task<Employees> GetEmployeesXArtRoomByAsync(int id);
+            Task<EmployeesXArtRoom> GetEmployeesXArtRoomByAsync(int id);
             Task CreateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom);
             Task UpdateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom);
             Task SoftDeleteEmployeesXArtRoomAsync(int id);
@@ -33,7 +33,7 @@ namespace National_Museum_2.Repository
                 throw new NotImplementedException();
             }
 
-            public Task<Employees> GetEmployeesXArtRoomByAsync(int id)
+            public Task<EmployeesXArtRoom> GetEmployeesXArtRoomByAsync(int id)
             {
                 throw new NotImplementedException();
             }
