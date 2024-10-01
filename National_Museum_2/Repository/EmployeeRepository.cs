@@ -6,7 +6,7 @@ namespace National_Museum_2.Respositoy
     public interface IEmployeeRepository{
         Task<IEnumerable<Employees>> GetAllEmployeesAsync();
         Task<Employees> GetEmployeesByAsync(int id);
-        Task CreateEmployeesAsync(Employees employee);
+        Task CreateEmployeesAsync(Employees employees);
         Task UpdateEmployeesAsync(Employees employees);
         Task SoftDeleteEmployeesAsync(int id);
     }

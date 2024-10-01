@@ -6,5 +6,7 @@
 
         public required string userType { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
     }
 }
