@@ -8,7 +8,7 @@ namespace National_Museum_2.Service
     public interface IUserService
     {
         Task<IEnumerable<User>> GetAllUserAsync();
-        Task<User> GetUserByAsync(int id);
+        Task<User> GetUserByIdAsync(int id);
         Task CreateUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task SoftDeleteUserAsync(int id);
@@ -33,7 +33,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<User> GetUserByAsync(int id)
+        public Task<User> GetUserByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

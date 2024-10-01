@@ -6,7 +6,7 @@ namespace National_Museum_2.Service
     public interface IGenderService
     {
         Task<IEnumerable<Gender>> GetAllGenderAsync();
-        Task<Gender> GetGenderByAsync(int id);
+        Task<Gender> GetGenderByIdAsync(int id);
         Task CreateGenderAsync(Gender gender);
         Task UpdateGenderAsync(Gender gender);
         Task SoftDeleteGenderAsync(int id);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<Gender> GetGenderByAsync(int id)
+        public Task<Gender> GetGenderByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

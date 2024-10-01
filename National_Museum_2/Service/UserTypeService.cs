@@ -6,7 +6,7 @@ namespace National_Museum_2.Service
     public interface IUserTypeService
     {
         Task<IEnumerable<UserType>> GetAllUserTypeAsync();
-        Task<UserType> GetUserTypeByAsync(int id);
+        Task<UserType> GetUserTypeByIdAsync(int id);
         Task CreateUserTypeAsync(UserType userType);
         Task UpdateUserTypeAsync(UserType userType);
         Task SoftDeleteUserTypeAsync(int id);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<UserType> GetUserTypeByAsync(int id)
+        public Task<UserType> GetUserTypeByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

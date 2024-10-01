@@ -6,7 +6,7 @@ namespace National_Museum_2.Service
     public interface IPermissionsService
     {
         Task<IEnumerable<Permissions>> GetAllPermissionsAsync();
-        Task<Permissions> GetPermissionsByAsync(int id);
+        Task<Permissions> GetPermissionsByIdAsync(int id);
         Task CreatePermissionsAsync(Permissions permissions);
         Task UpdatePermissionsAsync(Permissions permissions);
         Task SoftDeletePermissionsAsync(int id);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<Permissions> GetPermissionsByAsync(int id)
+        public Task<Permissions> GetPermissionsByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

@@ -6,7 +6,7 @@ namespace National_Museum_2.Service
     public interface IContactService
     {
         Task<IEnumerable<Contact>> GetAllContactAsync();
-        Task<Contact> GetContactByAsync(int id);
+        Task<Contact> GetContactByIdAsync(int id);
         Task CreateContactAsync(Contact contact);
         Task UpdateContactAsync(Contact contact);
         Task SoftDeleteContactAsync(int id);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<Contact> GetContactByAsync(int id)
+        public Task<Contact> GetContactByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

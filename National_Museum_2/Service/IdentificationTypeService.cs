@@ -6,7 +6,7 @@ namespace National_Museum_2.Service
     public interface IIdentificationTypeService
     {
         Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync();
-        Task<IdentificationType> GetIdentificationTypeByAsync(int id);
+        Task<IdentificationType> GetIdentificationTypeByIdAsync(int id);
         Task CreateIdentificationTypeAsync(IdentificationType identificationType);
         Task UpdateIdentificationTypeAsync(IdentificationType identificationType);
         Task SoftDeleteIdentificationTypeAsync(int id);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<IdentificationType> GetIdentificationTypeByAsync(int id)
+        public Task<IdentificationType> GetIdentificationTypeByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
