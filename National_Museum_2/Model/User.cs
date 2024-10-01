@@ -16,10 +16,10 @@
 
         public required string birthDate { get; set; }
 
-        //public virtual ICollection<Contact> Contacts { get; set; } = new  List<Contact>();
-
         public required string contact { get; set; }
 
         public virtual required Gender gender_Id { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }
