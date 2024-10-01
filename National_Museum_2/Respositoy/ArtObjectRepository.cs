@@ -3,7 +3,8 @@ using National_Museum_2.Model;
 
 namespace National_Museum_2.Respositoy
 {
-    public interface IArtObjectRepository{
+    public interface IArtObjectRepository
+    {
         Task<IEnumerable<ArtObject>> GetAllArtObjectAsync();
         Task<ArtObject> GetArtObjectByAsync(int id);
         Task CreateArtObjectAsync(ArtObject artobject);
@@ -38,5 +39,3 @@ namespace National_Museum_2.Respositoy
         }
     }
 }
-
-
