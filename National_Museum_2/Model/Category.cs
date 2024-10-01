@@ -2,9 +2,9 @@
 {
     public class Category
     {
-        public int CategoryId { get; set; }
+        public int categoryId { get; set; }
 
-        public required string  Category_ { get; set; }
+        public required string  category { get; set; }
     }
 
 }
