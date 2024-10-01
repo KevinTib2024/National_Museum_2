@@ -1,6 +1,6 @@
 ﻿namespace National_Museum_2.Service
 {
-    public class ArtObjectRepository
+    public class ArtObjectService
     {
     }
 }
