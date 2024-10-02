@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.Repository;
 using National_Museum_2.Respositoy;
 using National_Museum_2.Service;
 
@@ -32,6 +33,25 @@ builder.Services.AddScoped<IGenderService, GenderService>();
 
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
+
+//Oscar
+builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
+builder.Services.AddScoped<ICollectionService, CollectionService>();
+
+builder.Services.AddScoped<IEmployeesXArtRoomRepository, EmployeesXArtRoomRepository>();
+builder.Services.AddScoped<IEmployeesXArtRoomService, EmployeesXArtRoomService>();
+
+builder.Services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
+builder.Services.AddScoped<IMaintenanceService, MaintenanceService>();
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+
+builder.Services.AddScoped<ITypeEmployeeRepository, TypeEmployeeRepository>();
+builder.Services.AddScoped<ITypeEmployeeService, TypeEmployeeService>();
+
+builder.Services.AddScoped<IWorkSheduleRepository, WorkSheduleRepository>();
+builder.Services.AddScoped<IWorkSheduleService, WorkSheduleService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

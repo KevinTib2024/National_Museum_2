@@ -1,12 +1,12 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respositoy.National_Museum_2.Respositoy;
+using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
 {
     public interface ICollectionService
     {
         Task<IEnumerable<Collection>> GetAllCollectionAsync();
-        Task<Collection> GetCollectionAsync(int id);
+        Task<Collection> GetCollectionByIdAsync(int id);
         Task CreateCollectionAsync(Collection collection);
         Task UpdateCollectionAsync(Collection collection);
         Task SoftDeleteCollectionAsync(int id);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<Collection> GetCollectionAsync(int id)
+        public Task<Collection> GetCollectionByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

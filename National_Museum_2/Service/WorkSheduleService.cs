@@ -1,13 +1,12 @@
 ﻿using National_Museum_2.Model;
 using National_Museum_2.Repository;
-using National_Museum_2.Respositoy;
 
 namespace National_Museum_2.Service
 {
     public interface IWorkSheduleService
     {
         Task<IEnumerable<WorkShedule>> GetAllWorkSheduleAsync();
-        Task<WorkShedule> GetWorkSheduleByAsync(int id);
+        Task<WorkShedule> GetWorkSheduleByIdAsync(int id);
         Task CreateWorkSheduleAsync(WorkShedule workShedule);
         Task UpdateWorkSheduleAsync(WorkShedule workShedule);
         Task SoftDeleteWorkSheduleAsync(int id);
@@ -32,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<WorkShedule> GetWorkSheduleByAsync(int id)
+        public Task<WorkShedule> GetWorkSheduleByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

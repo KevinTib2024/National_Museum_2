@@ -1,13 +1,12 @@
 ﻿using National_Museum_2.Model;
 using National_Museum_2.Repository;
-using National_Museum_2.Respositoy;
 
 namespace National_Museum_2.Service
 {
     public interface IMaintenanceService
     {
         Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync();
-        Task<Maintenance> GetMaintenanceByAsync(int id);
+        Task<Maintenance> GetMaintenanceByIdAsync(int id);
         Task CreateMaintenanceAsync(Maintenance maintenance);
         Task UpdateMaintenanceAsync(Maintenance maintenance);
         Task SoftDeleteMaintenanceAsync(int id);
@@ -32,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<Maintenance> GetMaintenanceByAsync(int id)
+        public Task<Maintenance> GetMaintenanceByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

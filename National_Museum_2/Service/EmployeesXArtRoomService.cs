@@ -1,13 +1,12 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Repository.National_Museum_2.Repository;
-using National_Museum_2.Respositoy;
+using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
 {
     public interface IEmployeesXArtRoomService
     {
         Task<IEnumerable<EmployeesXArtRoom>> GetAllEmployeesXArtRoomAsync();
-        Task<EmployeesXArtRoom> GetEmployeesXArtRoomByAsync(int id);
+        Task<EmployeesXArtRoom> GetEmployeesXArtRoomByIdAsync(int id);
         Task CreateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom);
         Task UpdateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom);
         Task SoftDeleteEmployeesXArtRoomAsync(int id);
@@ -32,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<EmployeesXArtRoom> GetEmployeesXArtRoomByAsync(int id)
+        public Task<EmployeesXArtRoom> GetEmployeesXArtRoomByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

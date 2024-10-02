@@ -6,7 +6,7 @@ namespace National_Museum_2.Service
     public interface ITypeEmployeeService
     {
         Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync();
-        Task<TypeEmployee> GetTypeEmployeeByAsync(int id);
+        Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id);
         Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task SoftDeleteTypeEmployeeAsync(int id);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task<TypeEmployee> GetTypeEmployeeByAsync(int id)
+        public Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
