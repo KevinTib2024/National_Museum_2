@@ -29,6 +29,11 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
+        public Task SoftDeleteExhibitionAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task SoftExhibitionDeleteAsync(int id)
         {
             throw new NotImplementedException();
