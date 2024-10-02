@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/National_Museum_2/Context/MuseumDbContext.cs
+/National_Museum_2/Migrations/MuseumDbContextModelSnapshot.cs
