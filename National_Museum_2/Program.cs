@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.Repository;
 using National_Museum_2.Respositoy;
 using National_Museum_2.Service;
 
@@ -32,6 +33,27 @@ builder.Services.AddScoped<IGenderService, GenderService>();
 
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
+
+builder.Services.AddControllers();
+
+//Registrar controles y servicios Kevin Ramirez
+builder.Services.AddScoped<IArtObjectRepository, ArtObjectRepository>();
+builder.Services.AddScoped<IArtObjectService, ArtObjectService>();
+
+builder.Services.AddScoped<IArtRoomRepository, ArtRoomRepository>();
+builder.Services.AddScoped<IArtRoomService, ArtRoomService>();
+
+builder.Services.AddScoped<IStateRepository, StateRepository>();
+builder.Services.AddScoped<IStateService, StateService>();
+
+builder.Services.AddScoped<ILocationRepository, LocationRepository>();
+builder.Services.AddScoped<ILocationService, LocationService>();
+
+builder.Services.AddScoped<IExhibitionRepository, ExhibitionRepository>();
+builder.Services.AddScoped<IExhibitionService, ExhibitionService>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
