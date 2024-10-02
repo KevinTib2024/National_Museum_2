@@ -1,9 +1,9 @@
 ﻿using National_Museum_2.Context;
 using National_Museum_2.Model;
 
-namespace National_Museum_2.Respositoy
+namespace National_Museum_2.Respository
 {
-    namespace National_Museum_2.Respositoy
+    namespace National_Museum_2.Respository
     {
         public interface ICollectionRepository
         {
