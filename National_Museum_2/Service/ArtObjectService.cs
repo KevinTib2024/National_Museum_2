@@ -1,5 +1,5 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respositoy;
+using National_Museum_2.Respository;
 
 namespace National_Museum_2.Service
 {
@@ -8,7 +8,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<ArtObject>> GetAllArtObjectAsync();
         Task<ArtObject> GetArtObjectByIdAsync(int id);
         Task CreateArtObjectAsync(ArtObject artObject);
-        Task UpdateContactAsync(ArtObject artObject);
+        Task UpdateArtObjectAsync(ArtObject artObject);
         Task SoftDeleteArtObjectAsync(int id);
     }
     public class ArtObjectService : IArtObjectService
@@ -33,7 +33,12 @@ namespace National_Museum_2.Service
             throw new NotImplementedException();
         }
 
-        public Task UpdateContactAsync(ArtObject artObject)
+        public Task UpdateARtObjectAsync(ArtObject artObject)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateArtObjectAsync(ArtObject artObject)
         {
             throw new NotImplementedException();
         }

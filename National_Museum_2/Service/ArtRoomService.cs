@@ -1,5 +1,5 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respositoy;
+using National_Museum_2.Respository;
 namespace National_Museum_2.Service
 {
     public interface IArtRoomService
@@ -7,7 +7,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<ArtRoom>> GetAllArtRoomAsync();
         Task<ArtRoom> GetArtRoomByIdAsync(int id);
         Task CreateArtRoomAsync(ArtRoom artRoom);
-        Task UpdateContactAsync(ArtRoom artRoom);
+        Task UpdateArtRoomAsync(ArtRoom artRoom);
         Task SoftDeleteArtRoomAsync(int id);
     }
     public class ArtRoomService : IArtRoomService
@@ -28,6 +28,11 @@ namespace National_Museum_2.Service
         }
 
         public Task SoftDeleteArtRoomAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateArtRoomAsync(ArtRoom artRoom)
         {
             throw new NotImplementedException();
         }
