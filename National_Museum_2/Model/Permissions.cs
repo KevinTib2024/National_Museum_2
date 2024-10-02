@@ -7,5 +7,7 @@
         public virtual required PermissionXUserType PermissionXUserTypeId { get; set; }
 
         public required string Permission { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

@@ -5,7 +5,7 @@ namespace National_Museum_2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeesController : ControllerBase
+    public class EmployeesXArtRoomController : ControllerBase
     {
     }
 }

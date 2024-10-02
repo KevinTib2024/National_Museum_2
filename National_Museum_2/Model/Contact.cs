@@ -6,8 +6,9 @@
 
         public virtual required User userId { get; set; }
 
-       // public virtual required User User { get; set; }
-
         public required string contactType { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

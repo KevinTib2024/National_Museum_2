@@ -5,5 +5,7 @@
         public int identificationTypeId { get; set; }
 
         public required string Identification_Type { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

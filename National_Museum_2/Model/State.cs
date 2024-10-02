@@ -2,8 +2,8 @@
 {
     public class State
     {
-        public int State_Id { get; set; }
+        public int stateId { get; set; }
 
-        public required string State_ { get; set; }
+        public required string state { get; set; }
     }
 }

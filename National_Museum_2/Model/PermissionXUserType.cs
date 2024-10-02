@@ -6,5 +6,7 @@
 
         public virtual required UserType userTypeId { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
     }
 }
