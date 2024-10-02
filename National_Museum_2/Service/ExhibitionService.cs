@@ -10,6 +10,7 @@ namespace National_Museum_2.Service
         Task CreateExhibitionAsync(Exhibition exhibition);
         Task UpdateExhibitionAsync(Exhibition exhibition);
         Task SoftExhibitionDeleteAsync(int id);
+        Task SoftDeleteExhibitionAsync(int id);
     }
     public class ExhibitionService : IExhibitionService
     {
