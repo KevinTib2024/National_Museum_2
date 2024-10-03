@@ -4,7 +4,7 @@
     {
         public required int contactId { get; set; }
 
-        public virtual required User userId { get; set; }
+        public virtual required User user_Id { get; set; }
 
         public required string contactType { get; set; }
 

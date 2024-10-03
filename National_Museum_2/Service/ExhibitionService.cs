@@ -1,5 +1,6 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respository;
+using National_Museum_2.Repository;
+using National_Museum_2.Respositoy;
 
 namespace National_Museum_2.Service
 {
@@ -14,6 +15,13 @@ namespace National_Museum_2.Service
     }
     public class ExhibitionService : IExhibitionService
     {
+        private readonly IExhibitionRepository _exhibitionRepository;
+
+        public ExhibitionService(IExhibitionRepository exhibitionRepository)
+        {
+            _exhibitionRepository = exhibitionRepository;
+        }
+
         public Task CreateExhibitionAsync(Exhibition exhibition)
         {
             throw new NotImplementedException();
@@ -25,6 +33,11 @@ namespace National_Museum_2.Service
         }
 
         public Task<Exhibition> GetExhibitionByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SoftDeleteExhibitionAsync(int id)
         {
             throw new NotImplementedException();
         }
