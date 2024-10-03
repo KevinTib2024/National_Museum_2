@@ -2,8 +2,8 @@
 {
     public class TicketType
     {
-        public int TicketType_Id { get; set; }
-        public required string Ticket_Type { get; set; }
+        public int ticketTypeId { get; set; }
+        public required string ticketType { get; set; }
         public required float price { get; set; }
     }
 }

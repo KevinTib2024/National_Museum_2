@@ -4,7 +4,7 @@
     {
         public int permissionXUserTypeId { get; set; }
 
-        public virtual required UserType user_Type_Id { get; set; }
+        public virtual required UserType userType_Id { get; set; }
 
         public bool IsDeleted { get; set; } = false;
 

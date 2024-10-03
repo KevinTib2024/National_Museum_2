@@ -155,6 +155,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("contactId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("contactType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -266,6 +269,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("genderId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("gender")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -286,6 +292,9 @@ namespace National_Museum_2.Migrations
                     b.Property<string>("Identification_Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.HasKey("identificationTypeId");
 
@@ -340,6 +349,23 @@ namespace National_Museum_2.Migrations
                     b.ToTable("maintenance");
                 });
 
+            modelBuilder.Entity("National_Museum_2.Model.PaymentMethod", b =>
+                {
+                    b.Property<int>("paymentMethodId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("paymentMethodId"));
+
+                    b.Property<string>("paymentMethod")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("paymentMethodId");
+
+                    b.ToTable("paymentMethods");
+                });
+
             modelBuilder.Entity("National_Museum_2.Model.PermissionXUserType", b =>
                 {
                     b.Property<int>("permissionXUserTypeId")
@@ -348,12 +374,15 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("permissionXUserTypeId"));
 
-                    b.Property<int>("user_Type_IduserTypeId")
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("userType_IduserTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("permissionXUserTypeId");
 
-                    b.HasIndex("user_Type_IduserTypeId");
+                    b.HasIndex("userType_IduserTypeId");
 
                     b.ToTable("permissionXUserType");
                 });
@@ -365,6 +394,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("permissionsId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Permission")
                         .IsRequired()
@@ -397,6 +429,86 @@ namespace National_Museum_2.Migrations
                     b.ToTable("state");
                 });
 
+            modelBuilder.Entity("National_Museum_2.Model.TicketType", b =>
+                {
+                    b.Property<int>("ticketTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ticketTypeId"));
+
+                    b.Property<float>("price")
+                        .HasColumnType("real");
+
+                    b.Property<string>("ticketType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ticketTypeId");
+
+                    b.ToTable("ticketType");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.TicketXCollection", b =>
+                {
+                    b.Property<int>("ticketXCollectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ticketXCollectionId"));
+
+                    b.Property<int>("Ticket_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("collection_IdcollectionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ticketXCollectionId");
+
+                    b.HasIndex("collection_IdcollectionId");
+
+                    b.ToTable("ticketXCollection");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Tickets", b =>
+                {
+                    b.Property<int>("ticketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ticketId"));
+
+                    b.Property<int>("employeeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("paymentMethod_IdpaymentMethodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ticketType_IdticketTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ticketXCollection_IdticketXCollectionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("user_IduserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("visitDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ticketId");
+
+                    b.HasIndex("paymentMethod_IdpaymentMethodId");
+
+                    b.HasIndex("ticketType_IdticketTypeId");
+
+                    b.HasIndex("ticketXCollection_IdticketXCollectionId");
+
+                    b.HasIndex("user_IduserId");
+
+                    b.ToTable("ticket");
+                });
+
             modelBuilder.Entity("National_Museum_2.Model.TypeEmployee", b =>
                 {
                     b.Property<int>("typeEmployeeId")
@@ -421,6 +533,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("birthDate")
                         .IsRequired()
@@ -469,6 +584,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userTypeId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("userType")
                         .IsRequired()
@@ -629,13 +747,13 @@ namespace National_Museum_2.Migrations
 
             modelBuilder.Entity("National_Museum_2.Model.PermissionXUserType", b =>
                 {
-                    b.HasOne("National_Museum_2.Model.UserType", "user_Type_Id")
+                    b.HasOne("National_Museum_2.Model.UserType", "userType_Id")
                         .WithMany()
-                        .HasForeignKey("user_Type_IduserTypeId")
+                        .HasForeignKey("userType_IduserTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("user_Type_Id");
+                    b.Navigation("userType_Id");
                 });
 
             modelBuilder.Entity("National_Museum_2.Model.Permissions", b =>
@@ -647,6 +765,52 @@ namespace National_Museum_2.Migrations
                         .IsRequired();
 
                     b.Navigation("PermissionXUserType_Id");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.TicketXCollection", b =>
+                {
+                    b.HasOne("National_Museum_2.Model.Collection", "collection_Id")
+                        .WithMany()
+                        .HasForeignKey("collection_IdcollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("collection_Id");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Tickets", b =>
+                {
+                    b.HasOne("National_Museum_2.Model.PaymentMethod", "paymentMethod_Id")
+                        .WithMany()
+                        .HasForeignKey("paymentMethod_IdpaymentMethodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("National_Museum_2.Model.TicketType", "ticketType_Id")
+                        .WithMany()
+                        .HasForeignKey("ticketType_IdticketTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("National_Museum_2.Model.TicketXCollection", "ticketXCollection_Id")
+                        .WithMany()
+                        .HasForeignKey("ticketXCollection_IdticketXCollectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("National_Museum_2.Model.User", "user_Id")
+                        .WithMany()
+                        .HasForeignKey("user_IduserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("paymentMethod_Id");
+
+                    b.Navigation("ticketType_Id");
+
+                    b.Navigation("ticketXCollection_Id");
+
+                    b.Navigation("user_Id");
                 });
 
             modelBuilder.Entity("National_Museum_2.Model.User", b =>
