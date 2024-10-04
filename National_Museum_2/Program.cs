@@ -12,7 +12,7 @@ builder.Services.AddDbContext<MuseumDbContext>(options => options.UseSqlServer(c
 
 builder.Services.AddControllers();
 
-//Register controls and services Tibaquicha
+//Register repositorys and services Tibaquicha
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
@@ -35,7 +35,7 @@ builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 
 
-//Register controls and services Kevin Ramirez
+//Register repositorys and services Kevin Ramirez
 builder.Services.AddScoped<IArtObjectRepository, ArtObjectRepository>();
 builder.Services.AddScoped<IArtObjectService, ArtObjectService>();
 
@@ -55,7 +55,7 @@ builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 
-//Register controls and services Lucia
+//Register repositorys and services Lucia
 builder.Services.AddScoped<ITicketsRepository, TicketsRepository>();
 builder.Services.AddScoped<ITicketsService, TicketsService>();
 
@@ -69,7 +69,7 @@ builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
 builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
 
 
-//Register controls and services Oscar
+//Register repositorys and services Oscar
 builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
 builder.Services.AddScoped<ICollectionService, CollectionService>();
 
