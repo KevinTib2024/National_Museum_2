@@ -34,7 +34,6 @@ builder.Services.AddScoped<IGenderService, GenderService>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 
-builder.Services.AddControllers();
 
 //Register controls and services Kevin Ramirez
 builder.Services.AddScoped<IArtObjectRepository, ArtObjectRepository>();
@@ -55,6 +54,7 @@ builder.Services.AddScoped<IExhibitionService, ExhibitionService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+
 //Register controls and services Lucia
 builder.Services.AddScoped<ITicketsRepository, TicketsRepository>();
 builder.Services.AddScoped<ITicketsService, TicketsService>();
@@ -67,6 +67,7 @@ builder.Services.AddScoped<ITicketXCollectionService, TicketXCollectionService>(
 
 builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
 builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
+
 
 //Register controls and services Oscar
 builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
