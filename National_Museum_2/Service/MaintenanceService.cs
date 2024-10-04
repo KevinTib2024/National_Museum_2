@@ -1,23 +1,24 @@
-﻿using National_Museum_2.Context;
-using National_Museum_2.Model;
+﻿using National_Museum_2.Model;
+using National_Museum_2.Repository;
 
-namespace National_Museum_2.Repository
+namespace National_Museum_2.Service
 {
-    public interface IMaintenanceRepository
+    public interface IMaintenanceService
     {
         Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync();
-        Task<Maintenance> GetMaintenanceByAsync(int id);
+        Task<Maintenance> GetMaintenanceByIdAsync(int id);
         Task CreateMaintenanceAsync(Maintenance maintenance);
         Task UpdateMaintenanceAsync(Maintenance maintenance);
         Task SoftDeleteMaintenanceAsync(int id);
     }
-    public class MaintenanceRepository : IMaintenanceRepository
-    {
-        private readonly MuseumDbContext _context;
 
-        public MaintenanceRepository(MuseumDbContext context)
+    public class MaintenanceService : IMaintenanceService
+    {
+        private readonly IMaintenanceRepository _maintenanceRepository;
+
+        public MaintenanceService(IMaintenanceRepository maintenanceRepository)
         {
-            _context = context;
+            _maintenanceRepository = maintenanceRepository;
         }
 
         public Task CreateMaintenanceAsync(Maintenance maintenance)
@@ -30,7 +31,7 @@ namespace National_Museum_2.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Maintenance> GetMaintenanceByAsync(int id)
+        public Task<Maintenance> GetMaintenanceByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

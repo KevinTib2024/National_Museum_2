@@ -1,24 +1,24 @@
-﻿using National_Museum_2.Context;
-using National_Museum_2.Model;
+﻿using National_Museum_2.Model;
+using National_Museum_2.Repository;
 
-namespace National_Museum_2.Repository
+namespace National_Museum_2.Service
 {
-    public interface IWorkSheduleRepository
+    public interface IWorkSheduleService
     {
         Task<IEnumerable<WorkShedule>> GetAllWorkSheduleAsync();
-        Task<WorkShedule> GetWorkSheduleByAsync(int id);
+        Task<WorkShedule> GetWorkSheduleByIdAsync(int id);
         Task CreateWorkSheduleAsync(WorkShedule workShedule);
         Task UpdateWorkSheduleAsync(WorkShedule workShedule);
         Task SoftDeleteWorkSheduleAsync(int id);
     }
 
-    public class WorkSheduleRepository : IWorkSheduleRepository
+    public class WorkSheduleService : IWorkSheduleService
     {
-        private readonly MuseumDbContext _context;
+        private readonly IWorkSheduleRepository _workSheduleRepository;
 
-        public WorkSheduleRepository(MuseumDbContext context)
+        public WorkSheduleService(IWorkSheduleRepository workSheduleRepository)
         {
-            _context = context;
+            _workSheduleRepository = workSheduleRepository;
         }
 
         public Task CreateWorkSheduleAsync(WorkShedule workShedule)
@@ -31,7 +31,7 @@ namespace National_Museum_2.Repository
             throw new NotImplementedException();
         }
 
-        public Task<WorkShedule> GetWorkSheduleByAsync(int id)
+        public Task<WorkShedule> GetWorkSheduleByIdAsync(int id)
         {
             throw new NotImplementedException();
         }

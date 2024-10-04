@@ -1,23 +1,24 @@
-﻿using National_Museum_2.Context;
-using National_Museum_2.Model;
+﻿using National_Museum_2.Model;
+using National_Museum_2.Repository;
 
-namespace National_Museum_2.Repository
+namespace National_Museum_2.Service
 {
-    public interface ICollectionRepository
+    public interface ICollectionService
     {
         Task<IEnumerable<Collection>> GetAllCollectionAsync();
-        Task<Collection> GetCollectionByAsync(int id);
+        Task<Collection> GetCollectionByIdAsync(int id);
         Task CreateCollectionAsync(Collection collection);
-        Task UpdateCollectionAsync(Collection collections);
+        Task UpdateCollectionAsync(Collection collection);
         Task SoftDeleteCollectionAsync(int id);
     }
-    public class CollectionRepository : ICollectionRepository
-    {
-        private readonly MuseumDbContext _context;
 
-        public CollectionRepository(MuseumDbContext context)
+    public class CollectionService : ICollectionService
+    {
+        private readonly ICollectionRepository _collectionRepository;
+
+        public CollectionService(ICollectionRepository collectionRepository)
         {
-            _context = context;
+            _collectionRepository = collectionRepository;
         }
 
         public Task CreateCollectionAsync(Collection collection)
@@ -30,7 +31,7 @@ namespace National_Museum_2.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Collection> GetCollectionByAsync(int id)
+        public Task<Collection> GetCollectionByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
@@ -40,7 +41,7 @@ namespace National_Museum_2.Repository
             throw new NotImplementedException();
         }
 
-        public Task UpdateCollectionAsync(Collection collections)
+        public Task UpdateCollectionAsync(Collection collection)
         {
             throw new NotImplementedException();
         }

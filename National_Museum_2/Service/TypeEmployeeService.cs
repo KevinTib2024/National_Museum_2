@@ -1,24 +1,24 @@
-﻿using National_Museum_2.Context;
-using National_Museum_2.Model;
+﻿using National_Museum_2.Model;
+using National_Museum_2.Repository;
 
-namespace National_Museum_2.Repository
+namespace National_Museum_2.Service
 {
-    public interface ITypeEmployeeRepository
+    public interface ITypeEmployeeService
     {
         Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync();
-        Task<TypeEmployee> GetTypeEmployeeByAsync(int id);
+        Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id);
         Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task SoftDeleteTypeEmployeeAsync(int id);
     }
 
-    public class TypeEmployeeRepository : ITypeEmployeeRepository
+    public class TypeEmployeeService : ITypeEmployeeService
     {
-        private readonly MuseumDbContext _context;
+        private readonly ITypeEmployeeRepository _typeEmployeeRepository;
 
-        public TypeEmployeeRepository(MuseumDbContext context)
+        public TypeEmployeeService(ITypeEmployeeRepository typeEmployeeRepository)
         {
-            _context = context;
+            _typeEmployeeRepository = typeEmployeeRepository;
         }
 
         public Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee)
@@ -31,7 +31,7 @@ namespace National_Museum_2.Repository
             throw new NotImplementedException();
         }
 
-        public Task<TypeEmployee> GetTypeEmployeeByAsync(int id)
+        public Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id)
         {
             throw new NotImplementedException();
         }
