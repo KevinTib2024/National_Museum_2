@@ -14,6 +14,7 @@ namespace National_Museum_2.Context
         {
             base.OnModelCreating(modelBuilder);
 
+            //Tibaquichá
             modelBuilder.Entity<User>()
                 .HasKey(u => u.userId);
 
@@ -22,26 +23,9 @@ namespace National_Museum_2.Context
 
              modelBuilder.Entity<Permissions>()
                  .HasKey(u => u.permissionsId);
-            /*
-             modelBuilder.Entity<UserType>()
-               .HasKey(u => u.userType);
-
-             modelBuilder.Entity<Gender>()
-               .HasKey(u => u.genderId);
-
-            */  
+          
             modelBuilder.Entity<Contact>()
                    .HasKey(c => c.contactId);
-
-            // modelBuilder.Entity<IdentificationType>()
-            //    .HasKey(c => c.identificationTypeId);
-            /*
-
-             // Relación uno a muchos entre User y Contact
-             modelBuilder.Entity<Contact>()
-                 .HasOne(c => c.User)
-                 .WithMany(u => u.Contacts)
-                 .HasForeignKey(c => c.userId);  // Clave foránea en Contac*/
 
             //Oscar
             modelBuilder.Entity<EmployeesXArtRoom>()
@@ -78,10 +62,24 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<Category>()
                    .HasKey(c => c.categoryId);
 
-             modelBuilder.Entity<State>()
+            modelBuilder.Entity<State>()
                    .HasKey(c => c.stateId);
+
+            //Lucia
+            modelBuilder.Entity<Tickets>()
+                   .HasKey(c => c.ticketId);
+
+            modelBuilder.Entity<TicketXCollection>()
+                   .HasKey(c => c.ticketXCollectionId);
+
+            modelBuilder.Entity<TicketType>()
+                   .HasKey(c => c.ticketTypeId);
+
+            modelBuilder.Entity<PaymentMethod>()
+                   .HasKey(c => c.paymentMethodId);
         }
 
+        //Tibaquichá
         public DbSet<User> user { get; set; }
         public DbSet<UserType> userType { get; set; }
         public DbSet<PermissionXUserType> permissionXUserType { get; set; }
@@ -106,5 +104,10 @@ namespace National_Museum_2.Context
         public DbSet<Category> categories { get; set; }
         public DbSet<State> state { get; set; }
 
+        //Lucia
+        public DbSet<Tickets> ticket { get; set; }
+        public DbSet<TicketXCollection> ticketXCollection { get; set; }
+        public DbSet<TicketType> ticketType { get; set; }
+        public DbSet<PaymentMethod> paymentMethods { get; set; }
     }
 }   
