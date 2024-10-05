@@ -14,6 +14,7 @@
         public virtual required State  state_Id { get; set; }
         public virtual required Exhibition exhibition_Id { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
 
     }
 }

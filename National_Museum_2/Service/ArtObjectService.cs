@@ -1,5 +1,6 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respository;
+using National_Museum_2.Repository;
+using System.Reflection;
 
 namespace National_Museum_2.Service
 {
@@ -13,34 +14,36 @@ namespace National_Museum_2.Service
     }
     public class ArtObjectService : IArtObjectService
     {
-        public Task CreateArtObjectAsync(ArtObject artObject)
+        private readonly IArtObjectRepository _artObjectRepository;
+
+        public ArtObjectService(IArtObjectRepository artObjectRepository)
         {
-            throw new NotImplementedException();
+            _artObjectRepository = artObjectRepository;
         }
 
-        public Task<IEnumerable<ArtObject>> GetAllArtObjectAsync()
+        public async Task CreateArtObjectAsync(ArtObject artObject)
         {
-            throw new NotImplementedException();
+            await _artObjectRepository.CreateArtObjectAsync(artObject);
         }
 
-        public Task<ArtObject> GetArtObjectByIdAsync(int id)
+        public async Task<IEnumerable<ArtObject>> GetAllArtObjectAsync()
         {
-            throw new NotImplementedException();
+            return await _artObjectRepository.GetAllArtObjectAsync();
         }
 
-        public Task SoftDeleteArtObjectAsync(int id)
+        public async Task<ArtObject> GetArtObjectByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _artObjectRepository.GetArtObjectByIdAsync(id);
         }
 
-        public Task UpdateARtObjectAsync(ArtObject artObject)
+        public async Task SoftDeleteArtObjectAsync(int id)
         {
-            throw new NotImplementedException();
+            await _artObjectRepository.SoftDeleteArtObjectAsync(id);
         }
 
-        public Task UpdateArtObjectAsync(ArtObject artObject)
+        public async Task UpdateArtObjectAsync(ArtObject artObject)
         {
-            throw new NotImplementedException();
+            await _artObjectRepository.UpdateArtObjectAsync(artObject);
         }
     }
 }
