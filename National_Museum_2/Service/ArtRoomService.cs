@@ -1,5 +1,5 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respository;
+using National_Museum_2.Repository;
 namespace National_Museum_2.Service
 {
     public interface IArtRoomService
