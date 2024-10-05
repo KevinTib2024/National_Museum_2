@@ -2,17 +2,17 @@
 {
     public class ArtObject
     {
-        public int ArtObject_Id { get; set; }
+        public int artObjectId { get; set; }
 
-        public required string Name { get; set; }
-        public required string Description { get; set; }
-        public required string Artist { get; set; }
-        public required string CreationDate { get; set; }
-        public required string Origin { get; set; }
-        public required string Cost { get; set; }
-        public required string Category_Id { get; set; }
-        public required string State_Id { get; set; }
-        public required string Exhibition_Id { get; set; }
+        public required string name { get; set; }
+        public required string description { get; set; }
+        public required string artist { get; set; }
+        public required string creationDate { get; set; }
+        public required string origin { get; set; }
+        public required string cost { get; set; }
+        public virtual required Category category_Id { get; set; }
+        public virtual required State  state_Id { get; set; }
+        public virtual required Exhibition exhibition_Id { get; set; }
 
 
     }

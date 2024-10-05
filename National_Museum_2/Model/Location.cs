@@ -2,8 +2,8 @@
 {
     public class Location
     {
-        public int Location_Id { get; set; }
+        public int locationId { get; set; }
 
-        public required string Name { get; set; }
+        public required string name { get; set; }
     }
 }
