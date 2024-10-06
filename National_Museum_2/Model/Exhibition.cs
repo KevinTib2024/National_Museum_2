@@ -8,5 +8,7 @@
         public required string description{ get; set; }
         public virtual required ArtRoom artRoom_Id { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

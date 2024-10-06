@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,7 +7,7 @@ namespace National_Museum_2.Repository
     public interface IGenderRepository
     {
         Task<IEnumerable<Gender>> GetAllGenderAsync();
-        Task<Gender> GetGenderByAsync(int id);
+        Task<Gender> GetGenderByIdAsync(int id);
         Task CreateGenderAsync(Gender gender);
         Task UpdateGenderAsync(Gender gender);
         Task SoftDeleteGenderAsync(int id);
@@ -21,29 +22,54 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateGenderAsync(Gender gender)
+        public async Task CreateGenderAsync(Gender gender)
         {
-            throw new NotImplementedException();
+            if (gender == null)
+                throw new ArgumentNullException(nameof(gender));
+
+            // Agregar el objeto al contexto
+            _context.gender.Add(gender);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Gender>> GetAllGenderAsync()
+        public async Task<IEnumerable<Gender>> GetAllGenderAsync()
         {
-            throw new NotImplementedException();
+            return await _context.gender
+                .Where(s => !s.IsDeleted)
+                .ToListAsync(); 
         }
 
-        public Task<Gender> GetGenderByAsync(int id)
+        public async Task<Gender> GetGenderByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.gender
+                .FirstOrDefaultAsync(s => s.genderId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteGenderAsync(int id)
+        public async Task SoftDeleteGenderAsync(int id)
         {
-            throw new NotImplementedException();
+            var gender = await _context.gender.FindAsync(id);
+            if (gender != null)
+            {
+                gender.IsDeleted = true;
+                await _context.SaveChangesAsync(); 
+            }
         }
 
-        public Task UpdateGenderAsync(Gender gender)
+        public async Task UpdateGenderAsync(Gender gender)
         {
-            throw new NotImplementedException();
+            if (gender == null)
+                throw new ArgumentNullException(nameof(gender));
+
+            var existingGender = await _context.gender.FindAsync(gender.genderId);
+            if (existingGender == null)
+                throw new ArgumentException($"Gender with ID {gender.genderId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingGender.gender = gender.gender;  
+
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _permissionsRepository = permissionsRepository;
         }
 
-        public Task CreatePermissionsAsync(Permissions permissions)
+        public async Task CreatePermissionsAsync(Permissions permissions)
         {
-            throw new NotImplementedException();
+            await _permissionsRepository.CreatePermissionsAsync(permissions);
         }
 
-        public Task<IEnumerable<Permissions>> GetAllPermissionsAsync()
+        public async Task<IEnumerable<Permissions>> GetAllPermissionsAsync()
         {
-            throw new NotImplementedException();
+            return await _permissionsRepository.GetAllPermissionsAsync();
         }
 
-        public Task<Permissions> GetPermissionsByIdAsync(int id)
+        public async Task<Permissions> GetPermissionsByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _permissionsRepository.GetPermissionsByIdAsync(id);
         }
 
-        public Task SoftDeletePermissionsAsync(int id)
+        public async Task SoftDeletePermissionsAsync(int id)
         {
-            throw new NotImplementedException();
+            await _permissionsRepository.SoftDeletePermissionsAsync(id);
         }
 
-        public Task UpdatePermissionsAsync(Permissions permissions)
+        public async Task UpdatePermissionsAsync(Permissions permissions)
         {
-            throw new NotImplementedException();
+            await _permissionsRepository.UpdatePermissionsAsync(permissions);
         }
     }
 }

@@ -4,5 +4,7 @@
     {
         public required int typeEmployeeId { get; set; }
         public required string typeEmployee { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

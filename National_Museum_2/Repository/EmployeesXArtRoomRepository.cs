@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,7 +7,7 @@ namespace National_Museum_2.Repository
     public interface IEmployeesXArtRoomRepository
     {
         Task<IEnumerable<EmployeesXArtRoom>> GetAllEmployeesXArtRoomAsync();
-        Task<EmployeesXArtRoom> GetEmployeesXArtRoomByAsync(int id);
+        Task<EmployeesXArtRoom> GetEmployeesXArtRoomByIdAsync(int id);
         Task CreateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom);
         Task UpdateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom);
         Task SoftDeleteEmployeesXArtRoomAsync(int id);
@@ -20,29 +21,56 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
+        public async Task CreateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
         {
-            throw new NotImplementedException();
+            if (employeesXArtRoom == null)
+                throw new ArgumentNullException(nameof(employeesXArtRoom));
+
+            // Agregar el objeto al contexto
+            _context.employeesXArtRoom.Add(employeesXArtRoom);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<EmployeesXArtRoom>> GetAllEmployeesXArtRoomAsync()
+        public async Task<IEnumerable<EmployeesXArtRoom>> GetAllEmployeesXArtRoomAsync()
         {
-            throw new NotImplementedException();
+            return await _context.employeesXArtRoom
+           .Where(s => !s.IsDeleted)
+           .ToListAsync();
         }
 
-        public Task<EmployeesXArtRoom> GetEmployeesXArtRoomByAsync(int id)
+        public async Task<EmployeesXArtRoom> GetEmployeesXArtRoomByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.employeesXArtRoom
+            .FirstOrDefaultAsync(s => s.employeesXArtRoomId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteEmployeesXArtRoomAsync(int id)
+        public async Task SoftDeleteEmployeesXArtRoomAsync(int id)
         {
-            throw new NotImplementedException();
+            var employeesXArtRoom = await _context.employeesXArtRoom.FindAsync(id);
+            if (employeesXArtRoom != null)
+            {
+                employeesXArtRoom.IsDeleted = true;
+                await _context.SaveChangesAsync();
+
+            }
         }
 
-        public Task UpdateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
+        public async Task UpdateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
         {
-            throw new NotImplementedException();
+            if (employeesXArtRoom == null)
+                throw new ArgumentNullException(nameof(employeesXArtRoom));
+
+            var existingEmployeesXArtRoom = await _context.employeesXArtRoom.FindAsync(employeesXArtRoom.employeesXArtRoomId);
+            if (existingEmployeesXArtRoom == null)
+                throw new ArgumentException($"employeesXArtRoom with ID {employeesXArtRoom.employeesXArtRoomId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingEmployeesXArtRoom.employeeId = employeesXArtRoom.employeesXArtRoomId;
+            existingEmployeesXArtRoom.artRoomId = employeesXArtRoom.artRoomId;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

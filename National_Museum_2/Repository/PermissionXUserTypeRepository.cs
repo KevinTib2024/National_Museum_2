@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,7 +7,7 @@ namespace National_Museum_2.Repository
     public interface IPermissionXUserTypeRepository
     {
         Task<IEnumerable<PermissionXUserType>> GetAllPermissionXUserTypeAsync();
-        Task<PermissionXUserType> GetPermissionXUserTypeByAsync(int id);
+        Task<PermissionXUserType> GetPermissionXUserTypeByIdAsync(int id);
         Task CreatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType);
         Task UpdatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType);
         Task SoftDeletePermissionXUserTypeAsync(int id);
@@ -21,29 +22,54 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType)
+        public async Task CreatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType)
         {
-            throw new NotImplementedException();
+            if (permissionXUserType == null)
+                throw new ArgumentNullException(nameof(permissionXUserType));
+
+            // Agregar el objeto al contexto
+            _context.permissionXUserType.Add(permissionXUserType);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<PermissionXUserType>> GetAllPermissionXUserTypeAsync()
+        public async Task<IEnumerable<PermissionXUserType>> GetAllPermissionXUserTypeAsync()
         {
-            throw new NotImplementedException();
+            return await _context.permissionXUserType
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<PermissionXUserType> GetPermissionXUserTypeByAsync(int id)
+        public async Task<PermissionXUserType> GetPermissionXUserTypeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.permissionXUserType
+            .FirstOrDefaultAsync(s => s.permissionXUserTypeId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeletePermissionXUserTypeAsync(int id)
+        public async Task SoftDeletePermissionXUserTypeAsync(int id)
         {
-            throw new NotImplementedException();
+            var permissionXUserType = await _context.permissionXUserType.FindAsync(id);
+            if (permissionXUserType != null)
+            {
+                permissionXUserType.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType)
+        public async Task UpdatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType)
         {
-            throw new NotImplementedException();
+            if (permissionXUserType == null)
+                throw new ArgumentNullException(nameof(permissionXUserType));
+
+            var existingPermissionXUserType = await _context.permissionXUserType.FindAsync(permissionXUserType.permissionXUserTypeId);
+            if (existingPermissionXUserType == null)
+                throw new ArgumentException($"permissionXUserType with ID {permissionXUserType.permissionXUserTypeId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingPermissionXUserType.userType_Id = permissionXUserType.userType_Id;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

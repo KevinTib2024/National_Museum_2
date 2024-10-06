@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _identificationTypeRepository = identificationTypeRepository;
         }
 
-        public Task CreateIdentificationTypeAsync(IdentificationType identificationType)
+        public async Task CreateIdentificationTypeAsync(IdentificationType identificationType)
         {
-            throw new NotImplementedException();
+            await _identificationTypeRepository.CreateIdentificationTypeAsync(identificationType);
         }
 
-        public Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync()
+        public async Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync()
         {
-            throw new NotImplementedException();
+            return await _identificationTypeRepository.GetAllIdentificationTypeAsync();
         }
 
-        public Task<IdentificationType> GetIdentificationTypeByIdAsync(int id)
+        public async Task<IdentificationType> GetIdentificationTypeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _identificationTypeRepository.GetIdentificationTypeByIdAsync(id);
         }
 
-        public Task SoftDeleteIdentificationTypeAsync(int id)
+        public async Task SoftDeleteIdentificationTypeAsync(int id)
         {
-            throw new NotImplementedException();
+            await _identificationTypeRepository.SoftDeleteIdentificationTypeAsync(id);
         }
 
-        public Task UpdateIdentificationTypeAsync(IdentificationType identificationType)
+        public async Task UpdateIdentificationTypeAsync(IdentificationType identificationType)
         {
-            throw new NotImplementedException();
+            await _identificationTypeRepository.UpdateIdentificationTypeAsync(identificationType);
         }
     }
 }

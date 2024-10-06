@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _workSheduleRepository = workSheduleRepository;
         }
 
-        public Task CreateWorkSheduleAsync(WorkShedule workShedule)
+        public async Task CreateWorkSheduleAsync(WorkShedule workShedule)
         {
-            throw new NotImplementedException();
+            await _workSheduleRepository.CreateWorkSheduleAsync(workShedule);
         }
 
-        public Task<IEnumerable<WorkShedule>> GetAllWorkSheduleAsync()
+        public async Task<IEnumerable<WorkShedule>> GetAllWorkSheduleAsync()
         {
-            throw new NotImplementedException();
+            return await _workSheduleRepository.GetAllWorkSheduleAsync();
         }
 
-        public Task<WorkShedule> GetWorkSheduleByIdAsync(int id)
+        public async Task<WorkShedule> GetWorkSheduleByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _workSheduleRepository.GetWorkSheduleByIdAsync(id);
         }
 
-        public Task SoftDeleteWorkSheduleAsync(int id)
+        public async Task SoftDeleteWorkSheduleAsync(int id)
         {
-            throw new NotImplementedException();
+            await _workSheduleRepository.SoftDeleteWorkSheduleAsync(id);
         }
 
-        public Task UpdateWorkSheduleAsync(WorkShedule workShedule)
+        public async Task UpdateWorkSheduleAsync(WorkShedule workShedule)
         {
-            throw new NotImplementedException();
+            await _workSheduleRepository.UpdateWorkSheduleAsync(workShedule);
         }
     }
 }

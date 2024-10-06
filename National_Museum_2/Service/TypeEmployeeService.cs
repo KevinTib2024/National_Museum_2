@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _typeEmployeeRepository = typeEmployeeRepository;
         }
 
-        public Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee)
+        public async Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee)
         {
-            throw new NotImplementedException();
+            await _typeEmployeeRepository.CreateTypeEmployeeAsync(typeEmployee);
         }
 
-        public Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync()
+        public async Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync()
         {
-            throw new NotImplementedException();
+            return await _typeEmployeeRepository.GetAllTypeEmployeeAsync();
         }
 
-        public Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id)
+        public async Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _typeEmployeeRepository.GetTypeEmployeeByIdAsync(id);
         }
 
-        public Task SoftDeleteTypeEmployeeAsync(int id)
+        public async Task SoftDeleteTypeEmployeeAsync(int id)
         {
-            throw new NotImplementedException();
+            await _typeEmployeeRepository.SoftDeleteTypeEmployeeAsync(id);
         }
 
-        public Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee)
+        public async Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee)
         {
-            throw new NotImplementedException();
+            await _typeEmployeeRepository.UpdateTypeEmployeeAsync(typeEmployee);
         }
     }
 }

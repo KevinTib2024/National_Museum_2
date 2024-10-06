@@ -5,6 +5,8 @@
         public int categoryId { get; set; }
 
         public required string  category { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 
 }

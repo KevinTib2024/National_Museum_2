@@ -1,5 +1,5 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respository;
+using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
 {
@@ -13,29 +13,35 @@ namespace National_Museum_2.Service
     }
     public class CategoryService : ICategoryService
     {
-        public Task CreateCategoryAsync(Category category)
+        private readonly ICategoryRepository _categoryRepository;
+
+        public CategoryService(ICategoryRepository categoryRepository)
         {
-            throw new NotImplementedException();
+            _categoryRepository = categoryRepository;
+        }
+        public async Task CreateCategoryAsync(Category category)
+        {
+            await _categoryRepository.CreateCategoryAsync(category);
         }
 
-        public Task<IEnumerable<Category>> GetAllCategoryAsync()
+        public async Task<IEnumerable<Category>> GetAllCategoryAsync()
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.GetAllCategoryAsync();
         }
 
-        public Task<Category> GetCategoryByIdAsync(int id)
+        public async Task<Category> GetCategoryByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _categoryRepository.GetCategoryByIdAsync(id);
         }
 
-        public Task SoftDeleteCategoryAsync(int id)
+        public async Task SoftDeleteCategoryAsync(int id)
         {
-            throw new NotImplementedException();
+            await _categoryRepository.SoftDeleteCategoryAsync(id);
         }
 
-        public Task UpdateCategoryAsync(Category category)
+        public async Task UpdateCategoryAsync(Category category)
         {
-            throw new NotImplementedException();
+            await _categoryRepository.UpdateCategoryAsync(category);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respository;
+using National_Museum_2.Repository;
+
 namespace National_Museum_2.Service
 {
     public interface IArtRoomService
@@ -12,34 +13,35 @@ namespace National_Museum_2.Service
     }
     public class ArtRoomService : IArtRoomService
     {
-        public Task CreateArtRoomAsync(ArtRoom artRoom)
+        private readonly IArtRoomRepository _artRoomRepository;
+
+        public ArtRoomService(IArtRoomRepository artRoomRepository)
         {
-            throw new NotImplementedException();
+            _artRoomRepository = artRoomRepository;
+        }
+        public async Task CreateArtRoomAsync(ArtRoom artRoom)
+        {
+            await _artRoomRepository.CreateArtRoomAsync(artRoom);
         }
 
-        public Task<IEnumerable<ArtRoom>> GetAllArtRoomAsync()
+        public async Task<IEnumerable<ArtRoom>> GetAllArtRoomAsync()
         {
-            throw new NotImplementedException();
+            return await _artRoomRepository.GetAllArtRoomAsync();
         }
 
-        public Task<ArtRoom> GetArtRoomByIdAsync(int id)
+        public async Task<ArtRoom> GetArtRoomByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _artRoomRepository.GetArtRoomByIdAsync(id);
         }
 
-        public Task SoftDeleteArtRoomAsync(int id)
+        public async Task SoftDeleteArtRoomAsync(int id)
         {
-            throw new NotImplementedException();
+            await _artRoomRepository.SoftDeleteArtRoomAsync(id);
         }
 
-        public Task UpdateArtRoomAsync(ArtRoom artRoom)
+        public async Task UpdateArtRoomAsync(ArtRoom artRoom)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateContactAsync(ArtRoom artRoom)
-        {
-            throw new NotImplementedException();
+            await _artRoomRepository.UpdateArtRoomAsync(artRoom);
         }
     }
 }

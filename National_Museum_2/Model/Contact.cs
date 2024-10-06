@@ -9,6 +9,5 @@
         public required string contactType { get; set; }
 
         public bool IsDeleted { get; set; } = false;
-
     }
 }

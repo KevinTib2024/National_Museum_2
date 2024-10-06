@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _maintenanceRepository = maintenanceRepository;
         }
 
-        public Task CreateMaintenanceAsync(Maintenance maintenance)
+        public async Task CreateMaintenanceAsync(Maintenance maintenance)
         {
-            throw new NotImplementedException();
+            await _maintenanceRepository.CreateMaintenanceAsync(maintenance);
         }
 
-        public Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync()
+        public async Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync()
         {
-            throw new NotImplementedException();
+            return await _maintenanceRepository.GetAllMaintenanceAsync();
         }
 
-        public Task<Maintenance> GetMaintenanceByIdAsync(int id)
+        public async Task<Maintenance> GetMaintenanceByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _maintenanceRepository.GetMaintenanceByIdAsync(id);
         }
 
-        public Task SoftDeleteMaintenanceAsync(int id)
+        public async Task SoftDeleteMaintenanceAsync(int id)
         {
-            throw new NotImplementedException();
+            await _maintenanceRepository.SoftDeleteMaintenanceAsync(id);
         }
 
-        public Task UpdateMaintenanceAsync(Maintenance maintenance)
+        public async Task UpdateMaintenanceAsync(Maintenance maintenance)
         {
-            throw new NotImplementedException();
+            await _maintenanceRepository.UpdateMaintenanceAsync(maintenance);
         }
     }
 }

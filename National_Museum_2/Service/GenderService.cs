@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _genderRepository = genderRepository;
         }
 
-        public Task CreateGenderAsync(Gender gender)
+        public async Task CreateGenderAsync(Gender gender)
         {
-            throw new NotImplementedException();
+            await _genderRepository.CreateGenderAsync(gender);
         }
 
-        public Task<IEnumerable<Gender>> GetAllGenderAsync()
+        public async Task<IEnumerable<Gender>> GetAllGenderAsync()
         {
-            throw new NotImplementedException();
+            return await _genderRepository.GetAllGenderAsync();
         }
 
-        public Task<Gender> GetGenderByIdAsync(int id)
+        public async Task<Gender> GetGenderByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _genderRepository.GetGenderByIdAsync(id);
         }
 
-        public Task SoftDeleteGenderAsync(int id)
+        public async Task SoftDeleteGenderAsync(int id)
         {
-            throw new NotImplementedException();
+            await _genderRepository.SoftDeleteGenderAsync(id);
         }
 
-        public Task UpdateGenderAsync(Gender gender)
+        public async Task UpdateGenderAsync(Gender gender)
         {
-            throw new NotImplementedException();
+            await _genderRepository.UpdateGenderAsync(gender);
         }
     }
 }

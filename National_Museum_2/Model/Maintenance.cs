@@ -9,6 +9,7 @@ namespace National_Museum_2.Model
         public required DateTime endDate { get; set; }
         public required string description { get; set; }
         public required int cost { get; set; }
-        //public required int employeeId { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _employeesXArtRoomRepository = employeesXArtRoomRepository;
         }
 
-        public Task CreateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
+        public async Task CreateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
         {
-            throw new NotImplementedException();
+            await _employeesXArtRoomRepository.CreateEmployeesXArtRoomAsync(employeesXArtRoom);
         }
 
-        public Task<IEnumerable<EmployeesXArtRoom>> GetAllEmployeesXArtRoomAsync()
+        public async Task<IEnumerable<EmployeesXArtRoom>> GetAllEmployeesXArtRoomAsync()
         {
-            throw new NotImplementedException();
+            return await _employeesXArtRoomRepository.GetAllEmployeesXArtRoomAsync();
         }
 
-        public Task<EmployeesXArtRoom> GetEmployeesXArtRoomByIdAsync(int id)
+        public async Task<EmployeesXArtRoom> GetEmployeesXArtRoomByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _employeesXArtRoomRepository.GetEmployeesXArtRoomByIdAsync(id);
         }
 
-        public Task SoftDeleteEmployeesXArtRoomAsync(int id)
+        public async Task SoftDeleteEmployeesXArtRoomAsync(int id)
         {
-            throw new NotImplementedException();
+            await _employeesXArtRoomRepository.SoftDeleteEmployeesXArtRoomAsync(id);
         }
 
-        public Task UpdateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
+        public async Task UpdateEmployeesXArtRoomAsync(EmployeesXArtRoom employeesXArtRoom)
         {
-            throw new NotImplementedException();
+            await _employeesXArtRoomRepository.UpdateEmployeesXArtRoomAsync(employeesXArtRoom);
         }
     }
 }
