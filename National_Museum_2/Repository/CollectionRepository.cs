@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,7 +7,7 @@ namespace National_Museum_2.Repository
     public interface ICollectionRepository
     {
         Task<IEnumerable<Collection>> GetAllCollectionAsync();
-        Task<Collection> GetCollectionByAsync(int id);
+        Task<Collection> GetCollectionByIdAsync(int id);
         Task CreateCollectionAsync(Collection collection);
         Task UpdateCollectionAsync(Collection collections);
         Task SoftDeleteCollectionAsync(int id);
@@ -20,29 +21,55 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateCollectionAsync(Collection collection)
+        public async Task CreateCollectionAsync(Collection collection)
         {
-            throw new NotImplementedException();
+            if (collection == null)
+                throw new ArgumentNullException(nameof(collection));
+
+            // Agregar el objeto al contexto
+            _context.collection.Add(collection);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Collection>> GetAllCollectionAsync()
+        public async Task<IEnumerable<Collection>> GetAllCollectionAsync()
         {
-            throw new NotImplementedException();
+            return await _context.collection
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<Collection> GetCollectionByAsync(int id)
+        public async Task<Collection> GetCollectionByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.collection
+           .FirstOrDefaultAsync(s => s.collectionId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteCollectionAsync(int id)
+        public async Task SoftDeleteCollectionAsync(int id)
         {
-            throw new NotImplementedException();
+            var collection = await _context.collection.FindAsync(id);
+            if (collection != null)
+            {
+                collection.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateCollectionAsync(Collection collections)
+        public async Task UpdateCollectionAsync(Collection collections)
         {
-            throw new NotImplementedException();
+            if (collections == null)
+                throw new ArgumentNullException(nameof(collections));
+
+            var existingCollection = await _context.collection.FindAsync(collections.collectionId);
+            if (existingCollection == null)
+                throw new ArgumentException($"collection with ID {collections.collectionId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingCollection.name = collections.name;
+            existingCollection.description = collections.description;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

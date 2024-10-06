@@ -4,6 +4,8 @@
     {
         public int paymentMethodId { get; set; }
         public required string paymentMethod { get; set; }
-    
+
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

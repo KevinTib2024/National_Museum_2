@@ -13,29 +13,35 @@ namespace National_Museum_2.Service
     }
     public class LocationService : ILocationService
     {
-        public Task CreateLocationAsync(Location location)
+        private readonly ILocationRepository _locationRepository;
+
+        public LocationService(ILocationRepository locationRepository)
         {
-            throw new NotImplementedException();
+            _locationRepository = locationRepository;
+        }
+        public async Task CreateLocationAsync(Location location)
+        {
+            await _locationRepository.CreateLocationAsync(location);
         }
 
-        public Task<IEnumerable<Location>> GetAllLocationAsync()
+        public async Task<IEnumerable<Location>> GetAllLocationAsync()
         {
-            throw new NotImplementedException();
+            return await _locationRepository.GetAllLocationAsync();
         }
 
-        public Task<Location> GetLocationByIdAsync(int id)
+        public async Task<Location> GetLocationByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _locationRepository.GetLocationByIdAsync(id);
         }
 
-        public Task SoftDeleteLocationAsync(int id)
+        public async Task SoftDeleteLocationAsync(int id)
         {
-            throw new NotImplementedException();
+            await _locationRepository.SoftDeleteLocationAsync(id);
         }
 
-        public Task UpdateLocationAsync(Location location)
+        public async Task UpdateLocationAsync(Location location)
         {
-            throw new NotImplementedException();
+            await _locationRepository.UpdateLocationAsync(location);
         }
     }
 }

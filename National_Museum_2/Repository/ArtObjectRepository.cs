@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using National_Museum_2.Context;
 using National_Museum_2.Model;
-using System.Reflection;
 
 namespace National_Museum_2.Repository
 {
@@ -28,12 +26,11 @@ namespace National_Museum_2.Repository
             if (artObject == null)
                 throw new ArgumentNullException(nameof(artObject));
 
-            // Agregar el objeto gender al contexto
+            // Agregar el objeto al contexto
             _context.artObject.Add(artObject);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
-
         }
 
         public async Task<IEnumerable<ArtObject>> GetAllArtObjectAsync()
@@ -41,14 +38,12 @@ namespace National_Museum_2.Repository
             return await _context.artObject
             .Where(s => !s.IsDeleted)
             .ToListAsync();
-
         }
 
         public async Task<ArtObject> GetArtObjectByIdAsync(int id)
         {
             return await _context.artObject
             .FirstOrDefaultAsync(s => s.artObjectId == id && !s.IsDeleted);
-
         }
 
         public async Task SoftDeleteArtObjectAsync(int id)
@@ -58,7 +53,6 @@ namespace National_Museum_2.Repository
             {
                 artObject.IsDeleted = true;
                 await _context.SaveChangesAsync();
-
             }
         }
         public async Task UpdateArtObjectAsync(ArtObject artObject)
@@ -79,12 +73,10 @@ namespace National_Museum_2.Repository
             existingArtObject.origin = artObject.origin;
             existingArtObject.category_Id = artObject.category_Id; 
             existingArtObject.state_Id = artObject.state_Id;
-            existingArtObject.exhibition_Id = artObject.exhibition_Id;// Asumiendo que hay una propiedad "Name"
-                                                        // Realiza la actualización de otras propiedades que quieras modificar
+            existingArtObject.exhibition_Id = artObject.exhibition_Id;
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
-
         }
     }
 }

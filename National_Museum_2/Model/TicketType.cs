@@ -5,5 +5,7 @@
         public int ticketTypeId { get; set; }
         public required string ticketType { get; set; }
         public required float price { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

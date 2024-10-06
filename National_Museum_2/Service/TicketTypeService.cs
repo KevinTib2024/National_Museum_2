@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _ticketTypeRepository = ticketTypeRepository;
         }
 
-        public Task CreateTicketTypeAsync(TicketType ticketType)
+        public async Task CreateTicketTypeAsync(TicketType ticketType)
         {
-            throw new NotImplementedException();
+            await _ticketTypeRepository.CreateTicketTypeAsync(ticketType);
         }
 
-        public Task<IEnumerable<TicketType>> GetAllTicketTypeAsync()
+        public async Task<IEnumerable<TicketType>> GetAllTicketTypeAsync()
         {
-            throw new NotImplementedException();
+            return await _ticketTypeRepository.GetAllTicketTypeAsync();
         }
 
-        public Task<TicketType> GetTicketTypeByIdAsync(int id)
+        public async Task<TicketType> GetTicketTypeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _ticketTypeRepository.GetTicketTypeByIdAsync(id);
         }
 
-        public Task SoftDeleteTicketTypeAsync(int id)
+        public async Task SoftDeleteTicketTypeAsync(int id)
         {
-            throw new NotImplementedException();
+            await _ticketTypeRepository.SoftDeleteTicketTypeAsync(id);
         }
 
-        public Task UpdateTicketTypeAsync(TicketType ticketType)
+        public async Task UpdateTicketTypeAsync(TicketType ticketType)
         {
-            throw new NotImplementedException();
+            await _ticketTypeRepository.UpdateTicketTypeAsync(ticketType);
         }
     }
 }

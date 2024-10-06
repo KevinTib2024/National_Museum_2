@@ -5,5 +5,7 @@
         public int collectionId { get; set; }
         public required string name { get; set; }
         public required string description { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

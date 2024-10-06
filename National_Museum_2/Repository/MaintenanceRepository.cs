@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,7 +7,7 @@ namespace National_Museum_2.Repository
     public interface IMaintenanceRepository
     {
         Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync();
-        Task<Maintenance> GetMaintenanceByAsync(int id);
+        Task<Maintenance> GetMaintenanceByIdAsync(int id);
         Task CreateMaintenanceAsync(Maintenance maintenance);
         Task UpdateMaintenanceAsync(Maintenance maintenance);
         Task SoftDeleteMaintenanceAsync(int id);
@@ -20,29 +21,58 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateMaintenanceAsync(Maintenance maintenance)
+        public async Task CreateMaintenanceAsync(Maintenance maintenance)
         {
-            throw new NotImplementedException();
+            if (maintenance == null)
+                throw new ArgumentNullException(nameof(maintenance));
+
+            // Agregar el objeto al contexto
+            _context.maintenance.Add(maintenance);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync()
+        public async Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync()
         {
-            throw new NotImplementedException();
+            return await _context.maintenance
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<Maintenance> GetMaintenanceByAsync(int id)
+        public async Task<Maintenance> GetMaintenanceByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.maintenance
+            .FirstOrDefaultAsync(s => s.maintenanceId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteMaintenanceAsync(int id)
+        public async Task SoftDeleteMaintenanceAsync(int id)
         {
-            throw new NotImplementedException();
+            var maintenance = await _context.maintenance.FindAsync(id);
+            if (maintenance != null)
+            {
+                maintenance.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateMaintenanceAsync(Maintenance maintenance)
+        public async Task UpdateMaintenanceAsync(Maintenance maintenance)
         {
-            throw new NotImplementedException();
+            if (maintenance == null)
+                throw new ArgumentNullException(nameof(maintenance));
+
+            var existingMaintenance = await _context.maintenance.FindAsync(maintenance.maintenanceId);
+            if (existingMaintenance == null)
+                throw new ArgumentException($"maintenance with ID {maintenance.maintenanceId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingMaintenance.artObject_Id = maintenance.artObject_Id;
+            existingMaintenance.starDate = maintenance.starDate;
+            existingMaintenance.endDate = maintenance.endDate;
+            existingMaintenance.description = maintenance.description;
+            existingMaintenance.cost = maintenance.cost;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

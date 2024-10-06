@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _collectionRepository = collectionRepository;
         }
 
-        public Task CreateCollectionAsync(Collection collection)
+        public async Task CreateCollectionAsync(Collection collection)
         {
-            throw new NotImplementedException();
+            await _collectionRepository.CreateCollectionAsync(collection);
         }
 
-        public Task<IEnumerable<Collection>> GetAllCollectionAsync()
+        public async Task<IEnumerable<Collection>> GetAllCollectionAsync()
         {
-            throw new NotImplementedException();
+            return await _collectionRepository.GetAllCollectionAsync();
         }
 
-        public Task<Collection> GetCollectionByIdAsync(int id)
+        public async Task<Collection> GetCollectionByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _collectionRepository.GetCollectionByIdAsync(id);
         }
 
-        public Task SoftDeleteCollectionAsync(int id)
+        public async Task SoftDeleteCollectionAsync(int id)
         {
-            throw new NotImplementedException();
+            await _collectionRepository.SoftDeleteCollectionAsync(id);
         }
 
-        public Task UpdateCollectionAsync(Collection collection)
+        public async Task UpdateCollectionAsync(Collection collection)
         {
-            throw new NotImplementedException();
+            await _collectionRepository.UpdateCollectionAsync(collection);
         }
     }
 }

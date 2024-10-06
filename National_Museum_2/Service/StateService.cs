@@ -13,29 +13,36 @@ namespace National_Museum_2.Service
     }
     public class StateService : IStateService
     {
-        public Task CreateStateAsync(State state)
+        private readonly IStateRepository _stateRepository;
+
+        public StateService(IStateRepository stateRepository)
         {
-            throw new NotImplementedException();
+            _stateRepository = stateRepository;
         }
 
-        public Task<IEnumerable<State>> GetAllStateAsync()
+        public async Task CreateStateAsync(State state)
         {
-            throw new NotImplementedException();
+            await _stateRepository.CreateStateAsync(state);
         }
 
-        public Task<State> GetStateByIdAsync(int id)
+        public async Task<IEnumerable<State>> GetAllStateAsync()
         {
-            throw new NotImplementedException();
+            return await _stateRepository.GetAllStateAsync();
         }
 
-        public Task SoftDeleteStateAsync(int id)
+        public async Task<State> GetStateByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _stateRepository.GetStateByIdAsync(id);
         }
 
-        public Task UpdateStateAsync(State state)
+        public async Task SoftDeleteStateAsync(int id)
         {
-            throw new NotImplementedException();
+            await _stateRepository.SoftDeleteStateAsync(id);
+        }
+
+        public async Task UpdateStateAsync(State state)
+        {
+            await _stateRepository.UpdateStateAsync(state);
         }
     }
 }
