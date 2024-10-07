@@ -30,6 +30,7 @@ namespace National_Museum_2.Repository
             // Agregar el objeto al contexto
             _context.gender.Add(gender);
 
+
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
         }
