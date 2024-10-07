@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _contactRepository = contactRepository;
         }
 
-        public Task CreateContactAsync(Contact contact)
+        public async Task CreateContactAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            await _contactRepository.CreateContactAsync(contact);
         }
 
-        public Task<IEnumerable<Contact>> GetAllContactAsync()
+        public async Task<IEnumerable<Contact>> GetAllContactAsync()
         {
-            throw new NotImplementedException();
+            return await _contactRepository.GetAllContactAsync();
         }
 
-        public Task<Contact> GetContactByIdAsync(int id)
+        public async Task<Contact> GetContactByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _contactRepository.GetContactByIdAsync(id);
         }
 
-        public Task SoftDeleteContactAsync(int id)
+        public async Task SoftDeleteContactAsync(int id)
         {
-            throw new NotImplementedException();
+            await _contactRepository.SoftDeleteContactAsync(id);
         }
 
-        public Task UpdateContactAsync(Contact contact)
+        public async Task UpdateContactAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            await _contactRepository.UpdateContactAsync(contact);
         }
     }
 }

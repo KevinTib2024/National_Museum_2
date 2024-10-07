@@ -10,5 +10,7 @@
         public required int employeeId { get; set; }
         public virtual required TicketXCollection ticketXCollection_Id { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
     }
 }

@@ -12,8 +12,7 @@
         public virtual required Collection collection_Id { get; set; }
         public virtual required EmployeesXArtRoom employeesXArtRoom_Id { get; set; }
 
-        
-
+        public bool IsDeleted { get; set; } = false;
 
     }
 }

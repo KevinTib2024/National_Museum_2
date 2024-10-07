@@ -1,6 +1,5 @@
 ﻿using National_Museum_2.Model;
 using National_Museum_2.Repository;
-using System.Reflection;
 
 namespace National_Museum_2.Service
 {
@@ -20,7 +19,7 @@ namespace National_Museum_2.Service
         {
             _artObjectRepository = artObjectRepository;
         }
-
+        
         public async Task CreateArtObjectAsync(ArtObject artObject)
         {
             await _artObjectRepository.CreateArtObjectAsync(artObject);

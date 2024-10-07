@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,7 +7,7 @@ namespace National_Museum_2.Repository
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAllUserAsync();
-        Task<User> GetUserByAsync(int id);
+        Task<User> GetUserByIdAsync(int id);
         Task CreateUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task SoftDeleteUserAsync(int id);
@@ -21,29 +22,61 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateUserAsync(User User)
+        public async Task CreateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            // Agregar el objeto al contexto
+            _context.user.Add(user);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<User>> GetAllUserAsync()
+        public async Task<IEnumerable<User>> GetAllUserAsync()
         {
-            throw new NotImplementedException();
+            return await _context.user
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<User> GetUserByAsync(int id)
+        public async Task<User> GetUserByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.user
+            .FirstOrDefaultAsync(s => s.userId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteUserAsync(int id)
+        public async Task SoftDeleteUserAsync(int id)
         {
-            throw new NotImplementedException();
+            var user = await _context.user.FindAsync(id);
+            if (user != null)
+            {
+                user.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateUserAsync(User User)
+        public async Task UpdateUserAsync(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+                throw new ArgumentNullException(nameof(user));
+
+            var existingUser = await _context.user.FindAsync(user.userId);
+            if (existingUser == null)
+                throw new ArgumentException($"user with ID {user.userId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingUser.user_Type_Id = user.user_Type_Id;
+            existingUser.identificationType_Id = user.identificationType_Id;
+            existingUser.identificationNumber = user.identificationNumber;
+            existingUser.names = user.names;
+            existingUser.lastNames = user.lastNames;
+            existingUser.birthDate = user.birthDate;
+            existingUser.contact = user.contact;
+            existingUser.gender_Id = user.gender_Id;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

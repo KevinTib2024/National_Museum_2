@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,8 +7,8 @@ namespace National_Museum_2.Repository
     public interface ITicketXCollectionRepository
     {
         Task<IEnumerable<TicketXCollection>> GetAllTicketXCollectionAsync();
-        Task<TicketXCollection> GetTicketXCollectionByAsync(int id);
-        Task CreateContactAsync(TicketXCollection ticketXCollection);
+        Task<TicketXCollection> GetTicketXCollectionByIdAsync(int id);
+        Task CreateTicketXCollectionAsync(TicketXCollection ticketXCollection);
         Task UpdateTicketXCollectionAsync(TicketXCollection ticketXCollection);
         Task SoftDeleteTicketXCollectionAsync(int id);
     }
@@ -20,29 +21,55 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateContactAsync(TicketXCollection ticketXCollection)
+        public async Task CreateTicketXCollectionAsync(TicketXCollection ticketXCollection)
         {
-            throw new NotImplementedException();
+            if (ticketXCollection == null)
+                throw new ArgumentNullException(nameof(ticketXCollection));
+
+            // Agregar el objeto al contexto
+            _context.ticketXCollection.Add(ticketXCollection);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<TicketXCollection>> GetAllTicketXCollectionAsync()
+        public async Task<IEnumerable<TicketXCollection>> GetAllTicketXCollectionAsync()
         {
-            throw new NotImplementedException();
+            return await _context.ticketXCollection
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<TicketXCollection> GetTicketXCollectionByAsync(int id)
+        public async Task<TicketXCollection> GetTicketXCollectionByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.ticketXCollection
+            .FirstOrDefaultAsync(s => s.ticketXCollectionId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteTicketXCollectionAsync(int id)
+        public async Task SoftDeleteTicketXCollectionAsync(int id)
         {
-            throw new NotImplementedException();
+            var ticketXCollection = await _context.ticketXCollection.FindAsync(id);
+            if (ticketXCollection != null)
+            {
+                ticketXCollection.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateTicketXCollectionAsync(TicketXCollection ticketXCollection)
+        public async Task UpdateTicketXCollectionAsync(TicketXCollection ticketXCollection)
         {
-            throw new NotImplementedException();
+            if (ticketXCollection == null)
+                throw new ArgumentNullException(nameof(ticketXCollection));
+
+            var existingTicketXCollection = await _context.ticketXCollection.FindAsync(ticketXCollection.ticketXCollectionId);
+            if (existingTicketXCollection == null)
+                throw new ArgumentException($"ticketXCollection with ID {ticketXCollection.ticketXCollectionId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingTicketXCollection.Ticket_Id = ticketXCollection.Ticket_Id;
+            existingTicketXCollection.collection_Id = ticketXCollection.collection_Id;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

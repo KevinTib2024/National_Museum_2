@@ -27,7 +27,7 @@ namespace National_Museum_2.Repository
             if (gender == null)
                 throw new ArgumentNullException(nameof(gender));
 
-            // Agregar el objeto gender al contexto
+            // Agregar el objeto al contexto
             _context.gender.Add(gender);
 
             // Guardar cambios en la base de datos
@@ -67,10 +67,8 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"Gender with ID {gender.genderId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingGender.gender = gender.gender;  // Asumiendo que hay una propiedad "Name"
-                                                // Realiza la actualización de otras propiedades que quieras modificar
+            existingGender.gender = gender.gender;  
 
-            // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
         }
     }

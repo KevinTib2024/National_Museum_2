@@ -5,5 +5,7 @@
         public int employeesXArtRoomId { get; set; }
         public required int employeeId { get; set; }
         public required int artRoomId { get; set; }
+
+        public bool IsDeleted { get; set; } = false;
     }
 }

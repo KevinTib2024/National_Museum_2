@@ -14,36 +14,36 @@ namespace National_Museum_2.Service
 
     public class EmployeesService : IEmployeesService
     {
-        private readonly IEmployeeRepository _contactEmployees;
+        private readonly IEmployeeRepository _employeeRepository;
 
         public EmployeesService(IEmployeeRepository employeesRepository)
         {
-            _contactEmployees = employeesRepository;
+            _employeeRepository = employeesRepository;
         }
 
-        public Task CreateEmployeesAsync(Employees employees)
+        public async Task CreateEmployeesAsync(Employees employees)
         {
-            throw new NotImplementedException();
+            await _employeeRepository.CreateEmployeesAsync(employees);
         }
 
-        public Task<IEnumerable<Employees>> GetAllEmployeesAsync()
+        public async Task<IEnumerable<Employees>> GetAllEmployeesAsync()
         {
-            throw new NotImplementedException();
+            return await _employeeRepository.GetAllEmployeesAsync();
         }
 
-        public Task<Employees> GetEmployeesByIdAsync(int id)
+        public async Task<Employees> GetEmployeesByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _employeeRepository.GetEmployeesByIdAsync(id);
         }
 
-        public Task SoftDeleteEmployeesAsync(int id)
+        public async Task SoftDeleteEmployeesAsync(int id)
         {
-            throw new NotImplementedException();
+            await _employeeRepository.SoftDeleteEmployeesAsync(id);
         }
 
-        public Task UpdateEmployeesAsync(Employees employees)
+        public async Task UpdateEmployeesAsync(Employees employees)
         {
-            throw new NotImplementedException();
+            await _employeeRepository.UpdateEmployeesAsync(employees);
         }
     }
 }

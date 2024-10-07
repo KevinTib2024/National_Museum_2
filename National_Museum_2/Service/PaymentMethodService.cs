@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _paymentMethodRepository = paymentMethodRepository;
         }
 
-        public Task CreatePaymentMethodAsync(PaymentMethod paymentMethod)
+        public async Task CreatePaymentMethodAsync(PaymentMethod paymentMethod)
         {
-            throw new NotImplementedException();
+            await _paymentMethodRepository.CreatePaymentMethodAsync(paymentMethod);
         }
 
-        public Task<IEnumerable<PaymentMethod>> GetAllPaymentMethodAsync()
+        public async Task<IEnumerable<PaymentMethod>> GetAllPaymentMethodAsync()
         {
-            throw new NotImplementedException();
+            return await _paymentMethodRepository.GetAllPaymentMethodAsync();
         }
 
-        public Task<PaymentMethod> GetPaymentMethodByIdAsync(int id)
+        public async Task<PaymentMethod> GetPaymentMethodByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _paymentMethodRepository.GetPaymentMethodByIdAsync(id);
         }
 
-        public Task SoftDeletePaymentMethodAsync(int id)
+        public async Task SoftDeletePaymentMethodAsync(int id)
         {
-            throw new NotImplementedException();
+            await _paymentMethodRepository.SoftDeletePaymentMethodAsync(id);
         }
 
-        public Task UpdatePaymentMethodAsync(PaymentMethod paymentMethod)
+        public async Task UpdatePaymentMethodAsync(PaymentMethod paymentMethod)
         {
-            throw new NotImplementedException();
+            await _paymentMethodRepository.UpdatePaymentMethodAsync(paymentMethod);
         }
     }
 }
