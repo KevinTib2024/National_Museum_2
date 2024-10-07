@@ -1,4 +1,6 @@
-﻿namespace National_Museum_2.Model
+﻿using System.ComponentModel;
+
+namespace National_Museum_2.Model
 {
     public class Collection
     {
@@ -6,6 +8,7 @@
         public required string name { get; set; }
         public required string description { get; set; }
 
+        [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }
 }
