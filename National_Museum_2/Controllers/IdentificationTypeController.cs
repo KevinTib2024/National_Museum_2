@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
+using System.Reflection;
 
 namespace National_Museum_2.Controllers
 {
@@ -45,6 +46,8 @@ namespace National_Museum_2.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
+            identificationType.IsDeleted = false;
 
             await _identificationTypeService.CreateIdentificationTypeAsync(identificationType);
             return CreatedAtAction(nameof(GetIdentificationTypeById), new { id = identificationType.identificationTypeId }, identificationType);

@@ -1,4 +1,6 @@
-﻿namespace National_Museum_2.Model
+﻿using System.ComponentModel;
+
+namespace National_Museum_2.Model
 {
     public class Gender
     {
@@ -6,6 +8,7 @@
 
         public required string gender { get; set; }
 
+        [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }
 }
