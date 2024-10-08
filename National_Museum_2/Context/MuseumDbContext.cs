@@ -27,6 +27,15 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<Contact>()
                    .HasKey(c => c.contactId);
 
+            modelBuilder.Entity<UserType>()
+                 .HasKey(u => u.userTypeId);
+
+            modelBuilder.Entity<Gender>()
+                .HasKey(u => u.genderId);
+
+            modelBuilder.Entity<IdentificationType>()
+                   .HasKey(c => c.identificationTypeId);
+
             //Oscar
             modelBuilder.Entity<EmployeesXArtRoom>()
                    .HasKey(c => c.employeesXArtRoomId);
@@ -123,7 +132,7 @@ namespace National_Museum_2.Context
         public DbSet<Category> categories { get; set; }
         public DbSet<State> state { get; set; }
 
-        public DbSet<Scenary> scenaries { get; set; }
+        public DbSet<Scenary> scenary { get; set; }
 
         //Lucia
         public DbSet<Tickets> ticket { get; set; }
