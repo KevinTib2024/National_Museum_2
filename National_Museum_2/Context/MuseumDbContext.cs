@@ -77,6 +77,9 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<State>()
                    .HasKey(c => c.stateId);
 
+            modelBuilder.Entity<Scenary>()
+                   .HasKey(c => c.scenaryId);
+
             //Lucia
             modelBuilder.Entity<Tickets>()
                    .HasKey(c => c.ticketId);
@@ -119,6 +122,8 @@ namespace National_Museum_2.Context
         public DbSet<ArtObject> artObject{ get; set; }
         public DbSet<Category> categories { get; set; }
         public DbSet<State> state { get; set; }
+
+        public DbSet<Scenary> scenaries { get; set; }
 
         //Lucia
         public DbSet<Tickets> ticket { get; set; }

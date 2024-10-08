@@ -53,6 +53,9 @@ builder.Services.AddScoped<IExhibitionService, ExhibitionService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+builder.Services.AddScoped<IScenaryRepository, ScenaryRepository>();
+builder.Services.AddScoped<IScenaryService, ScenaryService>();
+
 
 //Register repositorys and services Lucia
 builder.Services.AddScoped<ITicketsRepository, TicketsRepository>();
