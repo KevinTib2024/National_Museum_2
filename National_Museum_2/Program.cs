@@ -68,6 +68,12 @@ builder.Services.AddScoped<ITicketXCollectionService, TicketXCollectionService>(
 builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
 builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
 
+builder.Services.AddScoped<IGameStateRepository, GameStateRepository>();
+builder.Services.AddScoped<IGameStateService, GameStateService>();
+
+builder.Services.AddScoped<IGameProgressRepository, GameProgressRepository>();
+builder.Services.AddScoped<IGameProgressService, GameProgressService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
