@@ -30,6 +30,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("artObjectId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("artist")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -82,6 +85,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("artRoomId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("collection_IdcollectionId")
                         .HasColumnType("int");
 
@@ -117,6 +123,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("categoryId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("category")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -133,6 +142,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("collectionId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("description")
                         .IsRequired()
@@ -180,6 +192,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("employeeId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("employeesXArtRoom_IdemployeesXArtRoomId")
                         .HasColumnType("int");
 
@@ -221,6 +236,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("employeesXArtRoomId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("artRoomId")
                         .HasColumnType("int");
 
@@ -242,6 +260,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("exhibitionId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("artRoom_IdartRoomId")
                         .HasColumnType("int");
@@ -309,6 +330,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("locationId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -325,6 +349,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("maintenanceId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("artObject_IdartObjectId")
                         .HasColumnType("int");
@@ -356,6 +383,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("paymentMethodId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("paymentMethod")
                         .IsRequired()
@@ -420,6 +450,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("stateId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("state")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -436,6 +469,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ticketTypeId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<float>("price")
                         .HasColumnType("real");
@@ -457,6 +493,9 @@ namespace National_Museum_2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ticketXCollectionId"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Ticket_Id")
                         .HasColumnType("int");
 
@@ -477,6 +516,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ticketId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int>("employeeId")
                         .HasColumnType("int");
@@ -516,6 +558,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("typeEmployeeId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("typeEmployee")
                         .IsRequired()
@@ -604,6 +649,9 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("workSheduleId"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("workShedule")
                         .IsRequired()

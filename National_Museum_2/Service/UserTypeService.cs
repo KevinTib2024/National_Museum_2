@@ -1,5 +1,5 @@
 ﻿using National_Museum_2.Model;
-using National_Museum_2.Respositoy;
+using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
 {
@@ -21,29 +21,29 @@ namespace National_Museum_2.Service
             _userTypeRepository = userTypeRepository;
         }
 
-        public Task CreateUserTypeAsync(UserType userType)
+        public async Task CreateUserTypeAsync(UserType userType)
         {
-            throw new NotImplementedException();
+            await _userTypeRepository.CreateUserTypeAsync(userType);
         }
 
-        public Task<IEnumerable<UserType>> GetAllUserTypeAsync()
+        public async Task<IEnumerable<UserType>> GetAllUserTypeAsync()
         {
-            throw new NotImplementedException();
+            return await _userTypeRepository.GetAllUserTypeAsync();
         }
 
-        public Task<UserType> GetUserTypeByIdAsync(int id)
+        public async Task<UserType> GetUserTypeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _userTypeRepository.GetUserTypeByIdAsync(id);
         }
 
-        public Task SoftDeleteUserTypeAsync(int id)
+        public async Task SoftDeleteUserTypeAsync(int id)
         {
-            throw new NotImplementedException();
+            await _userTypeRepository.SoftDeleteUserTypeAsync(id);
         }
 
-        public Task UpdateUserTypeAsync(UserType userType)
+        public async Task UpdateUserTypeAsync(UserType userType)
         {
-            throw new NotImplementedException();
+            await _userTypeRepository.UpdateUserTypeAsync(userType);
         }
     }
 }

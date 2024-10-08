@@ -1,12 +1,13 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
-namespace National_Museum_2.Respositoy
+namespace National_Museum_2.Repository
 {
     public interface IPermissionsRepository
     {
         Task<IEnumerable<Permissions>> GetAllPermissionsAsync();
-        Task<Permissions> GetPermissionsByAsync(int id);
+        Task<Permissions> GetPermissionsByIdAsync(int id);
         Task CreatePermissionsAsync(Permissions permissions);
         Task UpdatePermissionsAsync(Permissions permissions);
         Task SoftDeletePermissionsAsync(int id);
@@ -21,29 +22,55 @@ namespace National_Museum_2.Respositoy
             _context = context;
         }
 
-        public Task CreatePermissionsAsync(Permissions permissions)
+        public async Task CreatePermissionsAsync(Permissions permissions)
         {
-            throw new NotImplementedException();
+            if (permissions == null)
+                throw new ArgumentNullException(nameof(permissions));
+
+            // Agregar el objeto al contexto
+            _context.permissions.Add(permissions);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<Permissions>> GetAllPermissionsAsync()
+        public async Task<IEnumerable<Permissions>> GetAllPermissionsAsync()
         {
-            throw new NotImplementedException();
+            return await _context.permissions
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<Permissions> GetPermissionsByAsync(int id)
+        public async Task<Permissions> GetPermissionsByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.permissions
+            .FirstOrDefaultAsync(s => s.permissionsId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeletePermissionsAsync(int id)
+        public async Task SoftDeletePermissionsAsync(int id)
         {
-            throw new NotImplementedException();
+            var permissions = await _context.permissions.FindAsync(id);
+            if (permissions != null)
+            {
+                permissions.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdatePermissionsAsync(Permissions permissions)
+        public async Task UpdatePermissionsAsync(Permissions permissions)
         {
-            throw new NotImplementedException();
+            if (permissions == null)
+                throw new ArgumentNullException(nameof(permissions));
+
+            var existingPermissions = await _context.permissions.FindAsync(permissions.permissionsId);
+            if (existingPermissions == null)
+                throw new ArgumentException($"permissions with ID {permissions.permissionsId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingPermissions.PermissionXUserType_Id = permissions.PermissionXUserType_Id;
+            existingPermissions.Permission = permissions.Permission;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

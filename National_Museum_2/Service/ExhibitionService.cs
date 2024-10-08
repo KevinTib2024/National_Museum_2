@@ -9,7 +9,6 @@ namespace National_Museum_2.Service
         Task<Exhibition> GetExhibitionByIdAsync(int id);
         Task CreateExhibitionAsync(Exhibition exhibition);
         Task UpdateExhibitionAsync(Exhibition exhibition);
-        Task SoftExhibitionDeleteAsync(int id);
         Task SoftDeleteExhibitionAsync(int id);
     }
     public class ExhibitionService : IExhibitionService
@@ -21,34 +20,29 @@ namespace National_Museum_2.Service
             _exhibitionRepository = exhibitionRepository;
         }
 
-        public Task CreateExhibitionAsync(Exhibition exhibition)
+        public async Task CreateExhibitionAsync(Exhibition exhibition)
         {
-            throw new NotImplementedException();
+            await _exhibitionRepository.CreateExhibitionAsync(exhibition);
         }
 
-        public Task<IEnumerable<Exhibition>> GetAllExhibitionAsync()
+        public async Task<IEnumerable<Exhibition>> GetAllExhibitionAsync()
         {
-            throw new NotImplementedException();
+            return await _exhibitionRepository.GetAllExhibitionAsync();
         }
 
-        public Task<Exhibition> GetExhibitionByIdAsync(int id)
+        public async Task<Exhibition> GetExhibitionByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _exhibitionRepository.GetExhibitionByIdAsync(id);
         }
 
-        public Task SoftDeleteExhibitionAsync(int id)
+        public async Task SoftDeleteExhibitionAsync(int id)
         {
-            throw new NotImplementedException();
+            await _exhibitionRepository.SoftDeleteExhibitionAsync(id);
         }
 
-        public Task SoftExhibitionDeleteAsync(int id)
+        public async Task UpdateExhibitionAsync(Exhibition exhibition)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task UpdateExhibitionAsync(Exhibition exhibition)
-        {
-            throw new NotImplementedException();
+            await _exhibitionRepository.UpdateExhibitionAsync(exhibition);
         }
     }
 }

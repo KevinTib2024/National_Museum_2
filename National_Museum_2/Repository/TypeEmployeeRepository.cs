@@ -1,13 +1,13 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
-using National_Museum_2.Respositoy;
 
 namespace National_Museum_2.Repository
 {
     public interface ITypeEmployeeRepository
     {
         Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync();
-        Task<TypeEmployee> GetTypeEmployeeByAsync(int id);
+        Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id);
         Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task SoftDeleteTypeEmployeeAsync(int id);
@@ -22,29 +22,54 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee)
+        public async Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee)
         {
-            throw new NotImplementedException();
+            if (typeEmployee == null)
+                throw new ArgumentNullException(nameof(typeEmployee));
+
+            // Agregar el objeto al contexto
+            _context.typeEmployee.Add(typeEmployee);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync()
+        public async Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync()
         {
-            throw new NotImplementedException();
+            return await _context.typeEmployee
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<TypeEmployee> GetTypeEmployeeByAsync(int id)
+        public async Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.typeEmployee
+            .FirstOrDefaultAsync(s => s.typeEmployeeId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteTypeEmployeeAsync(int id)
+        public async Task SoftDeleteTypeEmployeeAsync(int id)
         {
-            throw new NotImplementedException();
+            var typeEmployee = await _context.typeEmployee.FindAsync(id);
+            if (typeEmployee != null)
+            {
+                typeEmployee.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee)
+        public async Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee)
         {
-            throw new NotImplementedException();
+            if (typeEmployee == null)
+                throw new ArgumentNullException(nameof(typeEmployee));
+
+            var existingTypeEmployee = await _context.typeEmployee.FindAsync(typeEmployee.typeEmployeeId);
+            if (existingTypeEmployee == null)
+                throw new ArgumentException($"typeEmployee with ID {typeEmployee.typeEmployeeId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingTypeEmployee.typeEmployeeId = typeEmployee.typeEmployeeId;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

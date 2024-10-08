@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Context;
+﻿using Microsoft.EntityFrameworkCore;
+using National_Museum_2.Context;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -6,7 +7,7 @@ namespace National_Museum_2.Repository
     public interface ITicketTypeRepository
     {
         Task<IEnumerable<TicketType>> GetAllTicketTypeAsync();
-        Task<TicketType> GetTicketTypeByAsync(int id);
+        Task<TicketType> GetTicketTypeByIdAsync(int id);
         Task CreateTicketTypeAsync(TicketType ticketType);
         Task UpdateTicketTypeAsync(TicketType ticketType);
         Task SoftDeleteTicketTypeAsync(int id);
@@ -21,29 +22,55 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public Task CreateTicketTypeAsync(TicketType ticketType)
+        public async Task CreateTicketTypeAsync(TicketType ticketType)
         {
-            throw new NotImplementedException();
+            if (ticketType == null)
+                throw new ArgumentNullException(nameof(ticketType));
+
+            // Agregar el objeto al contexto
+            _context.ticketType.Add(ticketType);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<IEnumerable<TicketType>> GetAllTicketTypeAsync()
+        public async Task<IEnumerable<TicketType>> GetAllTicketTypeAsync()
         {
-            throw new NotImplementedException();
+            return await _context.ticketType
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task<TicketType> GetTicketTypeByAsync(int id)
+        public async Task<TicketType> GetTicketTypeByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.ticketType
+            .FirstOrDefaultAsync(s => s.ticketTypeId == id && !s.IsDeleted);
         }
 
-        public Task SoftDeleteTicketTypeAsync(int id)
+        public async Task SoftDeleteTicketTypeAsync(int id)
         {
-            throw new NotImplementedException();
+            var ticketType = await _context.ticketType.FindAsync(id);
+            if (ticketType != null)
+            {
+                ticketType.IsDeleted = true;
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public Task UpdateTicketTypeAsync(TicketType ticketType)
+        public async Task UpdateTicketTypeAsync(TicketType ticketType)
         {
-            throw new NotImplementedException();
+            if (ticketType == null)
+                throw new ArgumentNullException(nameof(ticketType));
+
+            var existingTicketType = await _context.ticketType.FindAsync(ticketType.ticketTypeId);
+            if (existingTicketType == null)
+                throw new ArgumentException($"ticketType with ID {ticketType.ticketTypeId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingTicketType.ticketType = ticketType.ticketType;
+            existingTicketType.price = ticketType.price;
+
+            await _context.SaveChangesAsync();
         }
     }
 }
