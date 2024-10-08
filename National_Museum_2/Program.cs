@@ -87,6 +87,19 @@ builder.Services.AddScoped<ITypeEmployeeService, TypeEmployeeService>();
 builder.Services.AddScoped<IWorkSheduleRepository, WorkSheduleRepository>();
 builder.Services.AddScoped<IWorkSheduleService, WorkSheduleService>();
 
+builder.Services.AddScoped<IGamesRepository, GamesRepository>();
+builder.Services.AddScoped<IGamesService, GamesService>();
+
+builder.Services.AddScoped<IHistoricTicketsRepository, HistoricTicketsRepository>();
+builder.Services.AddScoped<IHistoricTicketsService, HistoricTicketsService>();
+
+builder.Services.AddScoped<IHistoricUserRepository, HistoricUserRepository>();
+builder.Services.AddScoped<IHistoricUserService, HistoricUserService>();
+
+builder.Services.AddScoped<IHistoricMaintenanceRepository, HistoricMaintenanceRepository>();
+builder.Services.AddScoped<IHistoricMaintenanceService, HistoricMaintenanceService>();
+
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

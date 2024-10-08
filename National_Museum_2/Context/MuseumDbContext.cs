@@ -46,6 +46,18 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<WorkShedule>()
                    .HasKey(c => c.workSheduleId);
 
+            modelBuilder.Entity<Games>()
+                   .HasKey(c => c.gameId);
+
+            modelBuilder.Entity<HistoricTickets>()
+                   .HasKey(c => c.historicTicketId);
+
+            modelBuilder.Entity<HistoricMaintenance>()
+                   .HasKey(c => c.historicMaintenanceId);
+
+            modelBuilder.Entity<HistoricUser>()
+                   .HasKey(c => c.historicUserId);
+
             //Kevin
             modelBuilder.Entity<ArtRoom>()
                    .HasKey(c => c.artRoomId);
@@ -95,6 +107,10 @@ namespace National_Museum_2.Context
         public DbSet<Maintenance> maintenance { get; set; }
         public DbSet<TypeEmployee> typeEmployee { get; set; }
         public DbSet<WorkShedule> workShedule { get; set; }
+        public DbSet<Games> games { get; set; }
+        public DbSet<HistoricTickets> historicTickets { get; set; }
+        public DbSet<HistoricMaintenance> historicMaintenance { get; set; }
+        public DbSet<HistoricUser> historicUser { get; set; }
 
         //Kevin R
         public DbSet<ArtRoom> artRoom { get; set; }
