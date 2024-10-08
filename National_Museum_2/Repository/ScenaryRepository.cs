@@ -10,33 +10,70 @@ namespace National_Museum_2.Repository
         Task<Scenary> GetScenaryByIdAsync(int id);
         Task CreateScenaryAsync(Scenary scenary);
         Task UpdateScenaryAsync(Scenary scenary);
-        Task SoftScenaryAsync(int id);
+        Task SoftDeleteScenaryAsync(int id);
     }
+
     public class ScenaryRepository : IScenaryRepository
     {
-        public Task CreateScenaryAsync(Scenary scenary)
+        private readonly MuseumDbContext _context;
+
+        public ScenaryRepository(MuseumDbContext context)
         {
-            throw new NotImplementedException();
+            _context = context;
         }
 
-        public Task<IEnumerable<Scenary>> GetAllScenaryAsync()
+        public async Task CreateScenaryAsync(Scenary scenary)
         {
-            throw new NotImplementedException();
+            if (scenary == null)
+                throw new ArgumentNullException(nameof(scenary));
+
+            // Agregar el objeto al contexto
+            _context.scenary.Add(scenary);
+
+            // Guardar cambios en la base de datos
+            await _context.SaveChangesAsync();
         }
 
-        public Task<Scenary> GetScenaryByIdAsync(int id)
+        public async Task<IEnumerable<Scenary>> GetAllScenaryAsync()
         {
-            throw new NotImplementedException();
+            return await _context.scenary
+            .Where(s => !s.IsDeleted)
+            .ToListAsync();
         }
 
-        public Task SoftScenaryAsync(int id)
+        public async Task<Scenary> GetScenaryByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _context.scenary
+            .FirstOrDefaultAsync(s => s.scenaryId == id && !s.IsDeleted);
         }
 
-        public Task UpdateScenaryAsync(Scenary scenary)
+        public async Task SoftDeleteScenaryAsync(int id)
         {
-            throw new NotImplementedException();
+            var scenary = await _context.scenary.FindAsync(id);
+            if (scenary != null)
+            {
+                scenary.IsDeleted = true;
+                await _context.SaveChangesAsync();
+
+            }
+        }
+
+        public async Task UpdateScenaryAsync(Scenary scenary)
+        {
+            if (scenary == null)
+                throw new ArgumentNullException(nameof(scenary));
+
+            var existingScenary = await _context.scenary.FindAsync(scenary.scenaryId);
+            if (existingScenary == null)
+                throw new ArgumentException($"scenary with ID {scenary.scenaryId} not found");
+
+            // Actualizar las propiedades del objeto existente
+            existingScenary.scenaryName = scenary.scenaryName;
+            existingScenary.description = scenary.description;
+            existingScenary.order = scenary.order;
+            existingScenary.achievementsobtained = scenary.achievementsobtained;
+
+            await _context.SaveChangesAsync();
         }
     }
 }

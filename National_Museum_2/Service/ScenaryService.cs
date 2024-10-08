@@ -13,29 +13,35 @@ namespace National_Museum_2.Service
     }
     public class ScenaryService : IScenaryService
     {
-        public Task CreateScenaryAsync(Scenary scenary)
+        private readonly IScenaryRepository _scenaryRepository;
+
+        public ScenaryService(IScenaryRepository scenaryRepository)
         {
-            throw new NotImplementedException();
+            _scenaryRepository = scenaryRepository;
+        }
+        public async Task CreateScenaryAsync(Scenary scenary)
+        {
+            await _scenaryRepository.CreateScenaryAsync(scenary);
         }
 
-        public Task<IEnumerable<Scenary>> GetAllScenaryAsync()
+        public async Task<IEnumerable<Scenary>> GetAllScenaryAsync()
         {
-            throw new NotImplementedException();
+            return await _scenaryRepository.GetAllScenaryAsync();
         }
 
-        public Task<Scenary> GetScenaryByIdAsync(int id)
+        public async Task<Scenary> GetScenaryByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _scenaryRepository.GetScenaryByIdAsync(id);
         }
 
-        public Task SoftDeleteScenaryAsync(int id)
+        public async Task SoftDeleteScenaryAsync(int id)
         {
-            throw new NotImplementedException();
+            await _scenaryRepository.SoftDeleteScenaryAsync(id);
         }
 
-        public Task UpdateScenaryAsync(Scenary scenary)
+        public async Task UpdateScenaryAsync(Scenary scenary)
         {
-            throw new NotImplementedException();
+            await _scenaryRepository.UpdateScenaryAsync(scenary);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -23,8 +22,8 @@ namespace National_Museum_2.Controllers
 
         public async Task<ActionResult<IEnumerable<Scenary>>> GetAllScenary()
         {
-            var Scenary = await _scenaryService.GetAllScenaryAsync();
-            return Ok(Scenary);
+            var scenary = await _scenaryService.GetAllScenaryAsync();
+            return Ok(scenary);
         }
 
         [HttpGet("{id}")]
