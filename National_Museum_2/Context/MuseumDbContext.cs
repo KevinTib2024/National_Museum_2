@@ -27,6 +27,15 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<Contact>()
                    .HasKey(c => c.contactId);
 
+            modelBuilder.Entity<UserType>()
+                 .HasKey(u => u.userTypeId);
+
+            modelBuilder.Entity<Gender>()
+                .HasKey(u => u.genderId);
+
+            modelBuilder.Entity<IdentificationType>()
+                   .HasKey(c => c.identificationTypeId);
+
             //Oscar
             modelBuilder.Entity<EmployeesXArtRoom>()
                    .HasKey(c => c.employeesXArtRoomId);
@@ -46,6 +55,18 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<WorkShedule>()
                    .HasKey(c => c.workSheduleId);
 
+            modelBuilder.Entity<Games>()
+                   .HasKey(c => c.gameId);
+
+            modelBuilder.Entity<HistoricTickets>()
+                   .HasKey(c => c.historicTicketId);
+
+            modelBuilder.Entity<HistoricMaintenance>()
+                   .HasKey(c => c.historicMaintenanceId);
+
+            modelBuilder.Entity<HistoricUser>()
+                   .HasKey(c => c.historicUserId);
+
             //Kevin
             modelBuilder.Entity<ArtRoom>()
                    .HasKey(c => c.artRoomId);
@@ -64,6 +85,9 @@ namespace National_Museum_2.Context
 
             modelBuilder.Entity<State>()
                    .HasKey(c => c.stateId);
+
+            modelBuilder.Entity<Scenary>()
+                   .HasKey(c => c.scenaryId);
 
             //Lucia
             modelBuilder.Entity<Tickets>()
@@ -101,6 +125,10 @@ namespace National_Museum_2.Context
         public DbSet<Maintenance> maintenance { get; set; }
         public DbSet<TypeEmployee> typeEmployee { get; set; }
         public DbSet<WorkShedule> workShedule { get; set; }
+        public DbSet<Games> games { get; set; }
+        public DbSet<HistoricTickets> historicTickets { get; set; }
+        public DbSet<HistoricMaintenance> historicMaintenance { get; set; }
+        public DbSet<HistoricUser> historicUser { get; set; }
 
         //Kevin R
         public DbSet<ArtRoom> artRoom { get; set; }
@@ -109,6 +137,8 @@ namespace National_Museum_2.Context
         public DbSet<ArtObject> artObject{ get; set; }
         public DbSet<Category> categories { get; set; }
         public DbSet<State> state { get; set; }
+
+        public DbSet<Scenary> scenary { get; set; }
 
         //Lucia
         public DbSet<Tickets> ticket { get; set; }
