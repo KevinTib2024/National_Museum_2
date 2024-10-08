@@ -77,6 +77,12 @@ namespace National_Museum_2.Context
 
             modelBuilder.Entity<PaymentMethod>()
                    .HasKey(c => c.paymentMethodId);
+
+            modelBuilder.Entity<GameProgress>()
+                   .HasKey(c => c.gameProgressId);
+
+            modelBuilder.Entity<GameState>()
+                   .HasKey(c => c.gameStateId);
         }
 
         //Tibaquichá
@@ -109,5 +115,7 @@ namespace National_Museum_2.Context
         public DbSet<TicketXCollection> ticketXCollection { get; set; }
         public DbSet<TicketType> ticketType { get; set; }
         public DbSet<PaymentMethod> paymentMethods { get; set; }
+        public DbSet<GameProgress> gameProgresses { get; set; }
+        public DbSet<GameState> gameStates { get; set; }
     }
 }   

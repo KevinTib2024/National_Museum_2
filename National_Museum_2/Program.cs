@@ -12,7 +12,7 @@ builder.Services.AddDbContext<MuseumDbContext>(options => options.UseSqlServer(c
 
 builder.Services.AddControllers();
 
-//Registrar controles y servicios
+//Registrar controles y servicios Tibaquicha
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
@@ -54,6 +54,25 @@ builder.Services.AddScoped<IExhibitionService, ExhibitionService>();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+//Registrar controles y servicios Lucia
+builder.Services.AddScoped<ITicketsRepository, TicketsRepository>();
+builder.Services.AddScoped<ITicketsService, TicketsService>();
+
+builder.Services.AddScoped<ITicketTypeRepository, TicketTypeRepository>();
+builder.Services.AddScoped<ITicketTypeService, TicketTypeService>();
+
+builder.Services.AddScoped<ITicketXCollectionRepository, TicketXCollectionRepository>();
+builder.Services.AddScoped<ITicketXCollectionService, TicketXCollectionService>();
+
+builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
+builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
+
+builder.Services.AddScoped<IGameStateRepository, GameStateRepository>();
+builder.Services.AddScoped<IGameStateService, GameStateService>();
+
+builder.Services.AddScoped<IGameProgressRepository, GameProgressRepository>();
+builder.Services.AddScoped<IGameProgressService, GameProgressService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
