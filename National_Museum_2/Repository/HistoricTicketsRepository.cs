@@ -68,7 +68,7 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"historicTickets with ID {historicTickets.historicTicketId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingHistoricTickets.ticketId = historicTickets.ticketId;
+            existingHistoricTickets.ticket_Id = historicTickets.ticket_Id;
             existingHistoricTickets.user_Id = historicTickets.user_Id;
             existingHistoricTickets.visitDate = historicTickets.visitDate;
             existingHistoricTickets.ticketType_Id = historicTickets.ticketType_Id;
