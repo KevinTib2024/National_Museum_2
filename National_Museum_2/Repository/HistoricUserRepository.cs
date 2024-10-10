@@ -77,6 +77,10 @@ namespace National_Museum_2.Repository
             existingHistoricUser.birthDate = historicUser.birthDate;
             existingHistoricUser.contact = historicUser.contact;
             existingHistoricUser.gender_Id = historicUser.gender_Id;
+            existingHistoricUser.email = historicUser.email;
+            existingHistoricUser.password = historicUser.password;
+            existingHistoricUser.ModificationDate = historicUser.ModificationDate;
+            existingHistoricUser.ModicationBy = historicUser.ModicationBy;
 
             await _context.SaveChangesAsync();
         }

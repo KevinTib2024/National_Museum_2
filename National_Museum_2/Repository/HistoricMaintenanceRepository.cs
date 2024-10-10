@@ -74,6 +74,8 @@ namespace National_Museum_2.Repository
             existingHistoricMaintenance.endDate = historicMaintenance.endDate;
             existingHistoricMaintenance.description = historicMaintenance.description;
             existingHistoricMaintenance.cost = historicMaintenance.cost;
+            existingHistoricMaintenance.ModificationDate = historicMaintenance.ModificationDate;
+            existingHistoricMaintenance.ModicationBy = historicMaintenance.ModicationBy;
 
 
             await _context.SaveChangesAsync();

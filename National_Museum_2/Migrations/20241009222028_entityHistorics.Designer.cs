@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using National_Museum_2.Context;
 
@@ -11,9 +12,11 @@ using National_Museum_2.Context;
 namespace National_Museum_2.Migrations
 {
     [DbContext(typeof(MuseumDbContext))]
-    partial class MuseumDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241009222028_entityHistorics")]
+    partial class entityHistorics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -502,10 +505,6 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("gender_Id")
                         .HasColumnType("int");
 
@@ -521,10 +520,6 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("names")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -644,15 +639,10 @@ namespace National_Museum_2.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("permissions_IdpermissionsId")
-                        .HasColumnType("int");
-
                     b.Property<int>("userType_IduserTypeId")
                         .HasColumnType("int");
 
                     b.HasKey("permissionXUserTypeId");
-
-                    b.HasIndex("permissions_IdpermissionsId");
 
                     b.HasIndex("userType_IduserTypeId");
 
@@ -674,7 +664,12 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PermissionXUserType_IdpermissionXUserTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("permissionsId");
+
+                    b.HasIndex("PermissionXUserType_IdpermissionXUserTypeId");
 
                     b.ToTable("permissions");
                 });
@@ -857,10 +852,6 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("gender_IdgenderId")
                         .HasColumnType("int");
 
@@ -876,10 +867,6 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("names")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1105,21 +1092,24 @@ namespace National_Museum_2.Migrations
 
             modelBuilder.Entity("National_Museum_2.Model.PermissionXUserType", b =>
                 {
-                    b.HasOne("National_Museum_2.Model.Permissions", "permissions_Id")
-                        .WithMany()
-                        .HasForeignKey("permissions_IdpermissionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("National_Museum_2.Model.UserType", "userType_Id")
                         .WithMany()
                         .HasForeignKey("userType_IduserTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("permissions_Id");
-
                     b.Navigation("userType_Id");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Permissions", b =>
+                {
+                    b.HasOne("National_Museum_2.Model.PermissionXUserType", "PermissionXUserType_Id")
+                        .WithMany()
+                        .HasForeignKey("PermissionXUserType_IdpermissionXUserTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PermissionXUserType_Id");
                 });
 
             modelBuilder.Entity("National_Museum_2.Model.TicketXCollection", b =>

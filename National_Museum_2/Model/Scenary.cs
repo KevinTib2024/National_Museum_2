@@ -4,7 +4,7 @@ namespace National_Museum_2.Model
 {
     public class Scenary
     {
-        public  virtual int scenaryId { get; set; }
+        public int scenaryId { get; set; }
         public required string  scenaryName { get; set; }
         public required string description { get; set; }  
         public required int order { get; set; }

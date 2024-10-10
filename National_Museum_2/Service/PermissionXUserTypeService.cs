@@ -10,6 +10,7 @@ namespace National_Museum_2.Service
         Task CreatePermissionXUserTypeAsync(PermissionXUserType user);
         Task UpdatePermissionXUserTypeAsync(PermissionXUserType user);
         Task SoftDeletePermissionXUserTypeAsync(int id);
+        Task<bool> HasPermissionAsync(int userType_Id, int permissions_Id);
     }
 
     public class PermissionXUserTypeService : IPermissionXUserTypeService
@@ -44,6 +45,18 @@ namespace National_Museum_2.Service
         public async Task UpdatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType)
         {
             await _permissionXUserTypeRepository.UpdatePermissionXUserTypeAsync(permissionXUserType);
+        }
+
+        public async Task<bool> HasPermissionAsync(int userType_Id, int permission_Id)
+        {
+            try
+            {
+                return await _permissionXUserTypeRepository.HasPermissionAsync(userType_Id, permission_Id);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
         }
     }
 }

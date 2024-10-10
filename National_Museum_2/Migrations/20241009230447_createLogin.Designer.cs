@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using National_Museum_2.Context;
 
@@ -11,9 +12,11 @@ using National_Museum_2.Context;
 namespace National_Museum_2.Migrations
 {
     [DbContext(typeof(MuseumDbContext))]
-    partial class MuseumDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241009230447_createLogin")]
+    partial class createLogin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -502,10 +505,6 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("gender_Id")
                         .HasColumnType("int");
 
@@ -521,10 +520,6 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("names")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

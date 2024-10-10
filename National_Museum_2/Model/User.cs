@@ -22,6 +22,10 @@ namespace National_Museum_2.Model
 
         public virtual required Gender gender_Id { get; set; }
 
+        public required string email { get; set; }
+
+        public required string password { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }
