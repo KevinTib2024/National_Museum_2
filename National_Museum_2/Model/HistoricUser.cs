@@ -14,6 +14,8 @@ namespace National_Museum_2.Model
         public required string birthDate { get; set; }
         public required string contact { get; set; }
         public required int gender_Id { get; set; }
+        public required string email { get; set; }
+        public required string password { get; set; }
         public required DateTime ModificationDate { get; set; }
         public required int ModicationBy { get; set; }
 
