@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
 using National_Museum_2.Repository;
-using National_Museum_2.Respositoy;
 using National_Museum_2.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -81,11 +80,10 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.UseHttpsRedirection();
 
