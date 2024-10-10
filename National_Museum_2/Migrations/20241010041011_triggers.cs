@@ -5,7 +5,7 @@
 namespace National_Museum_2.Migrations
 {
     /// <inheritdoc />
-    public partial class triggers : Migration
+    public partial class Triggers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
