@@ -53,7 +53,7 @@ namespace National_Museum_2.Service
             {
                 return await _permissionXUserTypeRepository.HasPermissionAsync(userType_Id, permission_Id);
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 throw;
             }
