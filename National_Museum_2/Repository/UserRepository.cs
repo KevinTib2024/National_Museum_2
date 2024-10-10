@@ -18,16 +18,21 @@ namespace National_Museum_2.Repository
     public class UserRepository : IUserRepository
     {
         private readonly MuseumDbContext _context;
+        private readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>(); // Usar PasswordHasher
 
         public UserRepository(MuseumDbContext context)
         {
             _context = context;
         }
 
+        // Método para crear un nuevo usuario con la contraseña hasheada
         public async Task CreateUserAsync(User user)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
+
+            // Hashear la contraseña antes de guardarla en la base de datos
+            user.password = _passwordHasher.HashPassword(user, user.password);
 
             // Agregar el objeto al contexto
             _context.user.Add(user);
@@ -59,6 +64,7 @@ namespace National_Museum_2.Repository
             }
         }
 
+        // Método para actualizar un usuario existente, incluyendo la contraseña si es necesario
         public async Task UpdateUserAsync(User user)
         {
             if (user == null)
@@ -66,7 +72,7 @@ namespace National_Museum_2.Repository
 
             var existingUser = await _context.user.FindAsync(user.userId);
             if (existingUser == null)
-                throw new ArgumentException($"user with ID {user.userId} not found");
+                throw new ArgumentException($"User with ID {user.userId} not found");
 
             // Actualizar las propiedades del objeto existente
             existingUser.user_Type_Id = user.user_Type_Id;
@@ -78,25 +84,29 @@ namespace National_Museum_2.Repository
             existingUser.contact = user.contact;
             existingUser.gender_Id = user.gender_Id;
             existingUser.email = user.email;
-            existingUser.password = user.password;
+
+            // Verificar si la contraseña ha sido cambiada
+            if (!string.IsNullOrEmpty(user.password))
+            {
+                // Hashear la nueva contraseña
+                existingUser.password = _passwordHasher.HashPassword(existingUser, user.password);
+            }
 
             await _context.SaveChangesAsync();
         }
 
+        // Método para validar un usuario, verificando la contraseña hasheada
         public async Task<bool> ValidateUserAsync(string email, string password)
         {
-            var passwordHasher = new PasswordHasher<User>();
-
             var user = await _context.user.FirstOrDefaultAsync(u => u.email == email);
 
-            if (user == null) 
+            if (user == null)
                 return false;
 
-            var userVerification = passwordHasher.VerifyHashedPassword(user, user.password, password);
-            
-            if (userVerification == PasswordVerificationResult.Success) return true;
+            // Verificar la contraseña ingresada con la contraseña hasheada almacenada
+            var userVerification = _passwordHasher.VerifyHashedPassword(user, user.password, password);
 
-            return false;
+            return userVerification == PasswordVerificationResult.Success;
         }
     }
 }
