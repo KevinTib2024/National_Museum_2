@@ -13,7 +13,7 @@ namespace National_Museum_2.Migrations
 {
     [DbContext(typeof(MuseumDbContext))]
     [Migration("20241010041011_triggers")]
-    partial class triggers
+    partial class Triggers
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
