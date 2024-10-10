@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
 using National_Museum_2.Model;
 
@@ -11,6 +12,7 @@ namespace National_Museum_2.Repository
         Task CreateUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task SoftDeleteUserAsync(int id);
+        Task<bool> ValidateUserAsync(string email, string password);
     }
 
     public class UserRepository : IUserRepository
@@ -75,8 +77,26 @@ namespace National_Museum_2.Repository
             existingUser.birthDate = user.birthDate;
             existingUser.contact = user.contact;
             existingUser.gender_Id = user.gender_Id;
+            existingUser.email = user.email;
+            existingUser.password = user.password;
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> ValidateUserAsync(string email, string password)
+        {
+            var passwordHasher = new PasswordHasher<User>();
+
+            var user = await _context.user.FirstOrDefaultAsync(u => u.email == email);
+
+            if (user == null) 
+                return false;
+
+            var userVerification = passwordHasher.VerifyHashedPassword(user, user.password, password);
+            
+            if (userVerification == PasswordVerificationResult.Success) return true;
+
+            return false;
         }
     }
 }

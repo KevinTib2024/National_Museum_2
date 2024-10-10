@@ -75,6 +75,8 @@ namespace National_Museum_2.Repository
             existingHistoricTickets.paymentMethod_Id = historicTickets.paymentMethod_Id;
             existingHistoricTickets.employeeId = historicTickets.employeeId;
             existingHistoricTickets.ticketXCollection_Id = historicTickets.ticketXCollection_Id;
+            existingHistoricTickets.ModificationDate = historicTickets.ModificationDate;
+            existingHistoricTickets.ModicationBy = historicTickets.ModicationBy;
 
             await _context.SaveChangesAsync();
         }

@@ -11,6 +11,8 @@ namespace National_Museum_2.Service
         Task CreateUserAsync(User user);
         Task UpdateUserAsync(User user);
         Task SoftDeleteUserAsync(int id);
+
+        Task<bool> ValidateUserAsync(string email, string password);
     }
 
     public class UserService : IUserService
@@ -45,6 +47,19 @@ namespace National_Museum_2.Service
         public async Task UpdateUserAsync(User user)
         {
             await _userRepository.UpdateUserAsync(user);
+        }
+
+        public async Task<bool> ValidateUserAsync(string email, string password)
+        {
+            try
+            {
+                return await _userRepository.ValidateUserAsync(email, password);
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+
         }
     }
 }

@@ -77,5 +77,20 @@ namespace National_Museum_2.Controllers
             await _permissionXUserTypeService.SoftDeletePermissionXUserTypeAsync(id);
             return NoContent();
         }
+
+        [HttpGet("validate")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        public async Task<ActionResult> ValidatePermissions(int userType_Id, int permissions_Id)
+        {
+            bool hasPermissions = await _permissionXUserTypeService.HasPermissionAsync(userType_Id, permissions_Id);
+
+            if (hasPermissions)
+            {
+                return Ok(new { Message = "User has the required permission." });
+            }
+
+            return StatusCode(StatusCodes.Status403Forbidden, "User does not have the required permission.");
+        }
     }
 }
