@@ -68,13 +68,13 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"game with ID {games.gameId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingGames.userId = games.userId;
+            existingGames.user_Id = games.user_Id;
             existingGames.gameDate = games.gameDate;
-            existingGames.gameStateId = games.gameStateId;
+            existingGames.gameState_Id = games.gameState_Id;
             existingGames.gameTime = games.gameTime;
             existingGames.punctuation = games.punctuation;
-            existingGames.scenaryId = games.scenaryId;
-            existingGames.gameProgressId = games.gameProgressId;
+            existingGames.scenary_Id = games.scenary_Id;
+            existingGames.gameProgress_Id = games.gameProgress_Id;
 
             await _context.SaveChangesAsync();
         }

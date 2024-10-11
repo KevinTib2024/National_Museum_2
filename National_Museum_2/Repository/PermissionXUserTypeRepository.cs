@@ -11,6 +11,7 @@ namespace National_Museum_2.Repository
         Task CreatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType);
         Task UpdatePermissionXUserTypeAsync(PermissionXUserType permissionXUserType);
         Task SoftDeletePermissionXUserTypeAsync(int id);
+        Task<bool> HasPermissionAsync(int userType_Id, int permissionsId);
     }
 
     public class PermissionXUserTypeRepository : IPermissionXUserTypeRepository
@@ -68,8 +69,18 @@ namespace National_Museum_2.Repository
 
             // Actualizar las propiedades del objeto existente
             existingPermissionXUserType.userType_Id = permissionXUserType.userType_Id;
+            existingPermissionXUserType.permissions_Id = permissionXUserType.permissions_Id;
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> HasPermissionAsync(int userType_Id, int permissionsId)
+        {
+            var permission = await _context.permissionXUserType
+            .Where(p => p.userType_Id.userTypeId == userType_Id && p.permissions_Id.permissionsId == permissionsId && !p.IsDeleted)
+            .FirstOrDefaultAsync();
+
+            return permission != null ? true : false;
         }
     }
 }

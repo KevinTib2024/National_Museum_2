@@ -6,8 +6,6 @@ namespace National_Museum_2.Model
     {
         public required int permissionsId { get; set; }
 
-        public virtual required PermissionXUserType PermissionXUserType_Id { get; set; }
-
         public required string Permission { get; set; }
 
         [DefaultValue(false)]

@@ -67,7 +67,6 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"permissions with ID {permissions.permissionsId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingPermissions.PermissionXUserType_Id = permissions.PermissionXUserType_Id;
             existingPermissions.Permission = permissions.Permission;
 
             await _context.SaveChangesAsync();
