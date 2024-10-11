@@ -27,6 +27,15 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<Contact>()
                    .HasKey(c => c.contactId);
 
+            modelBuilder.Entity<UserType>()
+                 .HasKey(u => u.userTypeId);
+
+            modelBuilder.Entity<Gender>()
+                .HasKey(u => u.genderId);
+
+            modelBuilder.Entity<IdentificationType>()
+                   .HasKey(c => c.identificationTypeId);
+
             //Oscar
             modelBuilder.Entity<EmployeesXArtRoom>()
                    .HasKey(c => c.employeesXArtRoomId);
@@ -45,6 +54,18 @@ namespace National_Museum_2.Context
 
             modelBuilder.Entity<WorkShedule>()
                    .HasKey(c => c.workSheduleId);
+
+            modelBuilder.Entity<Games>()
+                   .HasKey(c => c.gameId);
+
+            modelBuilder.Entity<HistoricTickets>()
+                   .HasKey(c => c.historicTicketId);
+
+            modelBuilder.Entity<HistoricMaintenance>()
+                   .HasKey(c => c.historicMaintenanceId);
+
+            modelBuilder.Entity<HistoricUser>()
+                   .HasKey(c => c.historicUserId);
 
             //Kevin
             modelBuilder.Entity<ArtRoom>()
@@ -65,6 +86,9 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<State>()
                    .HasKey(c => c.stateId);
 
+            modelBuilder.Entity<Scenary>()
+                   .HasKey(c => c.scenaryId);
+
             //Lucia
             modelBuilder.Entity<Tickets>()
                    .HasKey(c => c.ticketId);
@@ -77,6 +101,12 @@ namespace National_Museum_2.Context
 
             modelBuilder.Entity<PaymentMethod>()
                    .HasKey(c => c.paymentMethodId);
+
+            modelBuilder.Entity<GameProgress>()
+                   .HasKey(c => c.gameProgressId);
+
+            modelBuilder.Entity<GameState>()
+                   .HasKey(c => c.gameStateId);
         }
 
         //Tibaquichá
@@ -95,6 +125,10 @@ namespace National_Museum_2.Context
         public DbSet<Maintenance> maintenance { get; set; }
         public DbSet<TypeEmployee> typeEmployee { get; set; }
         public DbSet<WorkShedule> workShedule { get; set; }
+        public DbSet<Games> games { get; set; }
+        public DbSet<HistoricTickets> historicTickets { get; set; }
+        public DbSet<HistoricMaintenance> historicMaintenance { get; set; }
+        public DbSet<HistoricUser> historicUser { get; set; }
 
         //Kevin R
         public DbSet<ArtRoom> artRoom { get; set; }
@@ -104,10 +138,14 @@ namespace National_Museum_2.Context
         public DbSet<Category> categories { get; set; }
         public DbSet<State> state { get; set; }
 
+        public DbSet<Scenary> scenary { get; set; }
+
         //Lucia
         public DbSet<Tickets> ticket { get; set; }
         public DbSet<TicketXCollection> ticketXCollection { get; set; }
         public DbSet<TicketType> ticketType { get; set; }
         public DbSet<PaymentMethod> paymentMethods { get; set; }
+        public DbSet<GameProgress> gameProgresses { get; set; }
+        public DbSet<GameState> gameStates { get; set; }
     }
 }   

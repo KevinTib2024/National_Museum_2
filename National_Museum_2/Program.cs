@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
 using National_Museum_2.Repository;
+using National_Museum_2.Respositoy;
 using National_Museum_2.Service;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,7 @@ builder.Services.AddDbContext<MuseumDbContext>(options => options.UseSqlServer(c
 
 builder.Services.AddControllers();
 
-//Register repositorys and services Tibaquicha
+//Registrar controles y servicios Tibaquicha
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 
@@ -33,8 +34,9 @@ builder.Services.AddScoped<IGenderService, GenderService>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddScoped<IContactService, ContactService>();
 
+builder.Services.AddControllers();
 
-//Register repositorys and services Kevin Ramirez
+//Registrar controles y servicios Kevin Ramirez
 builder.Services.AddScoped<IArtObjectRepository, ArtObjectRepository>();
 builder.Services.AddScoped<IArtObjectService, ArtObjectService>();
 
@@ -53,8 +55,7 @@ builder.Services.AddScoped<IExhibitionService, ExhibitionService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-
-//Register repositorys and services Lucia
+//Registrar controles y servicios Lucia
 builder.Services.AddScoped<ITicketsRepository, TicketsRepository>();
 builder.Services.AddScoped<ITicketsService, TicketsService>();
 
@@ -67,25 +68,11 @@ builder.Services.AddScoped<ITicketXCollectionService, TicketXCollectionService>(
 builder.Services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
 builder.Services.AddScoped<IPaymentMethodService, PaymentMethodService>();
 
+builder.Services.AddScoped<IGameStateRepository, GameStateRepository>();
+builder.Services.AddScoped<IGameStateService, GameStateService>();
 
-//Register repositorys and services Oscar
-builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
-builder.Services.AddScoped<ICollectionService, CollectionService>();
-
-builder.Services.AddScoped<IEmployeesXArtRoomRepository, EmployeesXArtRoomRepository>();
-builder.Services.AddScoped<IEmployeesXArtRoomService, EmployeesXArtRoomService>();
-
-builder.Services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
-builder.Services.AddScoped<IMaintenanceService, MaintenanceService>();
-
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddScoped<IEmployeesService, EmployeesService>();
-
-builder.Services.AddScoped<ITypeEmployeeRepository, TypeEmployeeRepository>();
-builder.Services.AddScoped<ITypeEmployeeService, TypeEmployeeService>();
-
-builder.Services.AddScoped<IWorkSheduleRepository, WorkSheduleRepository>();
-builder.Services.AddScoped<IWorkSheduleService, WorkSheduleService>();
+builder.Services.AddScoped<IGameProgressRepository, GameProgressRepository>();
+builder.Services.AddScoped<IGameProgressService, GameProgressService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
