@@ -82,6 +82,37 @@ builder.Services.AddScoped<IGameStateService, GameStateService>();
 builder.Services.AddScoped<IGameProgressRepository, GameProgressRepository>();
 builder.Services.AddScoped<IGameProgressService, GameProgressService>();
 
+//Registrar controles y servicios Oscar
+builder.Services.AddScoped<ICollectionRepository, CollectionRepository>();
+builder.Services.AddScoped<ICollectionService, CollectionService>();
+
+builder.Services.AddScoped<IEmployeesXArtRoomRepository, EmployeesXArtRoomRepository>();
+builder.Services.AddScoped<IEmployeesXArtRoomService, EmployeesXArtRoomService>();
+
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddScoped<IEmployeesService, EmployeesService>();
+
+builder.Services.AddScoped<IMaintenanceRepository, MaintenanceRepository>();
+builder.Services.AddScoped<IMaintenanceService, MaintenanceService>();
+
+builder.Services.AddScoped<ITypeEmployeeRepository, TypeEmployeeRepository>();
+builder.Services.AddScoped<ITypeEmployeeService, TypeEmployeeService>();
+
+builder.Services.AddScoped<IWorkSheduleRepository, WorkSheduleRepository>();
+builder.Services.AddScoped<IWorkSheduleService, WorkSheduleService>();
+
+builder.Services.AddScoped<IGamesRepository, GamesRepository>();
+builder.Services.AddScoped<IGamesService, GamesService>();
+
+builder.Services.AddScoped<IHistoricTicketsRepository, HistoricTicketsRepository>();
+builder.Services.AddScoped<IHistoricTicketsService, HistoricTicketsService>();
+
+builder.Services.AddScoped<IHistoricMaintenanceRepository, HistoricMaintenanceRepository>();
+builder.Services.AddScoped<IHistoricMaintenanceService, HistoricMaintenanceService>();
+
+builder.Services.AddScoped<IHistoricUserRepository, HistoricUserRepository>();
+builder.Services.AddScoped<IHistoricUserService, HistoricUserService>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
