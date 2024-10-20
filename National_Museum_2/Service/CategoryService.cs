@@ -10,6 +10,7 @@ namespace National_Museum_2.Service
         Task CreateCategoryAsync(Category category);
         Task UpdateCategoryAsync(Category category);
         Task SoftDeleteCategoryAsync(int id);
+        
     }
     public class CategoryService : ICategoryService
     {
@@ -42,6 +43,10 @@ namespace National_Museum_2.Service
         public async Task UpdateCategoryAsync(Category category)
         {
             await _categoryRepository.UpdateCategoryAsync(category);
+        }
+        public Task<bool> ValidateUserAsync(string email, string password)
+        {
+            throw new NotImplementedException();
         }
     }
 }
