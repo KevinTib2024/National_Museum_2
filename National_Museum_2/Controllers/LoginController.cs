@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
+using System.ComponentModel.DataAnnotations;
 
 namespace National_Museum_2.Controllers
 {
@@ -18,18 +19,15 @@ namespace National_Museum_2.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-        public async Task<ActionResult<Boolean> Autentication()
+        public async Task<ActionResult<bool>>AutenticationAsync(string email, string password)
         {
-            var Login = await _loginService.AutenticationAsync();
-            return Ok();
+            var login = await _loginService.AutenticationAsync(email, password);
+            return Ok(login); 
         }
 
-        [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         
     }
 }

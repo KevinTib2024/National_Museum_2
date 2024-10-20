@@ -5,7 +5,7 @@ namespace National_Museum_2.Service
 {
     public interface ILoginService
     {
-        Task<bool> ValidateUserAsync(string email, string password);
+        Task<bool> AutenticationAsync(string email, string password);
     }
 
 
@@ -16,7 +16,7 @@ namespace National_Museum_2.Service
         {
             _loginRepository = loginRepository;
         }
-        public async Task<bool> ValidateUserAsync(string email, string password)
+        public async Task<bool> AutenticationAsync(string email, string password)
         {
             return await _loginRepository.AutenticationAsync(email, password);
         }

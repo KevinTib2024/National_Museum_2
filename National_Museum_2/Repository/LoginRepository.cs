@@ -6,8 +6,12 @@ using National_Museum_2.Model;
 
 
 namespace National_Museum_2.Repository
+
 {
+    
+
     public interface ILoginRepository
+        
     {
        
         Task <bool> AutenticationAsync(string email, string password);
