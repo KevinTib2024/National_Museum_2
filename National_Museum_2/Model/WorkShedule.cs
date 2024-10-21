@@ -7,6 +7,8 @@ namespace National_Museum_2.Model
         public required int workSheduleId { get; set; }
         public required string workShedule { get; set; }
 
+        public List<Employees> employees { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }

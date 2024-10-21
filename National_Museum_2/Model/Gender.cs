@@ -12,5 +12,6 @@ namespace National_Museum_2.Model
         public bool IsDeleted { get; set; } = false;
         public List<User> users { get; set; }
 
+
     }
 }

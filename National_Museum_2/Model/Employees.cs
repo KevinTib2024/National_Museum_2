@@ -15,11 +15,12 @@ namespace National_Museum_2.Model
         public virtual  WorkShedule workShedule { get; set; }
 
         public required DateTime hiringDate { get; set; }
-        public virtual required int employeesXArtRoom_Id { get; set; }
-        public virtual EmployeesXArtRoom employeesXArtRoom { get; set; }
 
         public virtual required int  maintenance_Id { get; set; }
         public virtual  Maintenance maintenance { get; set; }
+
+        public List<EmployeesXArtRoom> employeesXArtRooms { get; set; }
+        
 
 
         [DefaultValue(false)]

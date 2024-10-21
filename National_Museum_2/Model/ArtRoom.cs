@@ -9,13 +9,15 @@ namespace National_Museum_2.Model
         public required string name { get ; set; }
 
         public required string description { get; set; }
-        public virtual required Location location_Id{ get; set; }
+        public virtual required int location_Id{ get; set; }
+        public virtual  Location location{ get; set; }
         public required string numberExhibitions { get; set; }
-        public virtual required Collection collection_Id { get; set; }
-        public virtual required int employeesXArtRoom_Id { get; set; }
-        public virtual  EmployeesXArtRoom employeesXArtRoom { get; set; }
+        public virtual required int  collection_Id { get; set; }
+        public virtual  Collection collection { get; set; }
 
-        
+        public List<EmployeesXArtRoom> employeesXArtRoom { get; set; }
+
+        public List<Exhibition> exhibition { get; set; }
 
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
