@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace National_Museum_2.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,7 +17,8 @@ namespace National_Museum_2.Migrations
                 {
                     categoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    category = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,11 +32,56 @@ namespace National_Museum_2.Migrations
                     collectionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_collection", x => x.collectionId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "employeesXArtRoom",
+                columns: table => new
+                {
+                    employeesXArtRoomId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    employeeId = table.Column<int>(type: "int", nullable: false),
+                    artRoomId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_employeesXArtRoom", x => x.employeesXArtRoomId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "gameProgresses",
+                columns: table => new
+                {
+                    gameProgressId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    gameProgress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_gameProgresses", x => x.gameProgressId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "gameStates",
+                columns: table => new
+                {
+                    gameStateId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    gameState = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_gameStates", x => x.gameStateId);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,6 +96,75 @@ namespace National_Museum_2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_gender", x => x.genderId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "historicMaintenance",
+                columns: table => new
+                {
+                    historicMaintenanceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    maintenance_Id = table.Column<int>(type: "int", nullable: false),
+                    artObject_Id = table.Column<int>(type: "int", nullable: false),
+                    starDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    endDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    cost = table.Column<int>(type: "int", nullable: false),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModicationBy = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_historicMaintenance", x => x.historicMaintenanceId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "historicTickets",
+                columns: table => new
+                {
+                    historicTicketId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ticket_Id = table.Column<int>(type: "int", nullable: false),
+                    user_Id = table.Column<int>(type: "int", nullable: false),
+                    visitDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ticketType_Id = table.Column<int>(type: "int", nullable: false),
+                    paymentMethod_Id = table.Column<int>(type: "int", nullable: false),
+                    employeeId = table.Column<int>(type: "int", nullable: false),
+                    ticketXCollection_Id = table.Column<int>(type: "int", nullable: false),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModicationBy = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_historicTickets", x => x.historicTicketId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "historicUser",
+                columns: table => new
+                {
+                    historicUserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    user_Id = table.Column<int>(type: "int", nullable: false),
+                    user_Type_Id = table.Column<int>(type: "int", nullable: false),
+                    identificationType_Id = table.Column<int>(type: "int", nullable: false),
+                    identificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    names = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    lastNames = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    birthDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    gender_Id = table.Column<int>(type: "int", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ModificationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ModicationBy = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_historicUser", x => x.historicUserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -72,7 +187,8 @@ namespace National_Museum_2.Migrations
                 {
                     locationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -85,11 +201,43 @@ namespace National_Museum_2.Migrations
                 {
                     paymentMethodId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    paymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    paymentMethod = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_paymentMethods", x => x.paymentMethodId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "permissions",
+                columns: table => new
+                {
+                    permissionsId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Permission = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_permissions", x => x.permissionsId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "scenary",
+                columns: table => new
+                {
+                    scenaryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    scenaryName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    order = table.Column<int>(type: "int", nullable: false),
+                    achievementsobtained = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_scenary", x => x.scenaryId);
                 });
 
             migrationBuilder.CreateTable(
@@ -98,7 +246,8 @@ namespace National_Museum_2.Migrations
                 {
                     stateId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    state = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    state = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -112,7 +261,8 @@ namespace National_Museum_2.Migrations
                     ticketTypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ticketType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    price = table.Column<float>(type: "real", nullable: false)
+                    price = table.Column<float>(type: "real", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -125,7 +275,8 @@ namespace National_Museum_2.Migrations
                 {
                     typeEmployeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    typeEmployee = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    typeEmployee = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -152,7 +303,8 @@ namespace National_Museum_2.Migrations
                 {
                     workSheduleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    workShedule = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    workShedule = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -166,7 +318,8 @@ namespace National_Museum_2.Migrations
                     ticketXCollectionId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ticket_Id = table.Column<int>(type: "int", nullable: false),
-                    collection_IdcollectionId = table.Column<int>(type: "int", nullable: false)
+                    collection_IdcollectionId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -189,7 +342,10 @@ namespace National_Museum_2.Migrations
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     location_IdlocationId = table.Column<int>(type: "int", nullable: false),
                     numberExhibitions = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    collection_IdcollectionId = table.Column<int>(type: "int", nullable: false)
+                    collection_IdcollectionId = table.Column<int>(type: "int", nullable: false),
+                    employeesXArtRoom_Id = table.Column<int>(type: "int", nullable: false),
+                    employeesXArtRoomId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -199,6 +355,12 @@ namespace National_Museum_2.Migrations
                         column: x => x.collection_IdcollectionId,
                         principalTable: "collection",
                         principalColumn: "collectionId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_artRoom_employeesXArtRoom_employeesXArtRoomId",
+                        column: x => x.employeesXArtRoomId,
+                        principalTable: "employeesXArtRoom",
+                        principalColumn: "employeesXArtRoomId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_artRoom_location_location_IdlocationId",
@@ -215,11 +377,18 @@ namespace National_Museum_2.Migrations
                     permissionXUserTypeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     userType_IduserTypeId = table.Column<int>(type: "int", nullable: false),
+                    permissions_IdpermissionsId = table.Column<int>(type: "int", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_permissionXUserType", x => x.permissionXUserTypeId);
+                    table.ForeignKey(
+                        name: "FK_permissionXUserType_permissions_permissions_IdpermissionsId",
+                        column: x => x.permissions_IdpermissionsId,
+                        principalTable: "permissions",
+                        principalColumn: "permissionsId",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_permissionXUserType_userType_userType_IduserTypeId",
                         column: x => x.userType_IduserTypeId,
@@ -234,56 +403,38 @@ namespace National_Museum_2.Migrations
                 {
                     userId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user_Type_IduserTypeId = table.Column<int>(type: "int", nullable: false),
-                    identificationType_IdidentificationTypeId = table.Column<int>(type: "int", nullable: false),
+                    user_Type_Id = table.Column<int>(type: "int", nullable: false),
+                    identificationType_Id = table.Column<int>(type: "int", nullable: false),
                     identificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     names = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     lastNames = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     birthDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     contact = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    gender_IdgenderId = table.Column<int>(type: "int", nullable: false),
+                    gender_Id = table.Column<int>(type: "int", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_user", x => x.userId);
                     table.ForeignKey(
-                        name: "FK_user_gender_gender_IdgenderId",
-                        column: x => x.gender_IdgenderId,
+                        name: "FK_user_gender_gender_Id",
+                        column: x => x.gender_Id,
                         principalTable: "gender",
                         principalColumn: "genderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_identificationType_identificationType_IdidentificationTypeId",
-                        column: x => x.identificationType_IdidentificationTypeId,
+                        name: "FK_user_identificationType_identificationType_Id",
+                        column: x => x.identificationType_Id,
                         principalTable: "identificationType",
                         principalColumn: "identificationTypeId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_userType_user_Type_IduserTypeId",
-                        column: x => x.user_Type_IduserTypeId,
+                        name: "FK_user_userType_user_Type_Id",
+                        column: x => x.user_Type_Id,
                         principalTable: "userType",
                         principalColumn: "userTypeId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "employeesXArtRoom",
-                columns: table => new
-                {
-                    employeesXArtRoomId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    employeeId = table.Column<int>(type: "int", nullable: false),
-                    artRoomId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_employeesXArtRoom", x => x.employeesXArtRoomId);
-                    table.ForeignKey(
-                        name: "FK_employeesXArtRoom_artRoom_artRoomId",
-                        column: x => x.artRoomId,
-                        principalTable: "artRoom",
-                        principalColumn: "artRoomId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -295,7 +446,8 @@ namespace National_Museum_2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    artRoom_IdartRoomId = table.Column<int>(type: "int", nullable: false)
+                    artRoom_IdartRoomId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -305,27 +457,6 @@ namespace National_Museum_2.Migrations
                         column: x => x.artRoom_IdartRoomId,
                         principalTable: "artRoom",
                         principalColumn: "artRoomId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "permissions",
-                columns: table => new
-                {
-                    permissionsId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PermissionXUserType_IdpermissionXUserTypeId = table.Column<int>(type: "int", nullable: false),
-                    Permission = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_permissions", x => x.permissionsId);
-                    table.ForeignKey(
-                        name: "FK_permissions_permissionXUserType_PermissionXUserType_IdpermissionXUserTypeId",
-                        column: x => x.PermissionXUserType_IdpermissionXUserTypeId,
-                        principalTable: "permissionXUserType",
-                        principalColumn: "permissionXUserTypeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -351,6 +482,50 @@ namespace National_Museum_2.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "games",
+                columns: table => new
+                {
+                    gameId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    user_IduserId = table.Column<int>(type: "int", nullable: false),
+                    gameDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    gameState_IdgameStateId = table.Column<int>(type: "int", nullable: false),
+                    gameTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    punctuation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    scenary_IdscenaryId = table.Column<int>(type: "int", nullable: false),
+                    gameProgress_IdgameProgressId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_games", x => x.gameId);
+                    table.ForeignKey(
+                        name: "FK_games_gameProgresses_gameProgress_IdgameProgressId",
+                        column: x => x.gameProgress_IdgameProgressId,
+                        principalTable: "gameProgresses",
+                        principalColumn: "gameProgressId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_games_gameStates_gameState_IdgameStateId",
+                        column: x => x.gameState_IdgameStateId,
+                        principalTable: "gameStates",
+                        principalColumn: "gameStateId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_games_scenary_scenary_IdscenaryId",
+                        column: x => x.scenary_IdscenaryId,
+                        principalTable: "scenary",
+                        principalColumn: "scenaryId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_games_user_user_IduserId",
+                        column: x => x.user_IduserId,
+                        principalTable: "user",
+                        principalColumn: "userId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ticket",
                 columns: table => new
                 {
@@ -361,7 +536,8 @@ namespace National_Museum_2.Migrations
                     ticketType_IdticketTypeId = table.Column<int>(type: "int", nullable: false),
                     paymentMethod_IdpaymentMethodId = table.Column<int>(type: "int", nullable: false),
                     employeeId = table.Column<int>(type: "int", nullable: false),
-                    ticketXCollection_IdticketXCollectionId = table.Column<int>(type: "int", nullable: false)
+                    ticketXCollection_IdticketXCollectionId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -406,7 +582,8 @@ namespace National_Museum_2.Migrations
                     cost = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     category_IdcategoryId = table.Column<int>(type: "int", nullable: false),
                     state_IdstateId = table.Column<int>(type: "int", nullable: false),
-                    exhibition_IdexhibitionId = table.Column<int>(type: "int", nullable: false)
+                    exhibition_IdexhibitionId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -441,7 +618,8 @@ namespace National_Museum_2.Migrations
                     starDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     endDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    cost = table.Column<int>(type: "int", nullable: false)
+                    cost = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -460,43 +638,49 @@ namespace National_Museum_2.Migrations
                 {
                     employeeId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    user_IduserId = table.Column<int>(type: "int", nullable: false),
-                    typeEmployee_IdtypeEmployeeId = table.Column<int>(type: "int", nullable: false),
-                    workShedule_IdworkSheduleId = table.Column<int>(type: "int", nullable: false),
+                    user_Id = table.Column<int>(type: "int", nullable: false),
+                    userId = table.Column<int>(type: "int", nullable: false),
+                    typeEmployee_Id = table.Column<int>(type: "int", nullable: false),
+                    typeEmployeeId = table.Column<int>(type: "int", nullable: false),
+                    workShedule_Id = table.Column<int>(type: "int", nullable: false),
+                    workSheduleId = table.Column<int>(type: "int", nullable: false),
                     hiringDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    employeesXArtRoom_IdemployeesXArtRoomId = table.Column<int>(type: "int", nullable: false),
-                    maintenance_IdmaintenanceId = table.Column<int>(type: "int", nullable: false)
+                    employeesXArtRoom_Id = table.Column<int>(type: "int", nullable: false),
+                    employeesXArtRoomId = table.Column<int>(type: "int", nullable: false),
+                    maintenance_Id = table.Column<int>(type: "int", nullable: false),
+                    maintenanceId = table.Column<int>(type: "int", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_employee", x => x.employeeId);
                     table.ForeignKey(
-                        name: "FK_employee_employeesXArtRoom_employeesXArtRoom_IdemployeesXArtRoomId",
-                        column: x => x.employeesXArtRoom_IdemployeesXArtRoomId,
+                        name: "FK_employee_employeesXArtRoom_employeesXArtRoomId",
+                        column: x => x.employeesXArtRoomId,
                         principalTable: "employeesXArtRoom",
                         principalColumn: "employeesXArtRoomId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_employee_maintenance_maintenance_IdmaintenanceId",
-                        column: x => x.maintenance_IdmaintenanceId,
+                        name: "FK_employee_maintenance_maintenanceId",
+                        column: x => x.maintenanceId,
                         principalTable: "maintenance",
                         principalColumn: "maintenanceId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_employee_typeEmployee_typeEmployee_IdtypeEmployeeId",
-                        column: x => x.typeEmployee_IdtypeEmployeeId,
+                        name: "FK_employee_typeEmployee_typeEmployeeId",
+                        column: x => x.typeEmployeeId,
                         principalTable: "typeEmployee",
                         principalColumn: "typeEmployeeId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_employee_user_user_IduserId",
-                        column: x => x.user_IduserId,
+                        name: "FK_employee_user_userId",
+                        column: x => x.userId,
                         principalTable: "user",
                         principalColumn: "userId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_employee_workShedule_workShedule_IdworkSheduleId",
-                        column: x => x.workShedule_IdworkSheduleId,
+                        name: "FK_employee_workShedule_workSheduleId",
+                        column: x => x.workSheduleId,
                         principalTable: "workShedule",
                         principalColumn: "workSheduleId",
                         onDelete: ReferentialAction.Cascade);
@@ -523,6 +707,11 @@ namespace National_Museum_2.Migrations
                 column: "collection_IdcollectionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_artRoom_employeesXArtRoomId",
+                table: "artRoom",
+                column: "employeesXArtRoomId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_artRoom_location_IdlocationId",
                 table: "artRoom",
                 column: "location_IdlocationId");
@@ -533,35 +722,29 @@ namespace National_Museum_2.Migrations
                 column: "user_IduserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employee_employeesXArtRoom_IdemployeesXArtRoomId",
+                name: "IX_employee_employeesXArtRoomId",
                 table: "employee",
-                column: "employeesXArtRoom_IdemployeesXArtRoomId");
+                column: "employeesXArtRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employee_maintenance_IdmaintenanceId",
+                name: "IX_employee_maintenanceId",
                 table: "employee",
-                column: "maintenance_IdmaintenanceId");
+                column: "maintenanceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employee_typeEmployee_IdtypeEmployeeId",
+                name: "IX_employee_typeEmployeeId",
                 table: "employee",
-                column: "typeEmployee_IdtypeEmployeeId");
+                column: "typeEmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employee_user_IduserId",
+                name: "IX_employee_userId",
                 table: "employee",
-                column: "user_IduserId");
+                column: "userId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_employee_workShedule_IdworkSheduleId",
+                name: "IX_employee_workSheduleId",
                 table: "employee",
-                column: "workShedule_IdworkSheduleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_employeesXArtRoom_artRoomId",
-                table: "employeesXArtRoom",
-                column: "artRoomId",
-                unique: true);
+                column: "workSheduleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_exhibition_artRoom_IdartRoomId",
@@ -569,14 +752,34 @@ namespace National_Museum_2.Migrations
                 column: "artRoom_IdartRoomId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_games_gameProgress_IdgameProgressId",
+                table: "games",
+                column: "gameProgress_IdgameProgressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_games_gameState_IdgameStateId",
+                table: "games",
+                column: "gameState_IdgameStateId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_games_scenary_IdscenaryId",
+                table: "games",
+                column: "scenary_IdscenaryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_games_user_IduserId",
+                table: "games",
+                column: "user_IduserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_maintenance_artObject_IdartObjectId",
                 table: "maintenance",
                 column: "artObject_IdartObjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_permissions_PermissionXUserType_IdpermissionXUserTypeId",
-                table: "permissions",
-                column: "PermissionXUserType_IdpermissionXUserTypeId");
+                name: "IX_permissionXUserType_permissions_IdpermissionsId",
+                table: "permissionXUserType",
+                column: "permissions_IdpermissionsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_permissionXUserType_userType_IduserTypeId",
@@ -609,19 +812,19 @@ namespace National_Museum_2.Migrations
                 column: "collection_IdcollectionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_gender_IdgenderId",
+                name: "IX_user_gender_Id",
                 table: "user",
-                column: "gender_IdgenderId");
+                column: "gender_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_identificationType_IdidentificationTypeId",
+                name: "IX_user_identificationType_Id",
                 table: "user",
-                column: "identificationType_IdidentificationTypeId");
+                column: "identificationType_Id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_user_Type_IduserTypeId",
+                name: "IX_user_user_Type_Id",
                 table: "user",
-                column: "user_Type_IduserTypeId");
+                column: "user_Type_Id");
         }
 
         /// <inheritdoc />
@@ -634,13 +837,22 @@ namespace National_Museum_2.Migrations
                 name: "employee");
 
             migrationBuilder.DropTable(
-                name: "permissions");
+                name: "games");
+
+            migrationBuilder.DropTable(
+                name: "historicMaintenance");
+
+            migrationBuilder.DropTable(
+                name: "historicTickets");
+
+            migrationBuilder.DropTable(
+                name: "historicUser");
+
+            migrationBuilder.DropTable(
+                name: "permissionXUserType");
 
             migrationBuilder.DropTable(
                 name: "ticket");
-
-            migrationBuilder.DropTable(
-                name: "employeesXArtRoom");
 
             migrationBuilder.DropTable(
                 name: "maintenance");
@@ -652,7 +864,16 @@ namespace National_Museum_2.Migrations
                 name: "workShedule");
 
             migrationBuilder.DropTable(
-                name: "permissionXUserType");
+                name: "gameProgresses");
+
+            migrationBuilder.DropTable(
+                name: "gameStates");
+
+            migrationBuilder.DropTable(
+                name: "scenary");
+
+            migrationBuilder.DropTable(
+                name: "permissions");
 
             migrationBuilder.DropTable(
                 name: "paymentMethods");
@@ -692,6 +913,9 @@ namespace National_Museum_2.Migrations
 
             migrationBuilder.DropTable(
                 name: "collection");
+
+            migrationBuilder.DropTable(
+                name: "employeesXArtRoom");
 
             migrationBuilder.DropTable(
                 name: "location");

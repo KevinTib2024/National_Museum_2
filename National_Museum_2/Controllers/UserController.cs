@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using National_Museum_2.Service;
 using National_Museum_2.Model;
+using National_Museum_2.Repository;
 
 namespace National_Museum_2.Controllers
 {
@@ -42,13 +43,12 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateUser([FromBody] User user)
+        public async Task<ActionResult> CreateUser([FromBody] RequestUser user)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            
 
             await _userService.CreateUserAsync(user);
-            return CreatedAtAction(nameof(GetUserById), new { id = user.userId }, user);
+            return CreatedAtAction(nameof(GetUserById), new { id = user }, user);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

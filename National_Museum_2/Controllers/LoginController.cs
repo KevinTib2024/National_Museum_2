@@ -4,28 +4,39 @@ using National_Museum_2.Model;
 using National_Museum_2.Service;
 using System.ComponentModel.DataAnnotations;
 
+    public  interface LoginRequest
+    {
+        string email { get; set; }
+        string password { get; set; }
+
+    }
 namespace National_Museum_2.Controllers
+
 {
     [Route("api/[controller]")]
     [ApiController]
     public class LoginController : ControllerBase
+        
     {
-        private readonly ILoginService _loginService;
+        private readonly LoginService _loginService;
 
-        public LoginController(ILoginService loginService)
+        public LoginController(LoginService loginService)
         {
 
             _loginService = loginService;
 
         }
 
+
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<bool>>AutenticationAsync(string email, string password)
+        public async Task<ActionResult<bool>> AutenticationAsync([FromBody] LoginRequest loginRequest)
         {
-            var login = await _loginService.AutenticationAsync(email, password);
-            return Ok(login); 
+            Console.WriteLine("Hola");
+            
+            return Ok(); 
         }
 
         

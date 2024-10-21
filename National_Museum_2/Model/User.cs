@@ -6,9 +6,12 @@ namespace National_Museum_2.Model
     {
         public int userId { get; set; }
 
-        public virtual required UserType user_Type_Id { get; set; }
+        public virtual  UserType user_Type { get; set; }
+        public virtual required int  user_Type_Id { get; set; }
 
-        public virtual required IdentificationType identificationType_Id { get; set; }
+
+        public virtual  IdentificationType identificationType { get; set; }
+        public virtual required int identificationType_Id { get; set; }
 
         public required string identificationNumber { get; set; }
 
@@ -20,7 +23,9 @@ namespace National_Museum_2.Model
 
         public required string contact { get; set; }
 
-        public virtual required Gender gender_Id { get; set; }
+        public virtual  Gender gender { get; set; }
+        public virtual required int gender_Id { get; set; }
+
 
         public required string email { get; set; }
 

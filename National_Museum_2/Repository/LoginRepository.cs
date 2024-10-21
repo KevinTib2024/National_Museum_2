@@ -19,7 +19,7 @@ namespace National_Museum_2.Repository
     public class LoginRepository : ILoginRepository
     {
         private readonly MuseumDbContext _context;
-        private User _user;
+     
         private readonly PasswordHasher<User> _passwordHasher = new PasswordHasher<User>();
         private PasswordVerificationResult _result;
 
@@ -32,15 +32,16 @@ namespace National_Museum_2.Repository
         {
             if (email == null ||password == null )
             {
-                throw new ArgumentNullException(nameof(_user));
+                throw new ArgumentNullException();
             }
-            _user = await _context.user.FirstOrDefaultAsync(user => user.email == email);
+            var _user = await _context.user.FirstOrDefaultAsync(user => user.email == email);
             if (_user == null)
             {
                 throw new ArgumentNullException(nameof(_user));
             }
             _result = _passwordHasher.VerifyHashedPassword(_user, _user.password, password);
             return _result == PasswordVerificationResult.Success;
+
         }
 
     }

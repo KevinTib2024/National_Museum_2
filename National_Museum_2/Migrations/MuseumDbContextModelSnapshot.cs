@@ -95,6 +95,12 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("employeesXArtRoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("employeesXArtRoom_Id")
+                        .HasColumnType("int");
+
                     b.Property<int>("location_IdlocationId")
                         .HasColumnType("int");
 
@@ -109,6 +115,8 @@ namespace National_Museum_2.Migrations
                     b.HasKey("artRoomId");
 
                     b.HasIndex("collection_IdcollectionId");
+
+                    b.HasIndex("employeesXArtRoomId");
 
                     b.HasIndex("location_IdlocationId");
 
@@ -195,35 +203,50 @@ namespace National_Museum_2.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int>("employeesXArtRoom_IdemployeesXArtRoomId")
+                    b.Property<int>("employeesXArtRoomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("employeesXArtRoom_Id")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("hiringDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("maintenance_IdmaintenanceId")
+                    b.Property<int>("maintenanceId")
                         .HasColumnType("int");
 
-                    b.Property<int>("typeEmployee_IdtypeEmployeeId")
+                    b.Property<int>("maintenance_Id")
                         .HasColumnType("int");
 
-                    b.Property<int>("user_IduserId")
+                    b.Property<int>("typeEmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("workShedule_IdworkSheduleId")
+                    b.Property<int>("typeEmployee_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("user_Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("workSheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("workShedule_Id")
                         .HasColumnType("int");
 
                     b.HasKey("employeeId");
 
-                    b.HasIndex("employeesXArtRoom_IdemployeesXArtRoomId");
+                    b.HasIndex("employeesXArtRoomId");
 
-                    b.HasIndex("maintenance_IdmaintenanceId");
+                    b.HasIndex("maintenanceId");
 
-                    b.HasIndex("typeEmployee_IdtypeEmployeeId");
+                    b.HasIndex("typeEmployeeId");
 
-                    b.HasIndex("user_IduserId");
+                    b.HasIndex("userId");
 
-                    b.HasIndex("workShedule_IdworkSheduleId");
+                    b.HasIndex("workSheduleId");
 
                     b.ToTable("employee");
                 });
@@ -246,9 +269,6 @@ namespace National_Museum_2.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("employeesXArtRoomId");
-
-                    b.HasIndex("artRoomId")
-                        .IsUnique();
 
                     b.ToTable("employeesXArtRoom");
                 });
@@ -861,14 +881,14 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("gender_IdgenderId")
+                    b.Property<int>("gender_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("identificationNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("identificationType_IdidentificationTypeId")
+                    b.Property<int>("identificationType_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("lastNames")
@@ -883,16 +903,16 @@ namespace National_Museum_2.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("user_Type_IduserTypeId")
+                    b.Property<int>("user_Type_Id")
                         .HasColumnType("int");
 
                     b.HasKey("userId");
 
-                    b.HasIndex("gender_IdgenderId");
+                    b.HasIndex("gender_Id");
 
-                    b.HasIndex("identificationType_IdidentificationTypeId");
+                    b.HasIndex("identificationType_Id");
 
-                    b.HasIndex("user_Type_IduserTypeId");
+                    b.HasIndex("user_Type_Id");
 
                     b.ToTable("user");
                 });
@@ -972,6 +992,12 @@ namespace National_Museum_2.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("National_Museum_2.Model.EmployeesXArtRoom", "employeesXArtRoom")
+                        .WithMany("artRooms")
+                        .HasForeignKey("employeesXArtRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("National_Museum_2.Model.Location", "location_Id")
                         .WithMany()
                         .HasForeignKey("location_IdlocationId")
@@ -979,6 +1005,8 @@ namespace National_Museum_2.Migrations
                         .IsRequired();
 
                     b.Navigation("collection_Id");
+
+                    b.Navigation("employeesXArtRoom");
 
                     b.Navigation("location_Id");
                 });
@@ -996,54 +1024,45 @@ namespace National_Museum_2.Migrations
 
             modelBuilder.Entity("National_Museum_2.Model.Employees", b =>
                 {
-                    b.HasOne("National_Museum_2.Model.EmployeesXArtRoom", "employeesXArtRoom_Id")
+                    b.HasOne("National_Museum_2.Model.EmployeesXArtRoom", "employeesXArtRoom")
+                        .WithMany("employees")
+                        .HasForeignKey("employeesXArtRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("National_Museum_2.Model.Maintenance", "maintenance")
                         .WithMany()
-                        .HasForeignKey("employeesXArtRoom_IdemployeesXArtRoomId")
+                        .HasForeignKey("maintenanceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("National_Museum_2.Model.Maintenance", "maintenance_Id")
+                    b.HasOne("National_Museum_2.Model.TypeEmployee", "typeEmployee")
                         .WithMany()
-                        .HasForeignKey("maintenance_IdmaintenanceId")
+                        .HasForeignKey("typeEmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("National_Museum_2.Model.TypeEmployee", "typeEmployee_Id")
+                    b.HasOne("National_Museum_2.Model.User", "user")
                         .WithMany()
-                        .HasForeignKey("typeEmployee_IdtypeEmployeeId")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("National_Museum_2.Model.User", "user_Id")
+                    b.HasOne("National_Museum_2.Model.WorkShedule", "workShedule")
                         .WithMany()
-                        .HasForeignKey("user_IduserId")
+                        .HasForeignKey("workSheduleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("National_Museum_2.Model.WorkShedule", "workShedule_Id")
-                        .WithMany()
-                        .HasForeignKey("workShedule_IdworkSheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("employeesXArtRoom");
 
-                    b.Navigation("employeesXArtRoom_Id");
+                    b.Navigation("maintenance");
 
-                    b.Navigation("maintenance_Id");
+                    b.Navigation("typeEmployee");
 
-                    b.Navigation("typeEmployee_Id");
+                    b.Navigation("user");
 
-                    b.Navigation("user_Id");
-
-                    b.Navigation("workShedule_Id");
-                });
-
-            modelBuilder.Entity("National_Museum_2.Model.EmployeesXArtRoom", b =>
-                {
-                    b.HasOne("National_Museum_2.Model.ArtRoom", null)
-                        .WithOne("employeesXArtRoom_Id")
-                        .HasForeignKey("National_Museum_2.Model.EmployeesXArtRoom", "artRoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("workShedule");
                 });
 
             modelBuilder.Entity("National_Museum_2.Model.Exhibition", b =>
@@ -1170,35 +1189,51 @@ namespace National_Museum_2.Migrations
 
             modelBuilder.Entity("National_Museum_2.Model.User", b =>
                 {
-                    b.HasOne("National_Museum_2.Model.Gender", "gender_Id")
-                        .WithMany()
-                        .HasForeignKey("gender_IdgenderId")
+                    b.HasOne("National_Museum_2.Model.Gender", "gender")
+                        .WithMany("users")
+                        .HasForeignKey("gender_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("National_Museum_2.Model.IdentificationType", "identificationType_Id")
-                        .WithMany()
-                        .HasForeignKey("identificationType_IdidentificationTypeId")
+                    b.HasOne("National_Museum_2.Model.IdentificationType", "identificationType")
+                        .WithMany("users")
+                        .HasForeignKey("identificationType_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("National_Museum_2.Model.UserType", "user_Type_Id")
-                        .WithMany()
-                        .HasForeignKey("user_Type_IduserTypeId")
+                    b.HasOne("National_Museum_2.Model.UserType", "user_Type")
+                        .WithMany("users")
+                        .HasForeignKey("user_Type_Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("gender_Id");
+                    b.Navigation("gender");
 
-                    b.Navigation("identificationType_Id");
+                    b.Navigation("identificationType");
 
-                    b.Navigation("user_Type_Id");
+                    b.Navigation("user_Type");
                 });
 
-            modelBuilder.Entity("National_Museum_2.Model.ArtRoom", b =>
+            modelBuilder.Entity("National_Museum_2.Model.EmployeesXArtRoom", b =>
                 {
-                    b.Navigation("employeesXArtRoom_Id")
-                        .IsRequired();
+                    b.Navigation("artRooms");
+
+                    b.Navigation("employees");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.Gender", b =>
+                {
+                    b.Navigation("users");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.IdentificationType", b =>
+                {
+                    b.Navigation("users");
+                });
+
+            modelBuilder.Entity("National_Museum_2.Model.UserType", b =>
+                {
+                    b.Navigation("users");
                 });
 #pragma warning restore 612, 618
         }

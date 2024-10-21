@@ -7,7 +7,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<User>> GetAllUserAsync();
         Task<User> GetUserByIdAsync(int id);
-        Task CreateUserAsync(User user);
+        Task CreateUserAsync(RequestUser user);
         Task UpdateUserAsync(User user);
         Task SoftDeleteUserAsync(int id);
         Task<bool> ValidateUserAsync(string email, string password);
@@ -23,7 +23,7 @@ namespace National_Museum_2.Service
         }
 
         // Crear un nuevo usuario, delega la responsabilidad al repositorio
-        public async Task CreateUserAsync(User user)
+        public async Task CreateUserAsync(RequestUser user)
         {
             await _userRepository.CreateUserAsync(user);
         }

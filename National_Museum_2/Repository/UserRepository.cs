@@ -5,11 +5,25 @@ using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
 {
+    public interface RequestUser
+    {
+        string names { get; set; }
+        string lastNames { get; set; }
+        string birthDate { get; set; }
+        string contact { get; set; }
+        int gender_Id { get; set; }
+        string email { get; set; }
+        string password { get; set; }
+        int user_Type_Id { get; set; }
+        int identificationType_Id { get; set; }
+        string identificationNumber { get; set; }
+
+    }
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAllUserAsync();
         Task<User> GetUserByIdAsync(int id);
-        Task CreateUserAsync(User user);
+        Task CreateUserAsync(RequestUser user);
         Task UpdateUserAsync(User user);
         Task SoftDeleteUserAsync(int id);
         Task<bool> ValidateUserAsync(string email, string password);
@@ -26,16 +40,49 @@ namespace National_Museum_2.Repository
         }
 
         // Método para crear un nuevo usuario con la contraseña hasheada
-        public async Task CreateUserAsync(User user)
+        public async Task CreateUserAsync(RequestUser user)
         {
+            var _typeUser = await _context.userType.FindAsync(user.user_Type_Id);
+            var _gender = await _context.gender.FindAsync(user.gender_Id);
+            var _identification_Type = await _context.identificationType.FindAsync(user.identificationType_Id);
+
+            if (_identification_Type == null)
+            {
+                throw new Exception("No se encontro identificacion");
+            }
+
+            if (_gender == null)
+            {
+                throw new Exception("No se encontro  genero");
+                
+            }
+            if (_typeUser == null)
+            {
+                throw new Exception("No se encontro tipo id");
+            }
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
+
             // Hashear la contraseña antes de guardarla en la base de datos
-            user.password = _passwordHasher.HashPassword(user, user.password);
+            user.password = _passwordHasher.HashPassword(null, user.password);
+            var _newUser = new User
+            {
+                names = user.names,
+                lastNames = user.lastNames,
+                identificationNumber = user.identificationNumber,
+                gender_Id = user.gender_Id,
+                birthDate = user.birthDate,
+                email = user.email,
+                password = user.password,
+                user_Type_Id = user.user_Type_Id,
+                identificationType_Id = user.identificationType_Id,
+                contact = user.contact
+
+            };
 
             // Agregar el objeto al contexto
-            _context.user.Add(user);
+            _context.user.Add(_newUser);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
