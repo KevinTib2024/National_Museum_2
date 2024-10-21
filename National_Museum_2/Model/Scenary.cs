@@ -10,6 +10,8 @@ namespace National_Museum_2.Model
         public required int order { get; set; }
         public required int achievementsobtained { get; set; }
 
+        public List<Games> games { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }

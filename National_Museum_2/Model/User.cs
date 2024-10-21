@@ -36,6 +36,8 @@ namespace National_Museum_2.Model
 
         public List<Employees> employees { get; set; }
 
+        public List<Games> games { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }

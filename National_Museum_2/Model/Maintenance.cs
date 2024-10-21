@@ -14,7 +14,7 @@ namespace National_Museum_2.Model
         public required string description { get; set; }
         public required int cost { get; set; }
 
-        public List<Employees> employees { get; set; }
+        public List<MaintenanceXEmployee> maintenanceXEmployees { get; set; }
 
         
 

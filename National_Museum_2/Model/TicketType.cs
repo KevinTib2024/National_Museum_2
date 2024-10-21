@@ -8,6 +8,8 @@ namespace National_Museum_2.Model
         public required string ticketType { get; set; }
         public required float price { get; set; }
 
+        public List <Tickets> tickets { get; set; }
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }

@@ -77,7 +77,7 @@ namespace National_Museum_2.Repository
         public async Task<bool> HasPermissionAsync(int userType_Id, int permissionsId)
         {
             var permission = await _context.permissionXUserType
-            .Where(p => p.userType_Id.userTypeId == userType_Id && p.permissions_Id.permissionsId == permissionsId && !p.IsDeleted)
+            .Where(p => p.userType_Id == userType_Id && p.permissions_Id == permissionsId && !p.IsDeleted)
             .FirstOrDefaultAsync();
 
             return permission != null ? true : false;

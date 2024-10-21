@@ -1,29 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.User;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
 {
-    public interface RequestUser
-    {
-        string names { get; set; }
-        string lastNames { get; set; }
-        string birthDate { get; set; }
-        string contact { get; set; }
-        int gender_Id { get; set; }
-        string email { get; set; }
-        string password { get; set; }
-        int user_Type_Id { get; set; }
-        int identificationType_Id { get; set; }
-        string identificationNumber { get; set; }
-
-    }
+    
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAllUserAsync();
         Task<User> GetUserByIdAsync(int id);
-        Task CreateUserAsync(RequestUser user);
+        Task CreateUserAsync(CreateUserRequest user);
         Task UpdateUserAsync(User user);
         Task SoftDeleteUserAsync(int id);
         Task<bool> ValidateUserAsync(string email, string password);
@@ -40,7 +28,7 @@ namespace National_Museum_2.Repository
         }
 
         // Método para crear un nuevo usuario con la contraseña hasheada
-        public async Task CreateUserAsync(RequestUser user)
+        public async Task CreateUserAsync(CreateUserRequest user)
         {
             var _typeUser = await _context.userType.FindAsync(user.user_Type_Id);
             var _gender = await _context.gender.FindAsync(user.gender_Id);

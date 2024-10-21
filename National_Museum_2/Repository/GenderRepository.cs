@@ -1,14 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Gender;
 using National_Museum_2.Model;
 
+  
 namespace National_Museum_2.Repository
 {
     public interface IGenderRepository
     {
         Task<IEnumerable<Gender>> GetAllGenderAsync();
         Task<Gender> GetGenderByIdAsync(int id);
-        Task CreateGenderAsync(Gender gender);
+        Task CreateGenderAsync(CreateGenderRequest gender);
         Task UpdateGenderAsync(Gender gender);
         Task SoftDeleteGenderAsync(int id);
     }
@@ -22,13 +24,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateGenderAsync(Gender gender)
+        public async Task CreateGenderAsync(CreateGenderRequest gender)
         {
             if (gender == null)
                 throw new ArgumentNullException(nameof(gender));
+            var _newGender = new Gender
+            {
+                gender = gender.gender
+            };   
 
             // Agregar el objeto al contexto
-            _context.gender.Add(gender);
+            _context.gender.Add(_newGender);
 
 
             // Guardar cambios en la base de datos

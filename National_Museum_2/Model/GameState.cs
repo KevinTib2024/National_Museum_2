@@ -7,6 +7,8 @@ namespace National_Museum_2.Model
         public int gameStateId { get; set; }
         public required string gameState { get; set; }
 
+        public List<Games> games { get; set; } 
+
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
     }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using National_Museum_2.Service;
 using National_Museum_2.Model;
 using National_Museum_2.Repository;
+using National_Museum_2.DTO.User;
 
 namespace National_Museum_2.Controllers
 {
@@ -43,7 +44,7 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateUser([FromBody] RequestUser user)
+        public async Task<ActionResult> CreateUser([FromBody] CreateUserRequest user)
         {
             
 

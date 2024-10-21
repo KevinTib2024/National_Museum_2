@@ -69,7 +69,6 @@ namespace National_Museum_2.Repository
             existingEmployees.typeEmployee_Id = employees.typeEmployee_Id;
             existingEmployees.workShedule_Id = employees.workShedule_Id;
             existingEmployees.hiringDate = employees.hiringDate;
-            existingEmployees.employeesXArtRoom_Id = employees.employeesXArtRoom_Id;
             existingEmployees.maintenance_Id = employees.maintenance_Id;
 
             await _context.SaveChangesAsync();

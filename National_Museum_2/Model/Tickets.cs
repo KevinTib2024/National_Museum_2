@@ -9,8 +9,10 @@ namespace National_Museum_2.Model
         public virtual User user { get; set; }
 
         public required DateTime visitDate { get; set; }
-        public virtual required TicketType ticketType_Id { get; set; }
-        public virtual required PaymentMethod paymentMethod_Id { get; set; }
+        public virtual required int ticketType_Id { get; set; }
+        public virtual TicketType ticketType { get; set; }
+        public virtual required int paymentMethod_Id { get; set; }
+        public virtual  PaymentMethod paymentMethod { get; set; }
         public required int employeeId { get; set; }
         
 

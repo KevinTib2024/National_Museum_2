@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Gender;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Gender>> GetAllGenderAsync();
         Task<Gender> GetGenderByIdAsync(int id);
-        Task CreateGenderAsync(Gender gender);
+        Task CreateGenderAsync(CreateGenderRequest gender);
         Task UpdateGenderAsync(Gender gender);
         Task SoftDeleteGenderAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _genderRepository = genderRepository;
         }
 
-        public async Task CreateGenderAsync(Gender gender)
+        public async Task CreateGenderAsync(CreateGenderRequest gender)
         {
             await _genderRepository.CreateGenderAsync(gender);
         }

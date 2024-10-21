@@ -20,6 +20,8 @@ namespace National_Museum_2.Model
         public virtual  Maintenance maintenance { get; set; }
 
         public List<EmployeesXArtRoom> employeesXArtRooms { get; set; }
+
+        public List<MaintenanceXEmployee> maintenanceXEmployee { get; set; }
         
 
 

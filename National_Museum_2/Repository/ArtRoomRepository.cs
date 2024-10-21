@@ -71,7 +71,7 @@ namespace National_Museum_2.Repository
             existingArtRoom.location_Id = artRoom.location_Id;
             existingArtRoom.numberExhibitions = artRoom.numberExhibitions;
             existingArtRoom.collection_Id = artRoom.collection_Id;
-            existingArtRoom.employeesXArtRoom_Id = artRoom.employeesXArtRoom_Id;
+            existingArtRoom.employeesXArtRoom = artRoom.employeesXArtRoom;
 
             await _context.SaveChangesAsync();
         }
