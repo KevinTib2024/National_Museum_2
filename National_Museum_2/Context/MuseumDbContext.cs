@@ -28,10 +28,6 @@ namespace National_Museum_2.Context
             //Permissions
             modelBuilder.Entity<Permissions>().HasKey(u => u.permissionsId);
 
-            //Contact
-            modelBuilder.Entity<Contact>().HasOne(c => c.user).WithMany(u => u.contacts).HasForeignKey(c => c.contactId);
-            modelBuilder.Entity<Contact>().HasKey(c => c.contactId);
-
             //UserType
             modelBuilder.Entity<UserType>().HasKey(u => u.userTypeId);
 
@@ -132,6 +128,7 @@ namespace National_Museum_2.Context
 
             //GameState
             modelBuilder.Entity<GameState>().HasKey(c => c.gameStateId);
+
             //MaintenanceXEmployee
             modelBuilder.Entity<MaintenanceXEmployee>().HasKey(m => m.maintenanceXEmployee_Id);
             modelBuilder.Entity<MaintenanceXEmployee>().HasOne(me => me.maitenance).WithMany(m => m.maintenanceXEmployees).HasForeignKey(me => me.maintenanceXEmployee_Id) ;
@@ -146,7 +143,6 @@ namespace National_Museum_2.Context
         public DbSet<Permissions> permissions { get; set; }
         public DbSet<IdentificationType> identificationType { get; set; }
         public DbSet<Gender> gender { get; set; }
-        public DbSet<Contact> contact { get; set; }
 
         //Oscar
         public DbSet<Collection> collection { get; set; }
@@ -176,7 +172,6 @@ namespace National_Museum_2.Context
         public DbSet<PaymentMethod> paymentMethods { get; set; }
         public DbSet<GameProgress> gameProgresses { get; set; }
         public DbSet<GameState> gameStates { get; set; }
-
         public DbSet<MaintenanceXEmployee> maintenanceXEmployee { get; set; }
     }
 }   
