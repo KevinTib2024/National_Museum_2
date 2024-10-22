@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.PaymentMethod;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -39,13 +40,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreatePaymentMethod([FromBody] PaymentMethod paymentMethod)
+        public async Task<ActionResult> CreatePaymentMethod([FromBody] CreatePaymentMetodRequest paymentMethod)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _paymentMethodService.CreatePaymentMethodAsync(paymentMethod);
-            return CreatedAtAction(nameof(GetPaymentMethodById), new { id = paymentMethod.paymentMethodId }, paymentMethod);
+            return CreatedAtAction(nameof(GetPaymentMethodById), new { id = paymentMethod }, paymentMethod);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

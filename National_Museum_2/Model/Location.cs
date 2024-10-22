@@ -13,5 +13,7 @@ namespace National_Museum_2.Model
 
         [DefaultValue(false)]
         public bool IsDeleted { get; set; } = false;
+
+        
     }
 }

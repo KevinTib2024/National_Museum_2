@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.State;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<State>> GetAllStateAsync();
         Task<State> GetStateByIdAsync(int id);
-        Task CreateStateAsync(State state);
+        Task CreateStateAsync(CreateStateRequest state);
         Task UpdateStateAsync(State state);
         Task SoftDeleteStateAsync(int id);
     }
@@ -21,13 +22,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateStateAsync(State state)
+        public async Task CreateStateAsync(CreateStateRequest state)
         {
             if (state == null)
                 throw new ArgumentNullException(nameof(state));
+            var _newstate = new State
+            {
+                state = state.state,
+            };
 
             // Agregar el objeto al contexto
-            _context.state.Add(state);
+            _context.state.Add(_newstate);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

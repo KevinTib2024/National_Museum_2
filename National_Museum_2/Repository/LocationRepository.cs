@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Location;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Location>> GetAllLocationAsync();
         Task<Location> GetLocationByIdAsync(int id);
-        Task CreateLocationAsync(Location location);
+        Task CreateLocationAsync(CreateLocationRequest location);
         Task UpdateLocationAsync(Location  location);
         Task SoftDeleteLocationAsync(int id);
     }
@@ -20,13 +21,19 @@ namespace National_Museum_2.Repository
         {
             _context = context;
         }
-        public async Task CreateLocationAsync(Location location)
+        public async Task CreateLocationAsync(CreateLocationRequest location)
         {
             if (location == null)
                 throw new ArgumentNullException(nameof(location));
+            var _newlocation = new Location
+            {
+                name = location.name,
+               
+               
+            };
 
             // Agregar el objeto al contexto
-            _context.location.Add(location);
+            _context.location.Add(_newlocation);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

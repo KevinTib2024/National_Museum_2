@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.IdentificationType;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync();
         Task<IdentificationType> GetIdentificationTypeByIdAsync(int id);
-        Task CreateIdentificationTypeAsync(IdentificationType identificationType);
+        Task CreateIdentificationTypeAsync(CreateIdentificationTypeRequest identificationType);
         Task UpdateIdentificationTypeAsync(IdentificationType identificationType);
         Task SoftDeleteIdentificationTypeAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _identificationTypeRepository = identificationTypeRepository;
         }
 
-        public async Task CreateIdentificationTypeAsync(IdentificationType identificationType)
+        public async Task CreateIdentificationTypeAsync(CreateIdentificationTypeRequest identificationType)
         {
             await _identificationTypeRepository.CreateIdentificationTypeAsync(identificationType);
         }

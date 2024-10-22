@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Validations;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Collection;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +10,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Collection>> GetAllCollectionAsync();
         Task<Collection> GetCollectionByIdAsync(int id);
-        Task CreateCollectionAsync(Collection collection);
+        Task CreateCollectionAsync(CreateCollectionRequest collection);
         Task UpdateCollectionAsync(Collection collections);
         Task SoftDeleteCollectionAsync(int id);
     }
@@ -21,13 +23,18 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateCollectionAsync(Collection collection)
+        public async Task CreateCollectionAsync(CreateCollectionRequest collection)
         {
             if (collection == null)
                 throw new ArgumentNullException(nameof(collection));
+            var _newcollection = new Collection
+            {
+                name = collection.name,
+                description = collection.descriptiom,
+            };
 
             // Agregar el objeto al contexto
-            _context.collection.Add(collection);
+            _context.collection.Add(_newcollection);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

@@ -31,7 +31,6 @@ namespace National_Museum_2.Model
 
         public required string password { get; set; }
 
-        public List<Contact> contacts { get; set; }
         public List<Tickets> tickets { get; set; }  
 
         public List<Employees> employees { get; set; }

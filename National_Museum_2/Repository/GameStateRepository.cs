@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.GameState;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<GameState>> GetAllGameStateAsync();
         Task<GameState> GetGameStateByIdAsync(int id);
-        Task CreateGameStateAsync(GameState gameState);
+        Task CreateGameStateAsync(CreateGameStateRequest gameState);
         Task UpdateGameStateAsync(GameState gameState);
         Task SoftDeleteGameStateAsync(int id);
     }
@@ -21,13 +22,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateGameStateAsync(GameState gameState)
+        public async Task CreateGameStateAsync(CreateGameStateRequest gameState)
         {
             if (gameState == null)
                 throw new ArgumentNullException(nameof(gameState));
+            var _newgameState = new GameState
+            {
+                gameState = gameState.gameState,
+            };
 
             // Agregar el objeto al contexto
-            _context.gameStates.Add(gameState);
+            _context.gameStates.Add(_newgameState);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

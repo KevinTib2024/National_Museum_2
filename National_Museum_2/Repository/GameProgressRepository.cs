@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.GameProgress;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<GameProgress>> GetAllGameProgressAsync();
         Task<GameProgress> GetGameProgressByIdAsync(int id);
-        Task CreateGameProgressAsync(GameProgress gameProgress);
+        Task CreateGameProgressAsync(CreateGameProgressRequest gameProgress);
         Task UpdateGameProgressAsync(GameProgress gameProgress);
         Task SoftDeleteGameProgressAsync(int id);
     }
@@ -21,13 +22,19 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateGameProgressAsync(GameProgress gameProgress)
+        public async Task CreateGameProgressAsync(CreateGameProgressRequest gameProgress)
         {
+
             if (gameProgress == null)
                 throw new ArgumentNullException(nameof(gameProgress));
+            var _newgameProgress = new GameProgress
+            {
+                gameProgress = gameProgress.gameProgress,
+                description = gameProgress.description, 
+            };
 
             // Agregar el objeto al contexto
-            _context.gameProgresses.Add(gameProgress);
+            _context.gameProgresses.Add(_newgameProgress);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

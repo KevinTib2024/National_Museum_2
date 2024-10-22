@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Maintenance;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync();
         Task<Maintenance> GetMaintenanceByIdAsync(int id);
-        Task CreateMaintenanceAsync(Maintenance maintenance);
+        Task CreateMaintenanceAsync(CreateMaintenanceRequest maintenance);
         Task UpdateMaintenanceAsync(Maintenance maintenance);
         Task SoftDeleteMaintenanceAsync(int id);
     }
@@ -21,13 +22,26 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateMaintenanceAsync(Maintenance maintenance)
+        public async Task CreateMaintenanceAsync(CreateMaintenanceRequest maintenance)
         {
+            var _artObject_Id = await _context.artObject.FindAsync(maintenance.artObject_Id);
             if (maintenance == null)
                 throw new ArgumentNullException(nameof(maintenance));
 
-            // Agregar el objeto al contexto
-            _context.maintenance.Add(maintenance);
+            if (_artObject_Id == null)
+            {
+                throw new Exception("No se encontro id de la obra");
+            }
+            var _newmaintenance = new Maintenance
+            {
+                artObject_Id = maintenance.artObject_Id,
+                starDate = maintenance.starDate,
+                endDate = maintenance.endDate,
+                description = maintenance.description,
+                cost = maintenance.cost,
+            };
+                // Agregar el objeto al contexto
+                _context.maintenance.Add(_newmaintenance);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

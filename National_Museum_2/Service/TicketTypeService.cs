@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.TicketType;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<TicketType>> GetAllTicketTypeAsync();
         Task<TicketType> GetTicketTypeByIdAsync(int id);
-        Task CreateTicketTypeAsync(TicketType ticketType);
+        Task CreateTicketTypeAsync(CreateTicketTypeRequest ticketType);
         Task UpdateTicketTypeAsync(TicketType ticketType);
         Task SoftDeleteTicketTypeAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _ticketTypeRepository = ticketTypeRepository;
         }
 
-        public async Task CreateTicketTypeAsync(TicketType ticketType)
+        public async Task CreateTicketTypeAsync(CreateTicketTypeRequest ticketType)
         {
             await _ticketTypeRepository.CreateTicketTypeAsync(ticketType);
         }

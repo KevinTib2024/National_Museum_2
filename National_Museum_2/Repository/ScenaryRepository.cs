@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Scenary;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Scenary>> GetAllScenaryAsync();
         Task<Scenary> GetScenaryByIdAsync(int id);
-        Task CreateScenaryAsync(Scenary scenary);
+        Task CreateScenaryAsync(CreateScenaryRequest scenary);
         Task UpdateScenaryAsync(Scenary scenary);
         Task SoftDeleteScenaryAsync(int id);
     }
@@ -22,13 +23,20 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateScenaryAsync(Scenary scenary)
+        public async Task CreateScenaryAsync(CreateScenaryRequest scenary)
         {
             if (scenary == null)
                 throw new ArgumentNullException(nameof(scenary));
+            var _newscenary = new Scenary
+            {
+                scenaryName = scenary.scenaryName,
+                description = scenary.description,
+                order   = scenary.order,
+                achievementsobtained = scenary.achievementsobtained,
+            };
 
             // Agregar el objeto al contexto
-            _context.scenary.Add(scenary);
+            _context.scenary.Add(_newscenary);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.UserType;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<UserType>> GetAllUserTypeAsync();
         Task<UserType> GetUserTypeByIdAsync(int id);
-        Task CreateUserTypeAsync(UserType userType);
+        Task CreateUserTypeAsync(CreateUserTypeRequest userType);
         Task UpdateUserTypeAsync(UserType userType);
         Task SoftDeleteUserTypeAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _userTypeRepository = userTypeRepository;
         }
 
-        public async Task CreateUserTypeAsync(UserType userType)
+        public async Task CreateUserTypeAsync(CreateUserTypeRequest userType)
         {
             await _userTypeRepository.CreateUserTypeAsync(userType);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.IdentificationType;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 using System.Reflection;
@@ -42,15 +43,15 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateIdentificationType([FromBody] IdentificationType identificationType)
+        public async Task<ActionResult> CreateIdentificationType([FromBody] CreateIdentificationTypeRequest identificationType)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            identificationType.IsDeleted = false;
+            
 
             await _identificationTypeService.CreateIdentificationTypeAsync(identificationType);
-            return CreatedAtAction(nameof(GetIdentificationTypeById), new { id = identificationType.identificationTypeId }, identificationType);
+            return CreatedAtAction(nameof(GetIdentificationTypeById), new { id = identificationType}, identificationType);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -58,7 +59,7 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateIdentificationType(int id, [FromBody] IdentificationType identificationType)
         {
-            if (id != identificationType.identificationTypeId)
+            if (id != identificationType.IdentificationTypeId)
                 return BadRequest();
 
             var existingIdentificationType = await _identificationTypeService.GetIdentificationTypeByIdAsync(id);

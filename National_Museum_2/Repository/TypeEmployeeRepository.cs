@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.TypeEmployee;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync();
         Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id);
-        Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee);
+        Task CreateTypeEmployeeAsync(CreateTypeEmployeeRequest typeEmployee);
         Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task SoftDeleteTypeEmployeeAsync(int id);
     }
@@ -22,13 +23,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee)
+        public async Task CreateTypeEmployeeAsync(CreateTypeEmployeeRequest typeEmployee)
         {
             if (typeEmployee == null)
                 throw new ArgumentNullException(nameof(typeEmployee));
+            var _newtypeEmployee = new TypeEmployee
+            {
+                typeEmployee = typeEmployee.typeEmployee,
+            };
 
             // Agregar el objeto al contexto
-            _context.typeEmployee.Add(typeEmployee);
+            _context.typeEmployee.Add(_newtypeEmployee);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

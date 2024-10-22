@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.TicketType;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<TicketType>> GetAllTicketTypeAsync();
         Task<TicketType> GetTicketTypeByIdAsync(int id);
-        Task CreateTicketTypeAsync(TicketType ticketType);
+        Task CreateTicketTypeAsync(CreateTicketTypeRequest ticketType);
         Task UpdateTicketTypeAsync(TicketType ticketType);
         Task SoftDeleteTicketTypeAsync(int id);
     }
@@ -22,13 +23,18 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateTicketTypeAsync(TicketType ticketType)
+        public async Task CreateTicketTypeAsync(CreateTicketTypeRequest ticketType)
         {
             if (ticketType == null)
                 throw new ArgumentNullException(nameof(ticketType));
+            var _newticketType = new TicketType
+            {
+                ticketType = ticketType.ticketType,
+                price = ticketType.price,
+            };
 
             // Agregar el objeto al contexto
-            _context.ticketType.Add(ticketType);
+            _context.ticketType.Add(_newticketType);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

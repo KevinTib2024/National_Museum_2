@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.Collection;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -39,13 +40,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateCollection([FromBody] Collection collection)
+        public async Task<ActionResult> CreateCollection([FromBody] CreateCollectionRequest collection)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _collectionService.CreateCollectionAsync(collection);
-            return CreatedAtAction(nameof(GetCollectionById), new { id = collection.collectionId }, collection);
+            return CreatedAtAction(nameof(GetCollectionById), new { id = collection }, collection);
         }
 
         [HttpPut("{id}")]

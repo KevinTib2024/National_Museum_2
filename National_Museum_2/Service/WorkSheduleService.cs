@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.WorkShedule;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<WorkShedule>> GetAllWorkSheduleAsync();
         Task<WorkShedule> GetWorkSheduleByIdAsync(int id);
-        Task CreateWorkSheduleAsync(WorkShedule workShedule);
+        Task CreateWorkSheduleAsync(CreateWorkSheduleRequest workShedule);
         Task UpdateWorkSheduleAsync(WorkShedule workShedule);
         Task SoftDeleteWorkSheduleAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _workSheduleRepository = workSheduleRepository;
         }
 
-        public async Task CreateWorkSheduleAsync(WorkShedule workShedule)
+        public async Task CreateWorkSheduleAsync(CreateWorkSheduleRequest workShedule)
         {
             await _workSheduleRepository.CreateWorkSheduleAsync(workShedule);
         }

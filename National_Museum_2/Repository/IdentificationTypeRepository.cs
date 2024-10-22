@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.IdentificationType;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -9,7 +10,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync();
         Task<IdentificationType> GetIdentificationTypeByIdAsync(int id);
-        Task CreateIdentificationTypeAsync(IdentificationType identificationType);
+        Task CreateIdentificationTypeAsync(CreateIdentificationTypeRequest identificationType);
         Task UpdateIdentificationTypeAsync(IdentificationType identificationType);
         Task SoftDeleteIdentificationTypeAsync(int id);
     }
@@ -23,13 +24,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateIdentificationTypeAsync(IdentificationType identificationType)
+        public async Task CreateIdentificationTypeAsync(CreateIdentificationTypeRequest identificationType)
         {
             if (identificationType == null)
                 throw new ArgumentNullException(nameof(identificationType));
+            var _newidentificationType = new IdentificationType
+            {
+                Identification_Type = identificationType.Identification_Type,
+            };
 
             // Agregar el objeto al contexto
-            _context.identificationType.Add(identificationType);
+            _context.identificationType.Add(_newidentificationType);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
@@ -45,7 +50,7 @@ namespace National_Museum_2.Repository
         public async Task<IdentificationType> GetIdentificationTypeByIdAsync(int id)
         {
             return await _context.identificationType
-            .FirstOrDefaultAsync(s => s.identificationTypeId == id && !s.IsDeleted);
+            .FirstOrDefaultAsync(s => s.IdentificationTypeId == id && !s.IsDeleted);
         }
 
         public async Task SoftDeleteIdentificationTypeAsync(int id)
@@ -64,9 +69,9 @@ namespace National_Museum_2.Repository
             if (identificationType == null)
                 throw new ArgumentNullException(nameof(identificationType));
 
-            var existingIdentificationType = await _context.identificationType.FindAsync(identificationType.identificationTypeId);
+            var existingIdentificationType = await _context.identificationType.FindAsync(identificationType.IdentificationTypeId);
             if (existingIdentificationType == null)
-                throw new ArgumentException($"identificationType with ID {identificationType.identificationTypeId} not found");
+                throw new ArgumentException($"identificationType with ID {identificationType.IdentificationTypeId} not found");
 
             // Actualizar las propiedades del objeto existente
             existingIdentificationType.Identification_Type = identificationType.Identification_Type;

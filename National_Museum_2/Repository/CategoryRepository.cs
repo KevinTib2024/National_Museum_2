@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Category;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Category>> GetAllCategoryAsync();
         Task<Category> GetCategoryByIdAsync(int id);
-        Task CreateCategoryAsync(Category category);
+        Task CreateCategoryAsync(CreateCategoryRequest category);
         Task UpdateCategoryAsync(Category category);
         Task SoftDeleteCategoryAsync(int id);
     }
@@ -20,13 +21,17 @@ namespace National_Museum_2.Repository
         {
             _context = context;
         }
-        public async Task CreateCategoryAsync(Category category)
+        public async Task CreateCategoryAsync(CreateCategoryRequest category)
         {
+
             if (category == null)
                 throw new ArgumentNullException(nameof(category));
-
+            var _newcategory = new Category
+            {
+                category = category.category,
+            };
             // Agregar el objeto al contexto
-            _context.categories.Add(category);
+            _context.categories.Add(_newcategory);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

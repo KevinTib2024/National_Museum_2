@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.TypeEmployee;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<TypeEmployee>> GetAllTypeEmployeeAsync();
         Task<TypeEmployee> GetTypeEmployeeByIdAsync(int id);
-        Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee);
+        Task CreateTypeEmployeeAsync(CreateTypeEmployeeRequest typeEmployee);
         Task UpdateTypeEmployeeAsync(TypeEmployee typeEmployee);
         Task SoftDeleteTypeEmployeeAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _typeEmployeeRepository = typeEmployeeRepository;
         }
 
-        public async Task CreateTypeEmployeeAsync(TypeEmployee typeEmployee)
+        public async Task CreateTypeEmployeeAsync(CreateTypeEmployeeRequest typeEmployee)
         {
             await _typeEmployeeRepository.CreateTypeEmployeeAsync(typeEmployee);
         }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.WorkShedule;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -39,13 +40,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateWorkShedule([FromBody] WorkShedule workShedule)
+        public async Task<ActionResult> CreateWorkShedule([FromBody] CreateWorkSheduleRequest workShedule)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _workSheduleService.CreateWorkSheduleAsync(workShedule);
-            return CreatedAtAction(nameof(GetWorkSheduleById), new { id = workShedule.workSheduleId }, workShedule);
+            return CreatedAtAction(nameof(GetWorkSheduleById), new { id = workShedule }, workShedule);
         }
 
         [HttpPut("{id}")]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Games;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Games>> GetAllGamesAsync();
         Task<Games> GetGamesByIdAsync(int id);
-        Task CreateGamesAsync(Games games);
+        Task CreateGamesAsync(CreateGamesRequest games);
         Task UpdateGamesAsync(Games games);
         Task SoftDeleteGamesAsync(int id);
     }
@@ -22,13 +23,44 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateGamesAsync(Games games)
+        public async Task CreateGamesAsync(CreateGamesRequest games)
         {
+            var _user_Id = await _context.user.FindAsync(games.user_id);
+            var _gameState_Id = await _context.gameStates.FindAsync(games.gameState_Id);
+            var _scenary_Id = await _context.scenary.FindAsync(games.scenary_Id);
+            var _gameProgrees_Id = await _context.gameProgresses.FindAsync(games.gameProgress_Id);
+
             if (games == null)
                 throw new ArgumentNullException(nameof(games));
+            if (_user_Id == null)
+            {
+                throw new Exception("No se encontro id del usuario");
+            }
+            if (_gameState_Id == null)
+            {
+                throw new Exception("No se encontro el estado del juego");
+            }
+            if (_scenary_Id == null)
+            {
+                throw new Exception("No se encontro el escenario");
+            }
+            if (_gameProgrees_Id == null)
+            {
+                throw new Exception("No se encontro el progreso");
+            }
+            var _newgames = new Games
+            {
+               user_Id = games.user_id,
+               gameDate = games.gameDate,
+               gameState_Id = games.gameState_Id,
+               gameTime = games.gameTime,   
+               punctuation = games.punctuation, 
+               scenary_Id = games.scenary_Id,
+               gameProgress_Id = games.gameProgress_Id,
+            };
 
             // Agregar el objeto al contexto
-            _context.games.Add(games);
+            _context.games.Add(_newgames);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.Category;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,13 +42,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateCategory([FromBody] Category category)
+        public async Task<ActionResult> CreateCategory([FromBody] CreateCategoryRequest category)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _categoryService.CreateCategoryAsync(category);
-            return CreatedAtAction(nameof(GetCategoryById), new { id = category.categoryId }, category);
+            return CreatedAtAction(nameof(GetCategoryById), new { id = category }, category);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

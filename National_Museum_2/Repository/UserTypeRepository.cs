@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.UserType;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<UserType>> GetAllUserTypeAsync();
         Task<UserType> GetUserTypeByIdAsync(int id);
-        Task CreateUserTypeAsync(UserType userType);
+        Task CreateUserTypeAsync(CreateUserTypeRequest userType);
         Task UpdateUserTypeAsync(UserType userType);
         Task SoftDeleteUserTypeAsync(int id);
     }
@@ -22,13 +23,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateUserTypeAsync(UserType userType)
+        public async Task CreateUserTypeAsync(CreateUserTypeRequest userType)
         {
             if (userType == null)
                 throw new ArgumentNullException(nameof(userType));
+            var _newuserType = new UserType
+            {
+                userType = userType.userType,
+            };
 
             // Agregar el objeto al contexto
-            _context.userType.Add(userType);
+            _context.userType.Add(_newuserType);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Permissions;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Permissions>> GetAllPermissionsAsync();
         Task<Permissions> GetPermissionsByIdAsync(int id);
-        Task CreatePermissionsAsync(Permissions permissions);
+        Task CreatePermissionsAsync(CreatePermissionsRequest permissions);
         Task UpdatePermissionsAsync(Permissions permissions);
         Task SoftDeletePermissionsAsync(int id);
     }
@@ -22,13 +23,19 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreatePermissionsAsync(Permissions permissions)
+        public async Task CreatePermissionsAsync(CreatePermissionsRequest permissions)
         {
             if (permissions == null)
                 throw new ArgumentNullException(nameof(permissions));
+            var _newpermissions = new Permissions
+            {
+               permission = permissions.permission,
+                
+            };
+           
 
             // Agregar el objeto al contexto
-            _context.permissions.Add(permissions);
+            _context.permissions.Add(_newpermissions);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
@@ -67,7 +74,7 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"permissions with ID {permissions.permissionsId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingPermissions.Permission = permissions.Permission;
+            existingPermissions.permission = permissions.permission;
 
             await _context.SaveChangesAsync();
         }

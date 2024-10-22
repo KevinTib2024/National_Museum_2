@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.UserType;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,13 +42,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateUserType([FromBody] UserType userType)
+        public async Task<ActionResult> CreateUserType([FromBody] CreateUserTypeRequest userType)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _userTypeService.CreateUserTypeAsync(userType);
-            return CreatedAtAction(nameof(GetUserTypeById), new { id = userType.userTypeId }, userType);
+            return CreatedAtAction(nameof(GetUserTypeById), new { id = userType }, userType);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

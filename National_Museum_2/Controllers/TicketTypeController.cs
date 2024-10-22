@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.TicketType;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -40,13 +41,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateTicketType([FromBody] TicketType ticketType)
+        public async Task<ActionResult> CreateTicketType([FromBody] CreateTicketTypeRequest ticketType)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _ticketTypeService.CreateTicketTypeAsync(ticketType);
-            return CreatedAtAction(nameof(GetTicketTypeById), new { id = ticketType.ticketTypeId }, ticketType);
+            return CreatedAtAction(nameof(GetTicketTypeById), new { id = ticketType }, ticketType);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

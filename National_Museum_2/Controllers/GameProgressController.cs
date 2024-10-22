@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.GameProgress;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,13 +42,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateGameProgress([FromBody] GameProgress gameProgress)
+        public async Task<ActionResult> CreateGameProgress([FromBody] CreateGameProgressRequest gameProgress)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _gameProgressService.CreateGameProgressAsync(gameProgress);
-            return CreatedAtAction(nameof(GetGameProgressById), new { id = gameProgress.gameProgressId }, gameProgress);
+            return CreatedAtAction(nameof(GetGameProgressById), new { id = gameProgress }, gameProgress);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.WorkShedule;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<WorkShedule>> GetAllWorkSheduleAsync();
         Task<WorkShedule> GetWorkSheduleByIdAsync(int id);
-        Task CreateWorkSheduleAsync(WorkShedule workShedule);
+        Task CreateWorkSheduleAsync(CreateWorkSheduleRequest workShedule);
         Task UpdateWorkSheduleAsync(WorkShedule workShedule);
         Task SoftDeleteWorkSheduleAsync(int id);
     }
@@ -22,13 +23,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateWorkSheduleAsync(WorkShedule workShedule)
+        public async Task CreateWorkSheduleAsync(CreateWorkSheduleRequest workShedule)
         {
             if (workShedule == null)
                 throw new ArgumentNullException(nameof(workShedule));
+            var _newworkShedule = new WorkShedule
+            {
+                workShedule = workShedule.workShedule,
+            };
 
             // Agregar el objeto al contexto
-            _context.workShedule.Add(workShedule);
+            _context.workShedule.Add(_newworkShedule);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
