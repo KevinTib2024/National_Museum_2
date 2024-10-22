@@ -97,6 +97,7 @@ namespace National_Museum_2.Context
             //ArtObject
             modelBuilder.Entity<ArtObject>().HasOne(ao => ao.category).WithMany(c => c.artObjects).HasForeignKey(ao => ao.category_Id);
             modelBuilder.Entity<ArtObject>().HasOne(ao => ao.exhibition).WithMany(e => e.artObjects).HasForeignKey(ao => ao.exhibition_Id);
+            modelBuilder.Entity<ArtObject>().HasOne(ao => ao.state).WithMany(s => s.artObjects).HasForeignKey(ao => ao.state_Id);
             modelBuilder.Entity<ArtObject>().HasKey(c => c.artObjectId);
 
             //Category
@@ -166,7 +167,6 @@ namespace National_Museum_2.Context
         public DbSet<ArtObject> artObject{ get; set; }
         public DbSet<Category> categories { get; set; }
         public DbSet<State> state { get; set; }
-
         public DbSet<Scenary> scenary { get; set; }
 
         //Lucia

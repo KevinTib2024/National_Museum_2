@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.ArtRoom;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<ArtRoom>> GetAllArtRoomAsync();
         Task<ArtRoom> GetArtRoomByIdAsync(int id);
-        Task CreateArtRoomAsync(ArtRoom artRoom);
+        Task CreateArtRoomAsync(CreateArtRoomRequest artRoom);
         Task UpdateArtRoomAsync(ArtRoom artRoom);
         Task SoftDeleteArtRoomAsync(int id);
     }
@@ -19,7 +20,7 @@ namespace National_Museum_2.Service
         {
             _artRoomRepository = artRoomRepository;
         }
-        public async Task CreateArtRoomAsync(ArtRoom artRoom)
+        public async Task CreateArtRoomAsync(CreateArtRoomRequest artRoom)
         {
             await _artRoomRepository.CreateArtRoomAsync(artRoom);
         }

@@ -7,11 +7,12 @@ namespace National_Museum_2.Model
         public int artRoomId { get; set; } 
 
         public required string name { get ; set; }
-
         public required string description { get; set; }
+        public required string numberExhibitions { get; set; }
+
         public virtual required int location_Id{ get; set; }
         public virtual  Location location{ get; set; }
-        public required string numberExhibitions { get; set; }
+
         public virtual required int  collection_Id { get; set; }
         public virtual  Collection collection { get; set; }
 

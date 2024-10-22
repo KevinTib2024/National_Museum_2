@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
+using National_Museum_2.DTO.ArtObject;
 
 namespace National_Museum_2.Controllers
 {
@@ -30,6 +31,7 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<ArtObject>> GetArtObjectById(int id)
+
         {
             var artObject = await _artObjectService.GetArtObjectByIdAsync(id);
             if (artObject == null)
@@ -41,13 +43,11 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateArtObjet([FromBody] ArtObject artObject)
+        public async Task<ActionResult> CreateArtObjet([FromBody] CreateArtObjectRequest artObject)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
 
             await _artObjectService.CreateArtObjectAsync(artObject);
-            return CreatedAtAction(nameof(GetArtObjectById), new { id = artObject.artObjectId}, artObject);
+            return CreatedAtAction(nameof(GetArtObjectById), new { id = artObject}, artObject);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

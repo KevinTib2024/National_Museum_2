@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
 using National_Museum_2.Model;
+using National_Museum_2.DTO.ArtObject;
 
 namespace National_Museum_2.Repository
 {
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<ArtObject>> GetAllArtObjectAsync();
         Task<ArtObject> GetArtObjectByIdAsync(int id);
-        Task CreateArtObjectAsync(ArtObject artObject);
+        Task CreateArtObjectAsync(CreateArtObjectRequest artObject);
         Task UpdateArtObjectAsync(ArtObject artObject);
         Task SoftDeleteArtObjectAsync(int id);
     }
@@ -21,13 +22,45 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateArtObjectAsync(ArtObject artObject)
+        public async Task CreateArtObjectAsync(CreateArtObjectRequest artObject)
         {
+            var _exhibition = await _context.exhibition.FindAsync(artObject.exhibition_Id);
+            var _category = await _context.categories.FindAsync(artObject.category_Id);
+            var _state = await _context.state.FindAsync(artObject.state_Id);
+
+            if (_exhibition == null)
+            {
+                throw new Exception("No se encontro exhibición");
+            }
+
+            if (_category == null)
+            {
+                throw new Exception("No se encontro categoria");
+            }
+
+            if (_state == null)
+            {
+                throw new Exception("No se encontro estado");
+            }
+
             if (artObject == null)
                 throw new ArgumentNullException(nameof(artObject));
 
+            var _newArtObject = new ArtObject
+            {
+                exhibition_Id = artObject.exhibition_Id,
+                category_Id = artObject.category_Id,
+                state_Id = artObject.state_Id,
+                name = artObject.name,
+                description = artObject.description,
+                artist = artObject.artist,
+                creationDate = artObject.creationDate,
+                origin = artObject.origin,
+                cost = artObject.cost,
+            };
+
             // Agregar el objeto al contexto
-            _context.artObject.Add(artObject);
+            _context.artObject.Add(_newArtObject);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

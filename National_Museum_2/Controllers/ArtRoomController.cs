@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.ArtRoom;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,13 +42,11 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateArtRoom([FromBody] ArtRoom artRoom)
+        public async Task<ActionResult> CreateArtRoom([FromBody] CreateArtRoomRequest artRoom)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
+            
             await _artRoomService.CreateArtRoomAsync(artRoom);
-            return CreatedAtAction(nameof(GetArtRoomById), new { id = artRoom.artRoomId }, artRoom);
+            return CreatedAtAction(nameof(GetArtRoomById), new { id = artRoom}, artRoom);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
