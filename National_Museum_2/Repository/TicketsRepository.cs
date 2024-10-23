@@ -10,7 +10,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Tickets>> GetAllTicketsAsync();
         Task<Tickets> GetTicketsByIdAsync(int id);
         Task CreateTicketsAsync(CreateTicketsRequest tickets);
-        Task UpdateTicketsAsync(Tickets tickets);
+        Task UpdateTicketsAsync(UpdateTicketsRequest tickets);
         Task SoftDeleteTicketsAsync(int id);
     }
 
@@ -88,7 +88,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateTicketsAsync(Tickets tickets)
+        public async Task UpdateTicketsAsync(UpdateTicketsRequest tickets)
         {
             if (tickets == null)
                 throw new ArgumentNullException(nameof(tickets));
@@ -98,11 +98,11 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"tickets with ID {tickets.ticketId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingTickets.user_Id = tickets.user_Id;
-            existingTickets.visitDate = tickets.visitDate;
-            existingTickets.ticketType_Id = tickets.ticketType_Id;
-            existingTickets.paymentMethod_Id = tickets.paymentMethod_Id;
-            existingTickets.employeeId = tickets.employeeId;
+            existingTickets.user_Id = (int)(tickets.user_Id == null ? existingTickets.user_Id : tickets.user_Id);
+            existingTickets.visitDate = tickets.visitDate?? existingTickets.visitDate;
+            existingTickets.ticketType_Id = (int)(tickets.ticketType_Id == null? existingTickets.ticketType_Id :tickets.ticketType_Id);
+            existingTickets.paymentMethod_Id = (int)(tickets.paymentMethod_Id ==null? existingTickets.paymentMethod_Id : tickets.paymentMethod_Id);
+            existingTickets.employeeId = (int)(tickets.employeeId == null ? existingTickets.employeeId : tickets.employeeId);
             await _context.SaveChangesAsync();
         }
     }

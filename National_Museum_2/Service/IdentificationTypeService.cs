@@ -6,8 +6,8 @@ namespace National_Museum_2.Service
 {
     public interface IIdentificationTypeService
     {
-        Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync();
-        Task<IdentificationType> GetIdentificationTypeByIdAsync(int id);
+        Task<IEnumerable<GetIdentificationTypeRequest>> GetAllIdentificationTypeAsync();
+        Task<GetIdentificationTypeRequest> GetIdentificationTypeByIdAsync(int id);
         Task CreateIdentificationTypeAsync(CreateIdentificationTypeRequest identificationType);
         Task UpdateIdentificationTypeAsync(IdentificationType identificationType);
         Task SoftDeleteIdentificationTypeAsync(int id);
@@ -27,12 +27,12 @@ namespace National_Museum_2.Service
             await _identificationTypeRepository.CreateIdentificationTypeAsync(identificationType);
         }
 
-        public async Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync()
+        public async Task<IEnumerable<GetIdentificationTypeRequest>> GetAllIdentificationTypeAsync()
         {
             return await _identificationTypeRepository.GetAllIdentificationTypeAsync();
         }
 
-        public async Task<IdentificationType> GetIdentificationTypeByIdAsync(int id)
+        public async Task<GetIdentificationTypeRequest> GetIdentificationTypeByIdAsync(int id)
         {
             return await _identificationTypeRepository.GetIdentificationTypeByIdAsync(id);
         }

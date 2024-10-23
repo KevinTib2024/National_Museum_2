@@ -97,11 +97,11 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"employees with ID {employees.employeeId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingEmployees.user_Id = employees.user_Id == null? existingEmployees.user_Id : employees.user_Id;
-            existingEmployees.typeEmployee_Id = employees.typeEmployee_Id == null? existingEmployees.typeEmployee_Id : employees.typeEmployee_Id;
-            existingEmployees.workShedule_Id = employees.workShedule_Id == null? existingEmployees.workShedule_Id : employees.workShedule_Id;
-            existingEmployees.hiringDate = DateTime(employees.hiringDate)? existingEmployees.hiringDate : employees.hiringDate;
-            existingEmployees.maintenance_Id = employees.maintenance_Id== null? existingEmployees.maintenance_Id : employees.maintenance_Id;
+            existingEmployees.user_Id = employees.user_Id ?? existingEmployees.user_Id;
+            existingEmployees.typeEmployee_Id = employees.typeEmployee_Id ?? existingEmployees.typeEmployee_Id;
+            existingEmployees.workShedule_Id = employees.workShedule_Id ?? existingEmployees.workShedule_Id ;
+            existingEmployees.hiringDate = employees.hiringDate?? existingEmployees.hiringDate;
+            existingEmployees.maintenance_Id = employees.maintenance_Id?? existingEmployees.maintenance_Id;
 
             await _context.SaveChangesAsync();
         }

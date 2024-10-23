@@ -53,7 +53,7 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateTickets(int id, [FromBody] Tickets tickets)
+        public async Task<IActionResult> UpdateTickets(int id, [FromBody] UpdateTicketsRequest tickets)
         {
             if (id != tickets.ticketId)
                 return BadRequest();

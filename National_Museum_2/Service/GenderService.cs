@@ -6,8 +6,8 @@ namespace National_Museum_2.Service
 {
     public interface IGenderService
     {
-        Task<IEnumerable<Gender>> GetAllGenderAsync();
-        Task<Gender> GetGenderByIdAsync(int id);
+        Task<IEnumerable<GetGenderRequest>> GetAllGenderAsync();
+        Task<GetGenderRequest> GetGenderByIdAsync(int id);
         Task CreateGenderAsync(CreateGenderRequest gender);
         Task UpdateGenderAsync(UpdateGenderRequest gender);
         Task SoftDeleteGenderAsync(int id);
@@ -27,12 +27,12 @@ namespace National_Museum_2.Service
             await _genderRepository.CreateGenderAsync(gender);
         }
 
-        public async Task<IEnumerable<Gender>> GetAllGenderAsync()
+        public async Task<IEnumerable<GetGenderRequest>> GetAllGenderAsync()
         {
             return await _genderRepository.GetAllGenderAsync();
         }
 
-        public async Task<Gender> GetGenderByIdAsync(int id)
+        public async Task<GetGenderRequest> GetGenderByIdAsync(int id)
         {
             return await _genderRepository.GetGenderByIdAsync(id);
         }

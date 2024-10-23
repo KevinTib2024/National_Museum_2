@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<Permissions>> GetAllPermissionsAsync();
         Task<Permissions> GetPermissionsByIdAsync(int id);
         Task CreatePermissionsAsync(CreatePermissionsRequest permissions);
-        Task UpdatePermissionsAsync(Permissions permissions);
+        Task UpdatePermissionsAsync(UpdatePermissionsRequest permissions);
         Task SoftDeletePermissionsAsync(int id);
     }
 
@@ -42,7 +42,7 @@ namespace National_Museum_2.Service
             await _permissionsRepository.SoftDeletePermissionsAsync(id);
         }
 
-        public async Task UpdatePermissionsAsync(Permissions permissions)
+        public async Task UpdatePermissionsAsync(UpdatePermissionsRequest permissions)
         {
             await _permissionsRepository.UpdatePermissionsAsync(permissions);
         }

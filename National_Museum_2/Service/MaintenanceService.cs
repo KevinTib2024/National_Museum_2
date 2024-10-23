@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync();
         Task<Maintenance> GetMaintenanceByIdAsync(int id);
         Task CreateMaintenanceAsync(CreateMaintenanceRequest maintenance);
-        Task UpdateMaintenanceAsync(Maintenance maintenance);
+        Task UpdateMaintenanceAsync(UpdateMaintenanceRequest maintenance);
         Task SoftDeleteMaintenanceAsync(int id);
     }
 
@@ -42,7 +42,7 @@ namespace National_Museum_2.Service
             await _maintenanceRepository.SoftDeleteMaintenanceAsync(id);
         }
 
-        public async Task UpdateMaintenanceAsync(Maintenance maintenance)
+        public async Task UpdateMaintenanceAsync(UpdateMaintenanceRequest maintenance)
         {
             await _maintenanceRepository.UpdateMaintenanceAsync(maintenance);
         }

@@ -10,7 +10,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<GameState>> GetAllGameStateAsync();
         Task<GameState> GetGameStateByIdAsync(int id);
         Task CreateGameStateAsync(CreateGameStateRequest gameState);
-        Task UpdateGameStateAsync(GameState gameState);
+        Task UpdateGameStateAsync(UpdateGameStateRequest gameState);
         Task SoftDeleteGameStateAsync(int id);
     }
     public class GameStateRepository : IGameStateRepository
@@ -61,7 +61,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateGameStateAsync(GameState gameState)
+        public async Task UpdateGameStateAsync(UpdateGameStateRequest gameState)
         {
             if (gameState == null)
                 throw new ArgumentNullException(nameof(gameState));
@@ -71,7 +71,7 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"gameState with ID {gameState.gameStateId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingGameState.gameState = gameState.gameState;
+            existingGameState.gameState = String.IsNullOrEmpty(gameState.gameState)? existingGameState.gameState : gameState.gameState;
 
             await _context.SaveChangesAsync();
         }

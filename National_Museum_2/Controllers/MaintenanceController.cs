@@ -52,10 +52,9 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateMaintenance(int id, [FromBody] Maintenance maintenance)
+        public async Task<IActionResult> UpdateMaintenance(int id, [FromBody] UpdateMaintenanceRequest maintenance)
         {
-            if (id != maintenance.maintenanceId)
-                return BadRequest();
+            
 
             var existingMaintenance = await _maintenanceService.GetMaintenanceByIdAsync(id);
             if (existingMaintenance == null)

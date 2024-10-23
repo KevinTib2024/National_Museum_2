@@ -73,8 +73,9 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"gameProgress with ID {gameProgress.gameProgressId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingGameProgress.gameProgress = gameProgress.gameProgress;
-            existingGameProgress.description = gameProgress.description;
+            existingGameProgress.gameProgress = String.IsNullOrEmpty(gameProgress.gameProgress)? existingGameProgress.gameProgress: gameProgress.gameProgress;
+            existingGameProgress.gameProgressId = gameProgress.gameProgressId?? existingGameProgress.gameProgressId;
+            existingGameProgress.description = String.IsNullOrEmpty(gameProgress.description)? existingGameProgress.description :  gameProgress.description;
 
             await _context.SaveChangesAsync();
         }

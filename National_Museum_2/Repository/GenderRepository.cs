@@ -8,8 +8,8 @@ namespace National_Museum_2.Repository
 {
     public interface IGenderRepository
     {
-        Task<IEnumerable<Gender>> GetAllGenderAsync();
-        Task<Gender> GetGenderByIdAsync(int id);
+        Task<IEnumerable<GetGenderRequest>> GetAllGenderAsync();
+        Task<GetGenderRequest> GetGenderByIdAsync(int id);
         Task CreateGenderAsync(CreateGenderRequest gender);
         Task UpdateGenderAsync(UpdateGenderRequest gender);
         Task SoftDeleteGenderAsync(int id);
@@ -41,17 +41,20 @@ namespace National_Museum_2.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Gender>> GetAllGenderAsync()
+        public async Task<IEnumerable<GetGenderRequest>> GetAllGenderAsync()
         {
             return await _context.gender
                 .Where(s => !s.IsDeleted)
+                .Select(s => new GetGenderRequest { gender = s.gender, genderId = s.genderId })
                 .ToListAsync(); 
         }
 
-        public async Task<Gender> GetGenderByIdAsync(int id)
+        public async Task<GetGenderRequest> GetGenderByIdAsync(int id)
         {
             return await _context.gender
-                .FirstOrDefaultAsync(s => s.genderId == id && !s.IsDeleted);
+                .Where(s => s.genderId == id && !s.IsDeleted)
+                .Select(s => new GetGenderRequest { gender = s.gender, genderId = s.genderId }).FirstOrDefaultAsync();
+
         }
 
         public async Task SoftDeleteGenderAsync(int id)

@@ -10,7 +10,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Permissions>> GetAllPermissionsAsync();
         Task<Permissions> GetPermissionsByIdAsync(int id);
         Task CreatePermissionsAsync(CreatePermissionsRequest permissions);
-        Task UpdatePermissionsAsync(Permissions permissions);
+        Task UpdatePermissionsAsync(UpdatePermissionsRequest permissions);
         Task SoftDeletePermissionsAsync(int id);
     }
 
@@ -64,7 +64,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdatePermissionsAsync(Permissions permissions)
+        public async Task UpdatePermissionsAsync(UpdatePermissionsRequest permissions)
         {
             if (permissions == null)
                 throw new ArgumentNullException(nameof(permissions));
@@ -74,7 +74,7 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"permissions with ID {permissions.permissionsId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingPermissions.permission = permissions.permission;
+            existingPermissions.permission = String.IsNullOrEmpty(permissions.permission)? existingPermissions.permission : permissions.permission;
 
             await _context.SaveChangesAsync();
         }

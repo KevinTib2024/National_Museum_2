@@ -2,14 +2,15 @@
 using Microsoft.VisualBasic;
 using National_Museum_2.Context;
 using National_Museum_2.DTO.IdentificationType;
+using National_Museum_2.DTO.User;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
 {
     public interface IIdentificationTypeRepository
     {
-        Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync();
-        Task<IdentificationType> GetIdentificationTypeByIdAsync(int id);
+        Task<IEnumerable<GetIdentificationTypeRequest>> GetAllIdentificationTypeAsync();
+        Task<GetIdentificationTypeRequest> GetIdentificationTypeByIdAsync(int id);
         Task CreateIdentificationTypeAsync(CreateIdentificationTypeRequest identificationType);
         Task UpdateIdentificationTypeAsync(IdentificationType identificationType);
         Task SoftDeleteIdentificationTypeAsync(int id);
@@ -40,17 +41,21 @@ namespace National_Museum_2.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<IdentificationType>> GetAllIdentificationTypeAsync()
+        public async Task<IEnumerable<GetIdentificationTypeRequest>> GetAllIdentificationTypeAsync()
         {
             return await _context.identificationType
            .Where(s => !s.IsDeleted)
+           .Select(s => new GetIdentificationTypeRequest { Identification_Type = s.Identification_Type })
            .ToListAsync();
         }
 
-        public async Task<IdentificationType> GetIdentificationTypeByIdAsync(int id)
+        public async Task<GetIdentificationTypeRequest> GetIdentificationTypeByIdAsync(int id)
         {
             return await _context.identificationType
-            .FirstOrDefaultAsync(s => s.IdentificationTypeId == id && !s.IsDeleted);
+            .Where(s => s.IdentificationTypeId == id && !s.IsDeleted)
+            .Select(s => new GetIdentificationTypeRequest { Identification_Type = s.Identification_Type }).FirstOrDefaultAsync();
+
+
         }
 
         public async Task SoftDeleteIdentificationTypeAsync(int id)

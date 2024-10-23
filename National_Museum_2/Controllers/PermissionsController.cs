@@ -54,10 +54,8 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdatePermissions(int id, [FromBody] Permissions permissions)
+        public async Task<IActionResult> UpdatePermissions(int id, [FromBody] UpdatePermissionsRequest permissions)
         {
-            if (id != permissions.permissionsId)
-                return BadRequest();
 
             var existingPermissions = await _permissionsService.GetPermissionsByIdAsync(id);
             if (existingPermissions == null)

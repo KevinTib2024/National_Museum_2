@@ -21,7 +21,7 @@ namespace National_Museum_2.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-        public async Task<ActionResult<IEnumerable<Category>>> GetAllCategory()
+        public async Task<ActionResult<IEnumerable<GetCategoryRequest>>> GetAllCategory()
         {
             var Category = await _categoryService.GetAllCategoryAsync();
             return Ok(Category);
@@ -30,7 +30,7 @@ namespace National_Museum_2.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<Category>> GetCategoryById(int id)
+        public async Task<ActionResult<GetCategoryRequest>> GetCategoryById(int id)
         {
             var category = await _categoryService.GetCategoryByIdAsync(id);
             if (category == null)

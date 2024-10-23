@@ -22,7 +22,7 @@ namespace National_Museum_2.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-        public async Task<ActionResult<IEnumerable<IdentificationType>>> GetAllIdentificationType()
+        public async Task<ActionResult<IEnumerable<GetIdentificationTypeRequest>>> GetAllIdentificationType()
         {
             var identificationType = await _identificationTypeService.GetAllIdentificationTypeAsync();
             return Ok(identificationType);
@@ -31,7 +31,7 @@ namespace National_Museum_2.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<IdentificationType>> GetIdentificationTypeById(int id)
+        public async Task<ActionResult<GetIdentificationTypeRequest>> GetIdentificationTypeById(int id)
         {
             var identificationType = await _identificationTypeService.GetIdentificationTypeByIdAsync(id);
             if (identificationType == null)

@@ -92,9 +92,9 @@ namespace National_Museum_2.Repository
             // Actualizar las propiedades del objeto existente
             existingArtRoom.name = String.IsNullOrEmpty(artRoom.name)? existingArtRoom.name : artRoom.name;
             existingArtRoom.description = String.IsNullOrEmpty(artRoom.description) ? existingArtRoom.description : artRoom.description;
-            existingArtRoom.location_Id = artRoom.location_Id == null ? existingArtRoom.location_Id : artRoom.location_Id;
+            existingArtRoom.location_Id = artRoom.location_Id?? existingArtRoom.location_Id;
             existingArtRoom.numberExhibitions = String.IsNullOrEmpty(artRoom.numberExhibitions)? existingArtRoom.numberExhibitions : artRoom.numberExhibitions;
-            existingArtRoom.collection_Id = artRoom.collection_Id == null ? existingArtRoom.collection_Id : artRoom.collection_Id;
+            existingArtRoom.collection_Id = artRoom.collection_Id ?? existingArtRoom.collection_Id;
             
 
             await _context.SaveChangesAsync();

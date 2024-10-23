@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<Tickets>> GetAllTicketsAsync();
         Task<Tickets> GetTicketsByIdAsync(int id);
         Task CreateTicketsAsync(CreateTicketsRequest tickets);
-        Task UpdateTicketsAsync(Tickets tickets);
+        Task UpdateTicketsAsync(UpdateTicketsRequest tickets);
         Task SoftDeleteTicketsAsync(int id);
     }
 
@@ -42,7 +42,7 @@ namespace National_Museum_2.Service
             await _ticketsRepository.SoftDeleteTicketsAsync(id);
         }
 
-        public async Task UpdateTicketsAsync(Tickets tickets)
+        public async Task UpdateTicketsAsync(UpdateTicketsRequest tickets)
         {
             await _ticketsRepository.UpdateTicketsAsync(tickets);
         }

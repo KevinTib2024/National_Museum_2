@@ -10,7 +10,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Games>> GetAllGamesAsync();
         Task<Games> GetGamesByIdAsync(int id);
         Task CreateGamesAsync(CreateGamesRequest games);
-        Task UpdateGamesAsync(Games games);
+        Task UpdateGamesAsync(UpdateGamesRequest games);
         Task SoftDeleteGamesAsync(int id);
     }
 
@@ -90,7 +90,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateGamesAsync(Games games)
+        public async Task UpdateGamesAsync(UpdateGamesRequest games)
         {
             if (games == null)
                 throw new ArgumentNullException(nameof(games));
@@ -100,13 +100,13 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"game with ID {games.gameId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingGames.user_Id = games.user_Id;
-            existingGames.gameDate = games.gameDate;
-            existingGames.gameState_Id = games.gameState_Id;
-            existingGames.gameTime = games.gameTime;
-            existingGames.punctuation = games.punctuation;
-            existingGames.scenary_Id = games.scenary_Id;
-            existingGames.gameProgress_Id = games.gameProgress_Id;
+            existingGames.user_Id = games.user_Id?? existingGames.user_Id;
+            existingGames.gameDate = games.gameDate?? existingGames.gameDate;
+            existingGames.gameState_Id = games.gameState_Id?? existingGames.gameState_Id;
+            existingGames.gameTime =String.IsNullOrEmpty(games.gameTime)? existingGames.gameTime : games.gameTime;
+            existingGames.punctuation = String.IsNullOrEmpty(games.punctuation)? existingGames.punctuation: games.punctuation;
+            existingGames.scenary_Id = games.scenary_Id?? existingGames.scenary_Id;
+            existingGames.gameProgress_Id = games.gameProgress_Id == null? existingGames.gameProgress_Id : games.gameId;
 
             await _context.SaveChangesAsync();
         }

@@ -54,7 +54,7 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateGameState(int id, [FromBody] GameState gameState)
+        public async Task<IActionResult> UpdateGameState(int id, [FromBody] UpdateGameStateRequest gameState)
         {
             if (id != gameState.gameStateId)
                 return BadRequest();

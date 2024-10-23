@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
 using National_Museum_2.DTO.Category;
+using National_Museum_2.DTO.UserType;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
 {
     public interface ICategoryRepository
     {
-        Task<IEnumerable<Category>> GetAllCategoryAsync();
-        Task<Category> GetCategoryByIdAsync(int id);
+        Task<IEnumerable<GetCategoryRequest>> GetAllCategoryAsync();
+        Task<GetCategoryRequest> GetCategoryByIdAsync(int id);
         Task CreateCategoryAsync(CreateCategoryRequest category);
         Task UpdateCategoryAsync(Category category);
         Task SoftDeleteCategoryAsync(int id);
@@ -37,17 +38,20 @@ namespace National_Museum_2.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategoryAsync()
+        public async Task<IEnumerable<GetCategoryRequest>> GetAllCategoryAsync()
         {
             return await _context.categories
            .Where(s => !s.IsDeleted)
+           .Select(s => new GetCategoryRequest { category = s.category })
            .ToListAsync();
         }
 
-        public async Task<Category> GetCategoryByIdAsync(int id)
+        public async Task<GetCategoryRequest> GetCategoryByIdAsync(int id)
         {
             return await _context.categories
-            .FirstOrDefaultAsync(s => s.categoryId == id && !s.IsDeleted);
+            .Where(s => s.categoryId == id && !s.IsDeleted)
+            .Select(s => new GetCategoryRequest { category = s.category }).FirstOrDefaultAsync();
+
         }
 
         public async Task SoftDeleteCategoryAsync(int id)

@@ -1,14 +1,15 @@
 ﻿namespace National_Museum_2.DTO.GameProgress
 {
-    public class IUpdateGameProgressRequest
+    public interface IUpdateGameProgressRequest
     {
-        string gameProgress { get; set; }
-        string description { get; set; }
+        int? gameProgressId { get; set; }
+        string? gameProgress { get; set; }
+        string? description { get; set; }
     }
     public class UpdateGameProgressRequest : IUpdateGameProgressRequest
     {
-        public string gameProgress { get; set; }
-        public string description { get; set; }
-        public int gameProgressId { get; internal set; }
+        public string? gameProgress { get; set; }
+        public string? description { get; set; }
+        public int? gameProgressId { get; set; }
     }
 }

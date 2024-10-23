@@ -10,7 +10,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Maintenance>> GetAllMaintenanceAsync();
         Task<Maintenance> GetMaintenanceByIdAsync(int id);
         Task CreateMaintenanceAsync(CreateMaintenanceRequest maintenance);
-        Task UpdateMaintenanceAsync(Maintenance maintenance);
+        Task UpdateMaintenanceAsync(UpdateMaintenanceRequest maintenance);
         Task SoftDeleteMaintenanceAsync(int id);
     }
     public class MaintenanceRepository : IMaintenanceRepository
@@ -70,7 +70,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateMaintenanceAsync(Maintenance maintenance)
+        public async Task UpdateMaintenanceAsync(UpdateMaintenanceRequest maintenance)
         {
             if (maintenance == null)
                 throw new ArgumentNullException(nameof(maintenance));
@@ -80,11 +80,11 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"maintenance with ID {maintenance.maintenanceId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingMaintenance.artObject_Id = maintenance.artObject_Id;
-            existingMaintenance.starDate = maintenance.starDate;
-            existingMaintenance.endDate = maintenance.endDate;
-            existingMaintenance.description = maintenance.description;
-            existingMaintenance.cost = maintenance.cost;
+            existingMaintenance.artObject_Id = maintenance.artObject_Id?? existingMaintenance.artObject_Id;
+            existingMaintenance.starDate = maintenance.starDate?? existingMaintenance.starDate;
+            existingMaintenance.endDate = maintenance.endDate?? existingMaintenance.endDate;
+            existingMaintenance.description = String.IsNullOrEmpty(maintenance.description)? existingMaintenance.description : maintenance.description;
+            existingMaintenance.cost = maintenance.cost ?? existingMaintenance.cost;
 
             await _context.SaveChangesAsync();
         }

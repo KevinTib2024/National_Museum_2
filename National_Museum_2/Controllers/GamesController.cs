@@ -54,10 +54,9 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateGames(int id, [FromBody] Games games)
+        public async Task<IActionResult> UpdateGames(int id, [FromBody] UpdateGamesRequest games)
         {
-            if (id != games.gameId)
-                return BadRequest();
+            
 
             var existingGames = await _gamesService.GetGamesByIdAsync(id);
             if (existingGames == null)

@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<Games>> GetAllGamesAsync();
         Task<Games> GetGamesByIdAsync(int id);
         Task CreateGamesAsync(CreateGamesRequest games);
-        Task UpdateGamesAsync(Games games);
+        Task UpdateGamesAsync(UpdateGamesRequest games);
         Task SoftDeleteGamesAsync(int id);
     }
 
@@ -42,7 +42,7 @@ namespace National_Museum_2.Service
             await _gamesRepository.SoftDeleteGamesAsync(id);
         }
 
-        public async Task UpdateGamesAsync(Games games)
+        public async Task UpdateGamesAsync(UpdateGamesRequest games)
         {
             await _gamesRepository.UpdateGamesAsync(games);
         }

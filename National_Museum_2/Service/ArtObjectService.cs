@@ -6,8 +6,8 @@ namespace National_Museum_2.Service
 {
     public interface IArtObjectService
     {
-        Task<IEnumerable<ArtObject>> GetAllArtObjectAsync();
-        Task<ArtObject> GetArtObjectByIdAsync(int id);
+        Task<IEnumerable<GetArtObjectRequest>> GetAllArtObjectAsync();
+        Task<GetArtObjectRequest> GetArtObjectByIdAsync(int id);
         Task CreateArtObjectAsync(CreateArtObjectRequest artObject);
         Task UpdateArtObjectAsync(UpdateArtObjectRequest artObject);
         Task SoftDeleteArtObjectAsync(int id);
@@ -26,12 +26,12 @@ namespace National_Museum_2.Service
             await _artObjectRepository.CreateArtObjectAsync(artObject);
         }
 
-        public async Task<IEnumerable<ArtObject>> GetAllArtObjectAsync()
+        public async Task<IEnumerable<GetArtObjectRequest>> GetAllArtObjectAsync()
         {
             return await _artObjectRepository.GetAllArtObjectAsync();
         }
 
-        public async Task<ArtObject> GetArtObjectByIdAsync(int id)
+        public async Task<GetArtObjectRequest> GetArtObjectByIdAsync(int id)
         {
             return await _artObjectRepository.GetArtObjectByIdAsync(id);
         }

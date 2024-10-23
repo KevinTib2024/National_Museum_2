@@ -10,7 +10,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Scenary>> GetAllScenaryAsync();
         Task<Scenary> GetScenaryByIdAsync(int id);
         Task CreateScenaryAsync(CreateScenaryRequest scenary);
-        Task UpdateScenaryAsync(Scenary scenary);
+        Task UpdateScenaryAsync(UpdateScenaryRequest scenary);
         Task SoftDeleteScenaryAsync(int id);
     }
 
@@ -66,7 +66,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateScenaryAsync(Scenary scenary)
+        public async Task UpdateScenaryAsync(UpdateScenaryRequest scenary)
         {
             if (scenary == null)
                 throw new ArgumentNullException(nameof(scenary));
@@ -76,10 +76,10 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"scenary with ID {scenary.scenaryId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingScenary.scenaryName = scenary.scenaryName;
-            existingScenary.description = scenary.description;
-            existingScenary.order = scenary.order;
-            existingScenary.achievementsobtained = scenary.achievementsobtained;
+            existingScenary.scenaryName = String.IsNullOrEmpty(scenary.scenaryName)? existingScenary.scenaryName : scenary.scenaryName;
+            existingScenary.description = String.IsNullOrEmpty(scenary.description)? existingScenary.description : scenary.description;
+            existingScenary.order = scenary.order?? existingScenary.order;
+            existingScenary.achievementsobtained = scenary.achievementsobtained?? existingScenary.achievementsobtained;
 
             await _context.SaveChangesAsync();
         }
