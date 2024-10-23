@@ -110,7 +110,7 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"User with ID {user.userId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingUser.user_Type_Id = user.user_Type_Id;
+            existingUser.user_Type_Id = user.user_Type_Id==null? existingUser.user_Type_Id: user.user_Type_Id;
             existingUser.identificationType_Id = user.identificationType_Id;
             existingUser.identificationNumber = user.identificationNumber;
             existingUser.names = user.names;

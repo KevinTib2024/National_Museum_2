@@ -11,7 +11,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Gender>> GetAllGenderAsync();
         Task<Gender> GetGenderByIdAsync(int id);
         Task CreateGenderAsync(CreateGenderRequest gender);
-        Task UpdateGenderAsync(Gender gender);
+        Task UpdateGenderAsync(UpdateGenderRequest gender);
         Task SoftDeleteGenderAsync(int id);
     }
 
@@ -64,7 +64,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateGenderAsync(Gender gender)
+        public async Task UpdateGenderAsync(UpdateGenderRequest gender )
         {
             if (gender == null)
                 throw new ArgumentNullException(nameof(gender));
@@ -74,7 +74,10 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"Gender with ID {gender.genderId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingGender.gender = gender.gender;  
+            
+            existingGender.gender = String.IsNullOrEmpty(gender.gender) ? existingGender.gender : gender.gender;
+            
+            
 
             await _context.SaveChangesAsync();
         }

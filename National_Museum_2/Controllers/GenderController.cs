@@ -53,12 +53,10 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateGender(int id, [FromBody] Gender gender)
+        public async Task<IActionResult> UpdateGender([FromBody] UpdateGenderRequest gender)
         {
-            if (id != gender.genderId)
-                return BadRequest();
 
-            var existingGender = await _genderService.GetGenderByIdAsync(id);
+            var existingGender = await _genderService.GetGenderByIdAsync(gender.genderId);
             if (existingGender == null)
                 return NotFound();
 
