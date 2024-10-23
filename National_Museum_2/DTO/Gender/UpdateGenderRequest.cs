@@ -2,6 +2,7 @@
 {
     public interface IUpdateGenderRequest
     {
+
         int genderId { get; set; }
         string? gender { get; set; }
     }

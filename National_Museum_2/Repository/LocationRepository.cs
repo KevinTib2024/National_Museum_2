@@ -2,6 +2,7 @@
 using National_Museum_2.Context;
 using National_Museum_2.DTO.Location;
 using National_Museum_2.Model;
+using System.Reflection;
 
 namespace National_Museum_2.Repository
 {
@@ -10,7 +11,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Location>> GetAllLocationAsync();
         Task<Location> GetLocationByIdAsync(int id);
         Task CreateLocationAsync(CreateLocationRequest location);
-        Task UpdateLocationAsync(Location  location);
+        Task UpdateLocationAsync(UpdateLocationRequest location);
         Task SoftDeleteLocationAsync(int id);
     }
     public class LocationRepository : ILocationRepository
@@ -62,17 +63,18 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateLocationAsync(Location location)
+        public async Task UpdateLocationAsync(UpdateLocationRequest location)
         {
             if (location == null)
                 throw new ArgumentNullException(nameof(location));
 
-            var existingLocation = await _context.location.FindAsync(location.locationId);
+            var existingLocation = await _context.location.FindAsync(location.location_Id);
             if (existingLocation == null)
-                throw new ArgumentException($"location with ID {location.locationId} not found");
+                throw new ArgumentException($"location with ID {location.location_Id} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingLocation.name = location.name;
+            existingLocation.name = String.IsNullOrEmpty(location.name)? existingLocation.name : location.name;
+
 
             await _context.SaveChangesAsync();
         }

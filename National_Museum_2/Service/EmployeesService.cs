@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<Employees>> GetAllEmployeesAsync();
         Task<Employees> GetEmployeesByIdAsync(int id);
         Task CreateEmployeesAsync(CreateEmployeesRequest employees);
-        Task UpdateEmployeesAsync(Employees employees);
+        Task UpdateEmployeesAsync(UpdateEmployeesRequest employees);
         Task SoftDeleteEmployeesAsync(int id);
     }
 
@@ -42,7 +42,7 @@ namespace National_Museum_2.Service
             await _employeeRepository.SoftDeleteEmployeesAsync(id);
         }
 
-        public async Task UpdateEmployeesAsync(Employees employees)
+        public async Task UpdateEmployeesAsync(UpdateEmployeesRequest employees)
         {
             await _employeeRepository.UpdateEmployeesAsync(employees);
         }

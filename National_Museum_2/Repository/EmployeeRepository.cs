@@ -9,7 +9,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<Employees>> GetAllEmployeesAsync();
         Task<Employees> GetEmployeesByIdAsync(int id);
         Task CreateEmployeesAsync(CreateEmployeesRequest employees);
-        Task UpdateEmployeesAsync(Employees employees);
+        Task UpdateEmployeesAsync(UpdateEmployeesRequest employees);
         Task SoftDeleteEmployeesAsync(int id);
     }
     public class EmployeeRepository : IEmployeeRepository
@@ -87,7 +87,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateEmployeesAsync(Employees employees)
+        public async Task UpdateEmployeesAsync(UpdateEmployeesRequest employees)
         {
             if (employees == null)
                 throw new ArgumentNullException(nameof(employees));
@@ -97,11 +97,11 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"employees with ID {employees.employeeId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingEmployees.user_Id = employees.user_Id;
-            existingEmployees.typeEmployee_Id = employees.typeEmployee_Id;
-            existingEmployees.workShedule_Id = employees.workShedule_Id;
-            existingEmployees.hiringDate = employees.hiringDate;
-            existingEmployees.maintenance_Id = employees.maintenance_Id;
+            existingEmployees.user_Id = employees.user_Id == null? existingEmployees.user_Id : employees.user_Id;
+            existingEmployees.typeEmployee_Id = employees.typeEmployee_Id == null? existingEmployees.typeEmployee_Id : employees.typeEmployee_Id;
+            existingEmployees.workShedule_Id = employees.workShedule_Id == null? existingEmployees.workShedule_Id : employees.workShedule_Id;
+            existingEmployees.hiringDate = DateTime(employees.hiringDate)? existingEmployees.hiringDate : employees.hiringDate;
+            existingEmployees.maintenance_Id = employees.maintenance_Id== null? existingEmployees.maintenance_Id : employees.maintenance_Id;
 
             await _context.SaveChangesAsync();
         }

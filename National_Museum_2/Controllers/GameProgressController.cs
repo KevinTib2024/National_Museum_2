@@ -54,7 +54,7 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateGameProgress(int id, [FromBody] GameProgress gameProgress)
+        public async Task<IActionResult> UpdateGameProgress(int id, [FromBody] UpdateGameProgressRequest gameProgress)
         {
             if (id != gameProgress.gameProgressId)
                 return BadRequest();

@@ -10,7 +10,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<GameProgress>> GetAllGameProgressAsync();
         Task<GameProgress> GetGameProgressByIdAsync(int id);
         Task CreateGameProgressAsync(CreateGameProgressRequest gameProgress);
-        Task UpdateGameProgressAsync(GameProgress gameProgress);
+        Task UpdateGameProgressAsync(UpdateGameProgressRequest gameProgress);
         Task SoftDeleteGameProgressAsync(int id);
     }
     public class GameProgressRepository : IGameProgressRepository
@@ -63,7 +63,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateGameProgressAsync(GameProgress gameProgress)
+        public async Task UpdateGameProgressAsync(UpdateGameProgressRequest gameProgress)
         {
             if (gameProgress == null)
                 throw new ArgumentNullException(nameof(gameProgress));

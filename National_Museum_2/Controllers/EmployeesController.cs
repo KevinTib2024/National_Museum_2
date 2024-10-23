@@ -53,10 +53,9 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateEmployees(int id, [FromBody] Employees employees)
+        public async Task<IActionResult> UpdateEmployees(int id, [FromBody] UpdateEmployeesRequest employees)
         {
-            if (id != employees.employeeId)
-                return BadRequest();
+           
 
             var existingEmployees = await _employeesService.GetEmployeesByIdAsync(id);
             if (existingEmployees == null)

@@ -53,10 +53,9 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateArtObject(int id, [FromBody] ArtObject artObject)
+        public async Task<IActionResult> UpdateArtObject(int id, [FromBody] UpdateArtObjectRequest artObject)
         {
-            if (id != artObject.artObjectId)
-                return BadRequest();
+            
 
             var existingArtObject = await _artObjectService.GetArtObjectByIdAsync(id);
             if (existingArtObject == null)

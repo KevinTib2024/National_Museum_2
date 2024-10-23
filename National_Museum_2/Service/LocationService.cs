@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<Location>> GetAllLocationAsync();
         Task<Location> GetLocationByIdAsync(int id);
         Task CreateLocationAsync(CreateLocationRequest location);
-        Task UpdateLocationAsync(Location location);
+        Task UpdateLocationAsync(UpdateLocationRequest location);
         Task SoftDeleteLocationAsync(int id);
     }
     public class LocationService : ILocationService
@@ -40,7 +40,7 @@ namespace National_Museum_2.Service
             await _locationRepository.SoftDeleteLocationAsync(id);
         }
 
-        public async Task UpdateLocationAsync(Location location)
+        public async Task UpdateLocationAsync(UpdateLocationRequest location)
         {
             await _locationRepository.UpdateLocationAsync(location);
         }

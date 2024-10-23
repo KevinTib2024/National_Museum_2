@@ -12,7 +12,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<ArtRoom>> GetAllArtRoomAsync();
         Task<ArtRoom> GetArtRoomByIdAsync(int id);
         Task CreateArtRoomAsync(CreateArtRoomRequest artRoom);
-        Task UpdateArtRoomAsync(ArtRoom artRoom);
+        Task UpdateArtRoomAsync(UpdateArtRoomRequest artRoom);
         Task SoftDeleteArtRoomAsync(int id);
     }
     public class ArtRoomRepository : IArtRoomRepository
@@ -80,7 +80,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateArtRoomAsync(ArtRoom artRoom)
+        public async Task UpdateArtRoomAsync(UpdateArtRoomRequest artRoom)
         {
             if (artRoom == null)
                 throw new ArgumentNullException(nameof(artRoom));
@@ -90,12 +90,12 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"artRoom with ID {artRoom.artRoomId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingArtRoom.name = artRoom.name;
-            existingArtRoom.description = artRoom.description;
-            existingArtRoom.location_Id = artRoom.location_Id;
-            existingArtRoom.numberExhibitions = artRoom.numberExhibitions;
-            existingArtRoom.collection_Id = artRoom.collection_Id;
-            existingArtRoom.employeesXArtRoom = artRoom.employeesXArtRoom;
+            existingArtRoom.name = String.IsNullOrEmpty(artRoom.name)? existingArtRoom.name : artRoom.name;
+            existingArtRoom.description = String.IsNullOrEmpty(artRoom.description) ? existingArtRoom.description : artRoom.description;
+            existingArtRoom.location_Id = artRoom.location_Id == null ? existingArtRoom.location_Id : artRoom.location_Id;
+            existingArtRoom.numberExhibitions = String.IsNullOrEmpty(artRoom.numberExhibitions)? existingArtRoom.numberExhibitions : artRoom.numberExhibitions;
+            existingArtRoom.collection_Id = artRoom.collection_Id == null ? existingArtRoom.collection_Id : artRoom.collection_Id;
+            
 
             await _context.SaveChangesAsync();
         }

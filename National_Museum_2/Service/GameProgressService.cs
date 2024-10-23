@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<GameProgress>> GetAllGameProgressAsync();
         Task<GameProgress> GetGameProgressByIdAsync(int id);
         Task CreateGameProgressAsync(CreateGameProgressRequest gameProgress);
-        Task UpdateGameProgressAsync(GameProgress gameProgress);
+        Task UpdateGameProgressAsync(UpdateGameProgressRequest gameProgress);
         Task SoftDeleteGameProgressAsync(int id);
     }
     public class GameProgressService : IGameProgressService
@@ -41,7 +41,7 @@ namespace National_Museum_2.Service
             await _gameProgressRepository.SoftDeleteGameProgressAsync(id);
         }
 
-        public async Task UpdateGameProgressAsync(GameProgress gameProgress)
+        public async Task UpdateGameProgressAsync(UpdateGameProgressRequest gameProgress)
         {
             await _gameProgressRepository.UpdateGameProgressAsync(gameProgress);
         }

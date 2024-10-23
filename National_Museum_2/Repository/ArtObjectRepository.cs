@@ -2,6 +2,7 @@
 using National_Museum_2.Context;
 using National_Museum_2.Model;
 using National_Museum_2.DTO.ArtObject;
+using System.Reflection;
 
 namespace National_Museum_2.Repository
 {
@@ -10,7 +11,7 @@ namespace National_Museum_2.Repository
         Task<IEnumerable<ArtObject>> GetAllArtObjectAsync();
         Task<ArtObject> GetArtObjectByIdAsync(int id);
         Task CreateArtObjectAsync(CreateArtObjectRequest artObject);
-        Task UpdateArtObjectAsync(ArtObject artObject);
+        Task UpdateArtObjectAsync(UpdateArtObjectRequest artObject);
         Task SoftDeleteArtObjectAsync(int id);
     }
     public class ArtObjectRepository : IArtObjectRepository
@@ -88,7 +89,7 @@ namespace National_Museum_2.Repository
                 await _context.SaveChangesAsync();
             }
         }
-        public async Task UpdateArtObjectAsync(ArtObject artObject)
+        public async Task UpdateArtObjectAsync(UpdateArtObjectRequest artObject)
         {
             if (artObject == null)
                 throw new ArgumentNullException(nameof(artObject));
@@ -98,15 +99,15 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"artObejct with ID {artObject.artObjectId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingArtObject.description = artObject.description;
-            existingArtObject.cost = artObject.cost;
-            existingArtObject.creationDate = artObject.creationDate;
-            existingArtObject.artist = artObject.artist;
-            existingArtObject.name = artObject.name;
-            existingArtObject.origin = artObject.origin;
-            existingArtObject.category_Id = artObject.category_Id; 
-            existingArtObject.state_Id = artObject.state_Id;
-            existingArtObject.exhibition_Id = artObject.exhibition_Id;
+            existingArtObject.description= String.IsNullOrEmpty(artObject.description) ? existingArtObject.description : artObject.description;
+            existingArtObject.cost = String.IsNullOrEmpty(artObject.cost)? existingArtObject.cost : artObject.cost;
+            existingArtObject.creationDate = String.IsNullOrEmpty(artObject.creationDate)? existingArtObject.creationDate :  artObject.creationDate;
+            existingArtObject.artist = String.IsNullOrEmpty(artObject.artist)? existingArtObject.artist : artObject.artist;
+            existingArtObject.name = String.IsNullOrEmpty(artObject.name)? existingArtObject.name : artObject.name;
+            existingArtObject.origin = String.IsNullOrEmpty(artObject.origin)? existingArtObject.origin : artObject.origin;
+            existingArtObject.category_Id = artObject.category_Id == null ? existingArtObject.artObjectId : artObject.category_Id;
+            existingArtObject.state_Id = artObject.state_Id == null ? existingArtObject.state_Id : artObject.category_Id;
+            existingArtObject.exhibition_Id = artObject.exhibition_Id == null ? existingArtObject.exhibition_Id : artObject.exhibition_Id;
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

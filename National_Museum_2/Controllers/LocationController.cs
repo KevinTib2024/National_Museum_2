@@ -54,11 +54,8 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateLocation(int id, [FromBody] Location location)
-        {
-            if (id != location.locationId)
-                return BadRequest();
-
+        public async Task<IActionResult> UpdateLocation(int id, [FromBody] UpdateLocationRequest location)
+        { 
             var existingLocation = await _locationService.GetLocationByIdAsync(id);
             if (existingLocation == null)
                 return NotFound();
