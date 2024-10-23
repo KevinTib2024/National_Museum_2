@@ -13,6 +13,12 @@
         string creationDate { get; set; }
         string origin { get; set; }
         string cost { get; set; }
+
+        IGetArtObjectRequest exhibition { get; set; }
+        IGetArtObjectRequest category { get; set; }
+        IGetArtObjectRequest state { get; set; }
+
+
     }
     public class GetArtObjectRequest  : IGetArtObjectRequest
     {
@@ -27,6 +33,11 @@
         public string creationDate { get; set; }
         public string origin { get; set; }
         public string cost { get; set; }
+        public IGetArtObjectRequest category { get; set; }
+        public IGetArtObjectRequest exhibition { get; set; }
+        public IGetArtObjectRequest state { get; set; }
+
+
     }
 
 }

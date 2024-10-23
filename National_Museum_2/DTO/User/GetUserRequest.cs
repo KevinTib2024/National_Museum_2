@@ -1,4 +1,6 @@
 ﻿using National_Museum_2.DTO.Gender;
+using National_Museum_2.DTO.IdentificationType;
+using National_Museum_2.DTO.UserType;
 
 namespace National_Museum_2.DTO.User
 {
@@ -17,7 +19,10 @@ namespace National_Museum_2.DTO.User
         string password { get; set; }
         string contact { get; set; }
         IGetGenderRequest gender { get; set; }
-        
+        IGetIdentificationTypeRequest identificationType { get; set; }
+        IGetUserTypeRequest userType { get; set; }
+
+
     }
     public class GetUserRequest : IGetUserRequest
     {
@@ -34,6 +39,10 @@ namespace National_Museum_2.DTO.User
         public string lastNames { get; set; }
         public string names { get; set; }
        public IGetGenderRequest gender {  set; get; }
+       public IGetIdentificationTypeRequest identificationType { get; set; }
+       public IGetUserTypeRequest userType { get; set; }
+
+
 
     }
 
