@@ -39,9 +39,6 @@ builder.Services.AddScoped<IIdentificationTypeService, IdentificationTypeService
 builder.Services.AddScoped<IGenderRepository, GenderRepository>();
 builder.Services.AddScoped<IGenderService, GenderService>();
 
-builder.Services.AddScoped<IContactRepository, ContactRepository>();
-builder.Services.AddScoped<IContactService, ContactService>();
-
 builder.Services.AddControllers();
 
 //Registrar controles y servicios Kevin Ramirez

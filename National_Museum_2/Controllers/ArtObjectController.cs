@@ -21,7 +21,7 @@ namespace National_Museum_2.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-        public async Task<ActionResult<IEnumerable<ArtObject>>> GetAllArtObject()
+        public async Task<ActionResult<IEnumerable<GetArtObjectRequest>>> GetAllArtObject()
         {
             var ArtObject = await _artObjectService.GetAllArtObjectAsync();
             return Ok(ArtObject);
@@ -30,7 +30,7 @@ namespace National_Museum_2.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<ArtObject>> GetArtObjectById(int id)
+        public async Task<ActionResult<GetArtObjectRequest>> GetArtObjectById(int id)
 
         {
             var artObject = await _artObjectService.GetArtObjectByIdAsync(id);
@@ -53,10 +53,9 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateArtObject(int id, [FromBody] ArtObject artObject)
+        public async Task<IActionResult> UpdateArtObject(int id, [FromBody] UpdateArtObjectRequest artObject)
         {
-            if (id != artObject.artObjectId)
-                return BadRequest();
+            
 
             var existingArtObject = await _artObjectService.GetArtObjectByIdAsync(id);
             if (existingArtObject == null)

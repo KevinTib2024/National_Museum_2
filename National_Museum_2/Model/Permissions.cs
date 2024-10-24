@@ -4,9 +4,9 @@ namespace National_Museum_2.Model
 {
     public class Permissions
     {
-        public required int permissionsId { get; set; }
+        public  int permissionsId { get; set; }
 
-        public required string Permission { get; set; }
+        public required string permission { get; set; }
 
         public List<PermissionXUserType> permissionXUserTypes { get; set; }
 

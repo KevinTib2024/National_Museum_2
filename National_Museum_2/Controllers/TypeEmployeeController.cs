@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.TypeEmployee;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -39,13 +40,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateTypeEmployee([FromBody] TypeEmployee typeEmployee)
+        public async Task<ActionResult> CreateTypeEmployee([FromBody] CreateTypeEmployeeRequest typeEmployee)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _typeEmployeeService.CreateTypeEmployeeAsync(typeEmployee);
-            return CreatedAtAction(nameof(GetTypeEmployeeById), new { id = typeEmployee.typeEmployeeId }, typeEmployee);
+            return CreatedAtAction(nameof(GetTypeEmployeeById), new { id = typeEmployee }, typeEmployee);
         }
 
         [HttpPut("{id}")]

@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Collection;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Collection>> GetAllCollectionAsync();
         Task<Collection> GetCollectionByIdAsync(int id);
-        Task CreateCollectionAsync(Collection collection);
+        Task CreateCollectionAsync(CreateCollectionRequest collection);
         Task UpdateCollectionAsync(Collection collection);
         Task SoftDeleteCollectionAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _collectionRepository = collectionRepository;
         }
 
-        public async Task CreateCollectionAsync(Collection collection)
+        public async Task CreateCollectionAsync(CreateCollectionRequest collection)
         {
             await _collectionRepository.CreateCollectionAsync(collection);
         }

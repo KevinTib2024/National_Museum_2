@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.PaymentMethod;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<PaymentMethod>> GetAllPaymentMethodAsync();
         Task<PaymentMethod> GetPaymentMethodByIdAsync(int id);
-        Task CreatePaymentMethodAsync(PaymentMethod paymentMethod);
+        Task CreatePaymentMethodAsync(CreatePaymentMetodRequest paymentMethod);
         Task UpdatePaymentMethodAsync(PaymentMethod paymentMethod);
         Task SoftDeletePaymentMethodAsync(int id);
     }
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _paymentMethodRepository = paymentMethodRepository;
         }
 
-        public async Task CreatePaymentMethodAsync(PaymentMethod paymentMethod)
+        public async Task CreatePaymentMethodAsync(CreatePaymentMetodRequest paymentMethod)
         {
             await _paymentMethodRepository.CreatePaymentMethodAsync(paymentMethod);
         }

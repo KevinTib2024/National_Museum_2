@@ -1,13 +1,14 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Category;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<Category>> GetAllCategoryAsync();
-        Task<Category> GetCategoryByIdAsync(int id);
-        Task CreateCategoryAsync(Category category);
+        Task<IEnumerable<GetCategoryRequest>> GetAllCategoryAsync();
+        Task<GetCategoryRequest> GetCategoryByIdAsync(int id);
+        Task CreateCategoryAsync(CreateCategoryRequest category);
         Task UpdateCategoryAsync(Category category);
         Task SoftDeleteCategoryAsync(int id);
         
@@ -20,17 +21,17 @@ namespace National_Museum_2.Service
         {
             _categoryRepository = categoryRepository;
         }
-        public async Task CreateCategoryAsync(Category category)
+        public async Task CreateCategoryAsync(CreateCategoryRequest category)
         {
             await _categoryRepository.CreateCategoryAsync(category);
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategoryAsync()
+        public async Task<IEnumerable<GetCategoryRequest>> GetAllCategoryAsync()
         {
             return await _categoryRepository.GetAllCategoryAsync();
         }
 
-        public async Task<Category> GetCategoryByIdAsync(int id)
+        public async Task<GetCategoryRequest> GetCategoryByIdAsync(int id)
         {
             return await _categoryRepository.GetCategoryByIdAsync(id);
         }

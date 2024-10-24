@@ -1,14 +1,15 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.UserType;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
 {
     public interface IUserTypeService
     {
-        Task<IEnumerable<UserType>> GetAllUserTypeAsync();
-        Task<UserType> GetUserTypeByIdAsync(int id);
-        Task CreateUserTypeAsync(UserType userType);
-        Task UpdateUserTypeAsync(UserType userType);
+        Task<IEnumerable<GetUserTypeRequest>> GetAllUserTypeAsync();
+        Task<GetUserTypeRequest> GetUserTypeByIdAsync(int id);
+        Task CreateUserTypeAsync(CreateUserTypeRequest userType);
+        Task UpdateUserTypeAsync(UpdateUserTypeRequest userType);
         Task SoftDeleteUserTypeAsync(int id);
     }
 
@@ -21,17 +22,17 @@ namespace National_Museum_2.Service
             _userTypeRepository = userTypeRepository;
         }
 
-        public async Task CreateUserTypeAsync(UserType userType)
+        public async Task CreateUserTypeAsync(CreateUserTypeRequest userType)
         {
             await _userTypeRepository.CreateUserTypeAsync(userType);
         }
 
-        public async Task<IEnumerable<UserType>> GetAllUserTypeAsync()
+        public async Task<IEnumerable<GetUserTypeRequest>> GetAllUserTypeAsync()
         {
             return await _userTypeRepository.GetAllUserTypeAsync();
         }
 
-        public async Task<UserType> GetUserTypeByIdAsync(int id)
+        public async Task<GetUserTypeRequest> GetUserTypeByIdAsync(int id)
         {
             return await _userTypeRepository.GetUserTypeByIdAsync(id);
         }
@@ -41,7 +42,7 @@ namespace National_Museum_2.Service
             await _userTypeRepository.SoftDeleteUserTypeAsync(id);
         }
 
-        public async Task UpdateUserTypeAsync(UserType userType)
+        public async Task UpdateUserTypeAsync(UpdateUserTypeRequest userType)
         {
             await _userTypeRepository.UpdateUserTypeAsync(userType);
         }

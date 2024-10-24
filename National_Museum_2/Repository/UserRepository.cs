@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Gender;
 using National_Museum_2.DTO.User;
 using National_Museum_2.Model;
 
@@ -9,10 +10,10 @@ namespace National_Museum_2.Repository
     
     public interface IUserRepository
     {
-        Task<IEnumerable<User>> GetAllUserAsync();
-        Task<User> GetUserByIdAsync(int id);
+        Task<IEnumerable<GetUserRequest>> GetAllUserAsync();
+        Task<GetUserRequest> GetUserByIdAsync(int id);
         Task CreateUserAsync(CreateUserRequest user);
-        Task UpdateUserAsync(User user);
+        Task UpdateUserAsync(UpdateUserRequest user);
         Task SoftDeleteUserAsync(int id);
         Task<bool> ValidateUserAsync(string email, string password);
     }
@@ -76,17 +77,19 @@ namespace National_Museum_2.Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<User>> GetAllUserAsync()
+        public async Task<IEnumerable<GetUserRequest>> GetAllUserAsync()
         {
             return await _context.user
             .Where(s => !s.IsDeleted)
+            .Select(s => new GetUserRequest { userId = s.userId, user_Type_Id=s.userId, names = s.names, lastNames = s.lastNames, identificationNumber = s.identificationNumber, birthDate = s.birthDate, email = s.email, password = s.password}) 
             .ToListAsync();
         }
 
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<GetUserRequest> GetUserByIdAsync(int id)
         {
             return await _context.user
-            .FirstOrDefaultAsync(s => s.userId == id && !s.IsDeleted);
+            .Where(s => s.userId == id && !s.IsDeleted)
+            .Select(s => new GetUserRequest { userId= s.userId, user_Type_Id = s.userId,names = s.names, lastNames = s.lastNames, identificationNumber = s.identificationNumber, birthDate = s.birthDate, email = s.email, password = s.password }).FirstOrDefaultAsync();
         }
 
         public async Task SoftDeleteUserAsync(int id)
@@ -100,7 +103,7 @@ namespace National_Museum_2.Repository
         }
 
         // Método para actualizar un usuario existente, incluyendo la contraseña si es necesario
-        public async Task UpdateUserAsync(User user)
+        public async Task UpdateUserAsync(UpdateUserRequest user)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
@@ -110,15 +113,14 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"User with ID {user.userId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingUser.user_Type_Id = user.user_Type_Id;
-            existingUser.identificationType_Id = user.identificationType_Id;
-            existingUser.identificationNumber = user.identificationNumber;
-            existingUser.names = user.names;
-            existingUser.lastNames = user.lastNames;
-            existingUser.birthDate = user.birthDate;
-            existingUser.contact = user.contact;
-            existingUser.gender_Id = user.gender_Id;
-            existingUser.email = user.email;
+            existingUser.user_Type_Id = (int)(user.user_Type_Id==null? existingUser.user_Type_Id: user.user_Type_Id);
+            existingUser.identificationType_Id = (int)(user.identificationType_Id == null? existingUser.identificationType_Id : user.identificationType_Id);
+            existingUser.identificationNumber = String.IsNullOrEmpty(user.identificationNumber)? existingUser.identificationNumber : user.identificationNumber;
+            existingUser.names =String.IsNullOrEmpty(user.names)? existingUser.names: user.names;
+            existingUser.lastNames =String.IsNullOrEmpty(user.lastNames)? existingUser.lastNames : user.lastNames;
+            existingUser.birthDate = String.IsNullOrEmpty(user.birthDate) ? existingUser.birthDate : user.birthDate;
+            existingUser.gender_Id = (int)(user.gender_Id == null ? existingUser.gender_Id : user.gender_Id);
+            existingUser.email = String.IsNullOrEmpty(user.email)? existingUser.email: user.email;
 
             // Verificar si la contraseña ha sido cambiada
             if (!string.IsNullOrEmpty(user.password))

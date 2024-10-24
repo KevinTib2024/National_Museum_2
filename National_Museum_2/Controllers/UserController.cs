@@ -23,7 +23,7 @@ namespace National_Museum_2.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-        public async Task<ActionResult<IEnumerable<User>>> GetAllUser()
+        public async Task<ActionResult<IEnumerable<GetUserRequest>>> GetAllUser()
         {
             var user = await _userService.GetAllUserAsync();
             return Ok(user);
@@ -32,7 +32,7 @@ namespace National_Museum_2.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<User>> GetUserById(int id)
+        public async Task<ActionResult<GetUserRequest>> GetUserById(int id)
         {
             var user = await _userService.GetUserByIdAsync(id);
             if (user == null)
@@ -55,7 +55,7 @@ namespace National_Museum_2.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateUser (int id, [FromBody] User user)
+        public async Task<IActionResult> UpdateUser (int id, [FromBody] UpdateUserRequest user)
         {
             if(id != user.userId)
                 return BadRequest();

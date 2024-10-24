@@ -6,10 +6,10 @@ namespace National_Museum_2.Service
 {
     public interface IUserService
     {
-        Task<IEnumerable<User>> GetAllUserAsync();
-        Task<User> GetUserByIdAsync(int id);
+        Task<IEnumerable<GetUserRequest>> GetAllUserAsync();
+        Task<GetUserRequest> GetUserByIdAsync(int id);
         Task CreateUserAsync(CreateUserRequest user);
-        Task UpdateUserAsync(User user);
+        Task UpdateUserAsync(UpdateUserRequest user);
         Task SoftDeleteUserAsync(int id);
         Task<bool> ValidateUserAsync(string email, string password);
     }
@@ -30,13 +30,13 @@ namespace National_Museum_2.Service
         }
 
         // Obtener todos los usuarios no eliminados
-        public async Task<IEnumerable<User>> GetAllUserAsync()
+        public async Task<IEnumerable<GetUserRequest>> GetAllUserAsync()
         {
             return await _userRepository.GetAllUserAsync();
         }
 
         // Obtener un usuario por ID
-        public async Task<User> GetUserByIdAsync(int id)
+        public async Task<GetUserRequest> GetUserByIdAsync(int id)
         {
             return await _userRepository.GetUserByIdAsync(id);
         }
@@ -48,7 +48,7 @@ namespace National_Museum_2.Service
         }
 
         // Actualizar un usuario, incluidas sus credenciales
-        public async Task UpdateUserAsync(User user)
+        public async Task UpdateUserAsync(UpdateUserRequest user)
         {
             await _userRepository.UpdateUserAsync(user);
         }

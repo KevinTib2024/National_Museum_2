@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Exhibition;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Exhibition>> GetAllExhibitionAsync();
         Task<Exhibition> GetExhibitionByIdAsync(int id);
-        Task CreateExhibitionAsync(Exhibition exhibition);
+        Task CreateExhibitionAsync(CreateExhibitionRequest exhibition);
         Task UpdateExhibitionAsync(Exhibition exhibition);
         Task SoftDeleteExhibitionAsync(int id);
     }
@@ -20,7 +21,7 @@ namespace National_Museum_2.Service
             _exhibitionRepository = exhibitionRepository;
         }
 
-        public async Task CreateExhibitionAsync(Exhibition exhibition)
+        public async Task CreateExhibitionAsync(CreateExhibitionRequest exhibition)
         {
             await _exhibitionRepository.CreateExhibitionAsync(exhibition);
         }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.GameState;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,8 +9,8 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<GameState>> GetAllGameStateAsync();
         Task<GameState> GetGameStateByIdAsync(int id);
-        Task CreateGameStateAsync(GameState gameState);
-        Task UpdateGameStateAsync(GameState gameState);
+        Task CreateGameStateAsync(CreateGameStateRequest gameState);
+        Task UpdateGameStateAsync(UpdateGameStateRequest gameState);
         Task SoftDeleteGameStateAsync(int id);
     }
     public class GameStateRepository : IGameStateRepository
@@ -21,13 +22,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateGameStateAsync(GameState gameState)
+        public async Task CreateGameStateAsync(CreateGameStateRequest gameState)
         {
             if (gameState == null)
                 throw new ArgumentNullException(nameof(gameState));
+            var _newgameState = new GameState
+            {
+                gameState = gameState.gameState,
+            };
 
             // Agregar el objeto al contexto
-            _context.gameStates.Add(gameState);
+            _context.gameStates.Add(_newgameState);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
@@ -56,7 +61,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateGameStateAsync(GameState gameState)
+        public async Task UpdateGameStateAsync(UpdateGameStateRequest gameState)
         {
             if (gameState == null)
                 throw new ArgumentNullException(nameof(gameState));
@@ -66,7 +71,7 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"gameState with ID {gameState.gameStateId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingGameState.gameState = gameState.gameState;
+            existingGameState.gameState = String.IsNullOrEmpty(gameState.gameState)? existingGameState.gameState : gameState.gameState;
 
             await _context.SaveChangesAsync();
         }

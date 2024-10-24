@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.Permissions;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,22 +42,20 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreatePermissions([FromBody] Permissions permissions)
+        public async Task<ActionResult> CreatePermissions([FromBody] CreatePermissionsRequest permissions)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _permissionsService.CreatePermissionsAsync(permissions);
-            return CreatedAtAction(nameof(GetPermissionsById), new { id = permissions.permissionsId }, permissions);
+            return CreatedAtAction(nameof(GetPermissionsById), new { id = permissions }, permissions);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdatePermissions(int id, [FromBody] Permissions permissions)
+        public async Task<IActionResult> UpdatePermissions(int id, [FromBody] UpdatePermissionsRequest permissions)
         {
-            if (id != permissions.permissionsId)
-                return BadRequest();
 
             var existingPermissions = await _permissionsService.GetPermissionsByIdAsync(id);
             if (existingPermissions == null)

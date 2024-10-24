@@ -35,7 +35,7 @@ namespace National_Museum_2.Context
             modelBuilder.Entity<Gender>().HasKey(u => u.genderId);
 
             //IdentificationType
-            modelBuilder.Entity<IdentificationType>().HasKey(c => c.identificationTypeId);
+            modelBuilder.Entity<IdentificationType>().HasKey(c => c.IdentificationTypeId);
 
             //EmployesXArtRoom
             modelBuilder.Entity<EmployeesXArtRoom>().HasOne(ea => ea.employee).WithMany(e => e.employeesXArtRooms).HasForeignKey(ea => ea.employeeId).OnDelete(DeleteBehavior.Restrict);

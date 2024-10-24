@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.GameState;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,19 +42,19 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateGameState([FromBody] GameState gameState)
+        public async Task<ActionResult> CreateGameState([FromBody] CreateGameStateRequest gameState)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _gameStateService.CreateGameStateAsync(gameState);
-            return CreatedAtAction(nameof(GetGameStateById), new { id = gameState.gameStateId }, gameState);
+            return CreatedAtAction(nameof(GetGameStateById), new { id = gameState }, gameState);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateGameState(int id, [FromBody] GameState gameState)
+        public async Task<IActionResult> UpdateGameState(int id, [FromBody] UpdateGameStateRequest gameState)
         {
             if (id != gameState.gameStateId)
                 return BadRequest();

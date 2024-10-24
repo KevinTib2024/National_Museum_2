@@ -9,7 +9,7 @@ namespace National_Museum_2.Service
         Task<IEnumerable<ArtRoom>> GetAllArtRoomAsync();
         Task<ArtRoom> GetArtRoomByIdAsync(int id);
         Task CreateArtRoomAsync(CreateArtRoomRequest artRoom);
-        Task UpdateArtRoomAsync(ArtRoom artRoom);
+        Task UpdateArtRoomAsync(UpdateArtRoomRequest artRoom);
         Task SoftDeleteArtRoomAsync(int id);
     }
     public class ArtRoomService : IArtRoomService
@@ -40,7 +40,7 @@ namespace National_Museum_2.Service
             await _artRoomRepository.SoftDeleteArtRoomAsync(id);
         }
 
-        public async Task UpdateArtRoomAsync(ArtRoom artRoom)
+        public async Task UpdateArtRoomAsync(UpdateArtRoomRequest artRoom)
         {
             await _artRoomRepository.UpdateArtRoomAsync(artRoom);
         }

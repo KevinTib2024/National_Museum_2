@@ -1,15 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.IdentificationType;
+using National_Museum_2.DTO.UserType;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
 {
     public interface IUserTypeRepository
     {
-        Task<IEnumerable<UserType>> GetAllUserTypeAsync();
-        Task<UserType> GetUserTypeByIdAsync(int id);
-        Task CreateUserTypeAsync(UserType userType);
-        Task UpdateUserTypeAsync(UserType userType);
+        Task<IEnumerable<GetUserTypeRequest>> GetAllUserTypeAsync();
+        Task<GetUserTypeRequest> GetUserTypeByIdAsync(int id);
+        Task CreateUserTypeAsync(CreateUserTypeRequest userType);
+        Task UpdateUserTypeAsync(UpdateUserTypeRequest userType);
         Task SoftDeleteUserTypeAsync(int id);
     }
 
@@ -22,29 +24,36 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateUserTypeAsync(UserType userType)
+        public async Task CreateUserTypeAsync(CreateUserTypeRequest userType)
         {
             if (userType == null)
                 throw new ArgumentNullException(nameof(userType));
+            var _newuserType = new UserType
+            {
+                userType = userType.userType,
+            };
 
             // Agregar el objeto al contexto
-            _context.userType.Add(userType);
+            _context.userType.Add(_newuserType);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<UserType>> GetAllUserTypeAsync()
+        public async Task<IEnumerable<GetUserTypeRequest>> GetAllUserTypeAsync()
         {
             return await _context.userType
             .Where(s => !s.IsDeleted)
+           .Select(s => new GetUserTypeRequest { userType = s.userType })
             .ToListAsync();
         }
 
-        public async Task<UserType> GetUserTypeByIdAsync(int id)
+        public async Task<GetUserTypeRequest> GetUserTypeByIdAsync(int id)
         {
             return await _context.userType
-            .FirstOrDefaultAsync(s => s.userTypeId == id && !s.IsDeleted);
+            .Where(s => s.userTypeId == id && !s.IsDeleted)
+            .Select(s => new GetUserTypeRequest { userType= s.userType}).FirstOrDefaultAsync();
+
         }
 
         public async Task SoftDeleteUserTypeAsync(int id)
@@ -57,7 +66,7 @@ namespace National_Museum_2.Repository
             }
         }
 
-        public async Task UpdateUserTypeAsync(UserType userType)
+        public async Task UpdateUserTypeAsync(UpdateUserTypeRequest userType)
         {
             if (userType == null)
                 throw new ArgumentNullException(nameof(userType));
@@ -67,7 +76,7 @@ namespace National_Museum_2.Repository
                 throw new ArgumentException($"userType with ID {userType.userTypeId} not found");
 
             // Actualizar las propiedades del objeto existente
-            existingUserType.userType = userType.userType;
+            existingUserType.userType = String.IsNullOrEmpty(userType.userType)? existingUserType.userType : userType.userType;
 
             await _context.SaveChangesAsync();
         }

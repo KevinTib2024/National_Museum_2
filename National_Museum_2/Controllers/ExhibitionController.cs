@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.Exhibition;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,13 +42,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateExhibition([FromBody] Exhibition exhibition)
+        public async Task<ActionResult> CreateExhibition([FromBody] CreateExhibitionRequest exhibition)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _exhibitionService.CreateExhibitionAsync(exhibition);
-            return CreatedAtAction(nameof(GetExhibitionById), new { id = exhibition.exhibitionId }, exhibition);
+            return CreatedAtAction(nameof(GetExhibitionById), new { id = exhibition }, exhibition);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Location;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,8 +8,8 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Location>> GetAllLocationAsync();
         Task<Location> GetLocationByIdAsync(int id);
-        Task CreateLocationAsync(Location location);
-        Task UpdateLocationAsync(Location location);
+        Task CreateLocationAsync(CreateLocationRequest location);
+        Task UpdateLocationAsync(UpdateLocationRequest location);
         Task SoftDeleteLocationAsync(int id);
     }
     public class LocationService : ILocationService
@@ -19,7 +20,7 @@ namespace National_Museum_2.Service
         {
             _locationRepository = locationRepository;
         }
-        public async Task CreateLocationAsync(Location location)
+        public async Task CreateLocationAsync(CreateLocationRequest location)
         {
             await _locationRepository.CreateLocationAsync(location);
         }
@@ -39,7 +40,7 @@ namespace National_Museum_2.Service
             await _locationRepository.SoftDeleteLocationAsync(id);
         }
 
-        public async Task UpdateLocationAsync(Location location)
+        public async Task UpdateLocationAsync(UpdateLocationRequest location)
         {
             await _locationRepository.UpdateLocationAsync(location);
         }

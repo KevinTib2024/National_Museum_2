@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.Location;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,23 +42,20 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateLocation([FromBody] Location location)
+        public async Task<ActionResult> CreateLocation([FromBody] CreateLocationRequest location)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _locationService.CreateLocationAsync(location);
-            return CreatedAtAction(nameof(GetLocationById), new { id = location.locationId }, location);
+            return CreatedAtAction(nameof(GetLocationById), new { id = location }, location);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateLocation(int id, [FromBody] Location location)
-        {
-            if (id != location.locationId)
-                return BadRequest();
-
+        public async Task<IActionResult> UpdateLocation(int id, [FromBody] UpdateLocationRequest location)
+        { 
             var existingLocation = await _locationService.GetLocationByIdAsync(id);
             if (existingLocation == null)
                 return NotFound();

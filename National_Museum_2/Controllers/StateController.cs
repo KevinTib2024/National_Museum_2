@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.State;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -41,13 +42,13 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateState([FromBody] State state)
+        public async Task<ActionResult> CreateState([FromBody] CreateStateRequest state)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _stateService.CreateStateAsync(state);
-            return CreatedAtAction(nameof(GetStateById), new { id = state.stateId }, state);
+            return CreatedAtAction(nameof(GetStateById), new { id = state }, state);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

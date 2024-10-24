@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.Maintenance;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -39,22 +40,21 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateMaintenance([FromBody] Maintenance maintenance)
+        public async Task<ActionResult> CreateMaintenance([FromBody] CreateMaintenanceRequest maintenance)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _maintenanceService.CreateMaintenanceAsync(maintenance);
-            return CreatedAtAction(nameof(GetMaintenanceById), new { id = maintenance.maintenanceId }, maintenance);
+            return CreatedAtAction(nameof(GetMaintenanceById), new { id = maintenance }, maintenance);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateMaintenance(int id, [FromBody] Maintenance maintenance)
+        public async Task<IActionResult> UpdateMaintenance(int id, [FromBody] UpdateMaintenanceRequest maintenance)
         {
-            if (id != maintenance.maintenanceId)
-                return BadRequest();
+            
 
             var existingMaintenance = await _maintenanceService.GetMaintenanceByIdAsync(id);
             if (existingMaintenance == null)

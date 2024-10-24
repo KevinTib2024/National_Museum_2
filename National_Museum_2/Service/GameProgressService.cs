@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.GameProgress;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,8 +8,8 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<GameProgress>> GetAllGameProgressAsync();
         Task<GameProgress> GetGameProgressByIdAsync(int id);
-        Task CreateGameProgressAsync(GameProgress gameProgress);
-        Task UpdateGameProgressAsync(GameProgress gameProgress);
+        Task CreateGameProgressAsync(CreateGameProgressRequest gameProgress);
+        Task UpdateGameProgressAsync(UpdateGameProgressRequest gameProgress);
         Task SoftDeleteGameProgressAsync(int id);
     }
     public class GameProgressService : IGameProgressService
@@ -20,7 +21,7 @@ namespace National_Museum_2.Service
             _gameProgressRepository = gameProgressRepository;
         }
 
-        public async Task CreateGameProgressAsync(GameProgress gameProgress)
+        public async Task CreateGameProgressAsync(CreateGameProgressRequest gameProgress)
         {
             await _gameProgressRepository.CreateGameProgressAsync(gameProgress);
         }
@@ -40,7 +41,7 @@ namespace National_Museum_2.Service
             await _gameProgressRepository.SoftDeleteGameProgressAsync(id);
         }
 
-        public async Task UpdateGameProgressAsync(GameProgress gameProgress)
+        public async Task UpdateGameProgressAsync(UpdateGameProgressRequest gameProgress)
         {
             await _gameProgressRepository.UpdateGameProgressAsync(gameProgress);
         }

@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Games;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,8 +8,8 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Games>> GetAllGamesAsync();
         Task<Games> GetGamesByIdAsync(int id);
-        Task CreateGamesAsync(Games games);
-        Task UpdateGamesAsync(Games games);
+        Task CreateGamesAsync(CreateGamesRequest games);
+        Task UpdateGamesAsync(UpdateGamesRequest games);
         Task SoftDeleteGamesAsync(int id);
     }
 
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _gamesRepository = gamesRepository;
         }
 
-        public async Task CreateGamesAsync(Games games)
+        public async Task CreateGamesAsync(CreateGamesRequest games)
         {
             await _gamesRepository.CreateGamesAsync(games);
         }
@@ -41,7 +42,7 @@ namespace National_Museum_2.Service
             await _gamesRepository.SoftDeleteGamesAsync(id);
         }
 
-        public async Task UpdateGamesAsync(Games games)
+        public async Task UpdateGamesAsync(UpdateGamesRequest games)
         {
             await _gamesRepository.UpdateGamesAsync(games);
         }

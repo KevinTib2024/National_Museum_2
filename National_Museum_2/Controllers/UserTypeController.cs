@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using National_Museum_2.DTO.UserType;
 using National_Museum_2.Model;
 using National_Museum_2.Service;
 
@@ -20,7 +21,7 @@ namespace National_Museum_2.Controllers
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-        public async Task<ActionResult<IEnumerable<UserType>>> GetAllUserType()
+        public async Task<ActionResult<IEnumerable<GetUserTypeRequest>>> GetAllUserType()
         {
             var userType = await _userTypeService.GetAllUserTypeAsync();
             return Ok(userType);
@@ -29,7 +30,7 @@ namespace National_Museum_2.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserType>> GetUserTypeById(int id)
+        public async Task<ActionResult<GetUserTypeRequest>> GetUserTypeById(int id)
         {
             var userType = await _userTypeService.GetUserTypeByIdAsync(id);
             if (userType == null)
@@ -41,19 +42,19 @@ namespace National_Museum_2.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult> CreateUserType([FromBody] UserType userType)
+        public async Task<ActionResult> CreateUserType([FromBody] CreateUserTypeRequest userType)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             await _userTypeService.CreateUserTypeAsync(userType);
-            return CreatedAtAction(nameof(GetUserTypeById), new { id = userType.userTypeId }, userType);
+            return CreatedAtAction(nameof(GetUserTypeById), new { id = userType }, userType);
         }
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateUserType(int id, [FromBody] UserType userType)
+        public async Task<IActionResult> UpdateUserType(int id, [FromBody] UpdateUserTypeRequest userType)
         {
             if (id != userType.userTypeId)
                 return BadRequest();

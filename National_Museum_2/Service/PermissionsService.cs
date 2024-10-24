@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Permissions;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,8 +8,8 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Permissions>> GetAllPermissionsAsync();
         Task<Permissions> GetPermissionsByIdAsync(int id);
-        Task CreatePermissionsAsync(Permissions permissions);
-        Task UpdatePermissionsAsync(Permissions permissions);
+        Task CreatePermissionsAsync(CreatePermissionsRequest permissions);
+        Task UpdatePermissionsAsync(UpdatePermissionsRequest permissions);
         Task SoftDeletePermissionsAsync(int id);
     }
 
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _permissionsRepository = permissionsRepository;
         }
 
-        public async Task CreatePermissionsAsync(Permissions permissions)
+        public async Task CreatePermissionsAsync(CreatePermissionsRequest permissions)
         {
             await _permissionsRepository.CreatePermissionsAsync(permissions);
         }
@@ -41,7 +42,7 @@ namespace National_Museum_2.Service
             await _permissionsRepository.SoftDeletePermissionsAsync(id);
         }
 
-        public async Task UpdatePermissionsAsync(Permissions permissions)
+        public async Task UpdatePermissionsAsync(UpdatePermissionsRequest permissions)
         {
             await _permissionsRepository.UpdatePermissionsAsync(permissions);
         }

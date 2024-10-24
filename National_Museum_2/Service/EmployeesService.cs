@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Employees;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,8 +8,8 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Employees>> GetAllEmployeesAsync();
         Task<Employees> GetEmployeesByIdAsync(int id);
-        Task CreateEmployeesAsync(Employees employees);
-        Task UpdateEmployeesAsync(Employees employees);
+        Task CreateEmployeesAsync(CreateEmployeesRequest employees);
+        Task UpdateEmployeesAsync(UpdateEmployeesRequest employees);
         Task SoftDeleteEmployeesAsync(int id);
     }
 
@@ -21,7 +22,7 @@ namespace National_Museum_2.Service
             _employeeRepository = employeesRepository;
         }
 
-        public async Task CreateEmployeesAsync(Employees employees)
+        public async Task CreateEmployeesAsync(CreateEmployeesRequest employees)
         {
             await _employeeRepository.CreateEmployeesAsync(employees);
         }
@@ -41,7 +42,7 @@ namespace National_Museum_2.Service
             await _employeeRepository.SoftDeleteEmployeesAsync(id);
         }
 
-        public async Task UpdateEmployeesAsync(Employees employees)
+        public async Task UpdateEmployeesAsync(UpdateEmployeesRequest employees)
         {
             await _employeeRepository.UpdateEmployeesAsync(employees);
         }

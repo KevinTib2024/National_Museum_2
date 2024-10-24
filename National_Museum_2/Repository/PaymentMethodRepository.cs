@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.PaymentMethod;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -8,7 +9,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<PaymentMethod>> GetAllPaymentMethodAsync();
         Task<PaymentMethod> GetPaymentMethodByIdAsync(int id);
-        Task CreatePaymentMethodAsync(PaymentMethod paymentMethod);
+        Task CreatePaymentMethodAsync(CreatePaymentMetodRequest paymentMethod);
         Task UpdatePaymentMethodAsync(PaymentMethod paymentMethod);
         Task SoftDeletePaymentMethodAsync(int id);
     }
@@ -22,13 +23,17 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreatePaymentMethodAsync(PaymentMethod paymentMethod)
+        public async Task CreatePaymentMethodAsync(CreatePaymentMetodRequest paymentMethod)
         {
             if (paymentMethod == null)
                 throw new ArgumentNullException(nameof(paymentMethod));
+            var _newpaymentMethod = new PaymentMethod
+            {
+                paymentMethod = paymentMethod.paymentMethod,
+            };
 
             // Agregar el objeto al contexto
-            _context.paymentMethods.Add(paymentMethod);
+            _context.paymentMethods.Add(_newpaymentMethod);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

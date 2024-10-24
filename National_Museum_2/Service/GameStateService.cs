@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.GameState;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,8 +8,8 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<GameState>> GetAllGameStateAsync();
         Task<GameState> GetGameStateByIdAsync(int id);
-        Task CreateGameStateAsync(GameState gameState);
-        Task UpdateGameStateAsync(GameState gameState);
+        Task CreateGameStateAsync(CreateGameStateRequest gameState);
+        Task UpdateGameStateAsync(UpdateGameStateRequest gameState);
         Task SoftDeleteGameStateAsync(int id);
     }
     public class GameStateService : IGameStateService
@@ -20,7 +21,7 @@ namespace National_Museum_2.Service
             _gameStateRepository = gameStateRepository;
         }
 
-        public async Task CreateGameStateAsync(GameState gameState)
+        public async Task CreateGameStateAsync(CreateGameStateRequest gameState)
         {
             await _gameStateRepository.CreateGameStateAsync(gameState);
         }
@@ -40,7 +41,7 @@ namespace National_Museum_2.Service
             await _gameStateRepository.SoftDeleteGameStateAsync(id);
         }
 
-        public async Task UpdateGameStateAsync(GameState gameState)
+        public async Task UpdateGameStateAsync(UpdateGameStateRequest gameState)
         {
             await _gameStateRepository.UpdateGameStateAsync(gameState);
         }

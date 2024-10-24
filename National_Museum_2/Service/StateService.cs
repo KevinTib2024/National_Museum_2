@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.State;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,7 +8,7 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<State>> GetAllStateAsync();
         Task<State> GetStateByIdAsync(int id);
-        Task CreateStateAsync(State state);
+        Task CreateStateAsync(CreateStateRequest state);
         Task UpdateStateAsync(State state);
         Task SoftDeleteStateAsync(int id);
     }
@@ -20,7 +21,7 @@ namespace National_Museum_2.Service
             _stateRepository = stateRepository;
         }
 
-        public async Task CreateStateAsync(State state)
+        public async Task CreateStateAsync(CreateStateRequest state)
         {
             await _stateRepository.CreateStateAsync(state);
         }

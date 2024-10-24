@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.VisualBasic;
 using National_Museum_2.Context;
+using National_Museum_2.DTO.Exhibition;
 using National_Museum_2.Model;
 
 namespace National_Museum_2.Repository
@@ -9,7 +10,7 @@ namespace National_Museum_2.Repository
     {
         Task<IEnumerable<Exhibition>> GetAllExhibitionAsync();
         Task<Exhibition> GetExhibitionByIdAsync(int id);
-        Task CreateExhibitionAsync(Exhibition exhibition);
+        Task CreateExhibitionAsync(CreateExhibitionRequest exhibition);
         Task UpdateExhibitionAsync(Exhibition exhibition);
         Task SoftDeleteExhibitionAsync(int id);
     }
@@ -22,13 +23,25 @@ namespace National_Museum_2.Repository
             _context = context;
         }
 
-        public async Task CreateExhibitionAsync(Exhibition exhibition)
+        public async Task CreateExhibitionAsync(CreateExhibitionRequest exhibition)
         {
+            var _artRoom = await _context.exhibition.FindAsync(exhibition.artRoom_Id);
             if (exhibition == null)
                 throw new ArgumentNullException(nameof(exhibition));
 
+            if (_artRoom == null)
+            {
+                throw new Exception("No se encontro id de la sala");
+            }
+            var _newexhibition = new Exhibition
+            {
+                artRoom_Id = exhibition.artRoom_Id,
+                name = exhibition.name,
+                description = exhibition.description,
+            };
+
             // Agregar el objeto al contexto
-            _context.exhibition.Add(exhibition);
+            _context.exhibition.Add(_newexhibition);
 
             // Guardar cambios en la base de datos
             await _context.SaveChangesAsync();

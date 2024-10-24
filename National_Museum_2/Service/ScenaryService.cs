@@ -1,4 +1,5 @@
-﻿using National_Museum_2.Model;
+﻿using National_Museum_2.DTO.Scenary;
+using National_Museum_2.Model;
 using National_Museum_2.Repository;
 
 namespace National_Museum_2.Service
@@ -7,8 +8,8 @@ namespace National_Museum_2.Service
     {
         Task<IEnumerable<Scenary>> GetAllScenaryAsync();
         Task<Scenary> GetScenaryByIdAsync(int id);
-        Task CreateScenaryAsync(Scenary scenary);
-        Task UpdateScenaryAsync(Scenary scenary);
+        Task CreateScenaryAsync(CreateScenaryRequest scenary);
+        Task UpdateScenaryAsync(UpdateScenaryRequest scenary);
         Task SoftDeleteScenaryAsync(int id);
     }
     public class ScenaryService : IScenaryService
@@ -19,7 +20,7 @@ namespace National_Museum_2.Service
         {
             _scenaryRepository = scenaryRepository;
         }
-        public async Task CreateScenaryAsync(Scenary scenary)
+        public async Task CreateScenaryAsync(CreateScenaryRequest scenary)
         {
             await _scenaryRepository.CreateScenaryAsync(scenary);
         }
@@ -39,7 +40,7 @@ namespace National_Museum_2.Service
             await _scenaryRepository.SoftDeleteScenaryAsync(id);
         }
 
-        public async Task UpdateScenaryAsync(Scenary scenary)
+        public async Task UpdateScenaryAsync(UpdateScenaryRequest scenary)
         {
             await _scenaryRepository.UpdateScenaryAsync(scenary);
         }
